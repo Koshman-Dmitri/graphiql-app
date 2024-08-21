@@ -1,3 +1,7 @@
-export default function Home() {
-  return <h1>Hello world!</h1>;
+'use client';
+
+import MainPage from './main/page';
+
+export default function HomePage() {
+  return <MainPage />;
 }

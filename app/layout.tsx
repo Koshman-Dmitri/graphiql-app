@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 import './globals.css';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 export const metadata: Metadata = {
   title: 'Graphiql App',
@@ -13,7 +15,11 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
       <head>
         <link rel="icon" type="image/png" href="/favicon.png" />
       </head>
-      <body>{children}</body>
+      <body>
+        <Header />
+        <main className="container">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
