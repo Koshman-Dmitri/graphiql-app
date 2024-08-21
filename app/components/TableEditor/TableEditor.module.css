@@ -1,0 +1,32 @@
+.title {
+  display: inline-block;
+  margin: 20px;
+}
+
+.addBtn {
+  display: inline-block;
+  padding: 4px;
+  max-width: 160px;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.table td {
+  padding: 5px;
+  word-break: break-word;
+  border: 1px solid black;
+}
+
+.table tr:has(.input:focus) {
+  background-color: lightgrey;
+}
+
+.removeBtn {
+  margin: 0 auto;
+  max-width: 50px;
+  border-radius: 50%;
+}

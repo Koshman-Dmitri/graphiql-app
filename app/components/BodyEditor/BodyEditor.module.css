@@ -1,0 +1,30 @@
+.title {
+  display: inline-block;
+  margin: 0 20px 20px 0;
+}
+
+.select {
+  display: inline-block;
+  margin-right: 20px;
+  font-size: 0.8em;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.textarea {
+  display: block;
+  padding: 6px;
+  font-size: 2rem;
+  border: 1px solid black;
+}
+
+.prettifyBtn {
+  display: inline-block;
+  max-width: 100px;
+}
+
+.errorMsg {
+  margin: 10px 0;
+  font-size: 2rem;
+  color: red;
+}

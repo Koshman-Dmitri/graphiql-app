@@ -1,0 +1,11 @@
+.form {
+  font-size: 2.4rem;
+}
+
+.submitWrapper {
+  display: flex;
+}
+
+.submitBtn {
+  max-width: 100px;
+}
