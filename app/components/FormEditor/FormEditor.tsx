@@ -1,6 +1,8 @@
 'use client';
 
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import makeRestPath from '@/app/utils/makeRestPath';
 import { RowElement } from './types';
 import styles from './FormEditor.module.css';
 import MethodEditor from '../MethodEditor/MethodEditor';
@@ -10,6 +12,7 @@ import VariablesEditor from '../VariablesEditor/VariablesEditor';
 import BodyEditor from '../BodyEditor/BodyEditor';
 
 export default function FormEditor() {
+  const router = useRouter();
   const [method, setMethod] = useState('GET');
   const [endpointUrl, setEndpointUrl] = useState('');
   const [headers, setHeaders] = useState<RowElement[]>([{ id: 0, key: '', value: '' }]);
@@ -19,7 +22,7 @@ export default function FormEditor() {
   const handleChangeMethod = (value: string): void => setMethod(value);
 
   const handleChangeEndpointUrl = (e: ChangeEvent<HTMLInputElement>): void =>
-    setEndpointUrl(e.target.value);
+    setEndpointUrl(e.target.value.trim());
 
   const handleAddHeader = (): void => {
     setHeaders([
@@ -87,7 +90,11 @@ export default function FormEditor() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log('TODO FORM SUBMIT');
+
+    const path = makeRestPath({ method, url: endpointUrl, headers, variables, body });
+    router.push(`/rest/${path}`);
+    console.log('TODO SAVE TO LOCAL STORAGE');
+    console.log('TODO RESTORE INPUTS VALUES');
   };
 
   return (

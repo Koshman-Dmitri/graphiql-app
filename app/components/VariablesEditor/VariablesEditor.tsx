@@ -22,9 +22,10 @@ export default function VariablesEditor({
         type="button"
         onClick={() => setIsVisible(!isVisible)}
       >
-        Manage variables
+        {isVisible ? 'Close variables' : 'Manage variables'}
       </button>
       <div className={wrapperClassName}>
+        <p className={styles.warningMsg}>{'To use variable, type {{variable_key}}'}</p>
         <TableEditor
           title={title}
           data={data}

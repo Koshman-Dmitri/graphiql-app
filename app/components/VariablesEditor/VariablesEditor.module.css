@@ -12,3 +12,7 @@
 .visibilityBtn {
   max-width: 240px;
 }
+
+.warningMsg {
+  padding: 10px 20px 0;
+}
