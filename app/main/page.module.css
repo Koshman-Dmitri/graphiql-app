@@ -10,3 +10,18 @@
   display: flex;
   gap: 2rem;
 }
+
+.buttonLinkMain {
+  min-width: 20rem;
+}
+
+@media (max-width: 768px) {
+  .mainLinks {
+    flex-direction: column;
+  }
+
+  .buttonLinkMain {
+    min-width: 50vw;
+    height: 6rem;
+  }
+}

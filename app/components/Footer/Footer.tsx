@@ -12,7 +12,7 @@ export default function Footer() {
             rel="noreferrer"
             className={styles.footerLink}
           >
-            RS School
+            <span>RS School</span>
             <Image
               src="./images/rss-logo.svg"
               className={styles.footerLogo}
@@ -28,7 +28,7 @@ export default function Footer() {
               rel="noreferrer"
               className={styles.footerLink}
             >
-              koshman-dmitri
+              <span>koshman-dmitri</span>
               <Image
                 src="./images/github-logo.svg"
                 className={styles.footerLogo}
@@ -43,7 +43,7 @@ export default function Footer() {
               rel="noreferrer"
               className={styles.footerLink}
             >
-              digitalfantazy
+              <span>digitalfantazy</span>
               <Image
                 src="./images/github-logo.svg"
                 className={styles.footerLogo}
@@ -58,7 +58,7 @@ export default function Footer() {
               rel="noreferrer"
               className={styles.footerLink}
             >
-              liudmilarodzina
+              <span>liudmilarodzina</span>
               <Image
                 src="./images/github-logo.svg"
                 className={styles.footerLogo}

@@ -6,7 +6,7 @@ export default function MainPage() {
 
   const generalInfo = (
     <>
-      <h2>General information about the developers, project, and course:</h2>
+      <h3>General information about the developers, project, and course:</h3>
       <p>
         The standard Lorem Ipsum passage, used since the 1500s Lorem ipsum dolor sit amet,
         consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -34,23 +34,6 @@ export default function MainPage() {
         duty through weakness of will, which is the same as saying through shrinking from toil and
         pain. These cases are perfectly simple and easy to distinguish.
       </p>
-      <p>
-        NTemporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet
-        ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic
-        tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut
-        perferendis doloribus asperiores repellat. 1914 translation by H. Rackham On the other hand,
-        we denounce with righteous indignation and dislike men who are so beguiled and demoralized
-        by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the
-        pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their
-        duty through weakness of will, which is the same as saying through shrinking from toil and
-        pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our
-        power of choice is untrammelled and when nothing prevents our being able to do what we like
-        best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances
-        and owing to the claims of duty or the obligations of business it will frequently occur that
-        pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds
-        in these matters to this principle of selection: he rejects pleasures to secure other
-        greater pleasures, or else he endures pains to avoid worse pains.
-      </p>
     </>
   );
 
@@ -60,8 +43,12 @@ export default function MainPage() {
         <h1>Welcome!</h1>
         {generalInfo}
         <div className={styles.mainLinks}>
-          <Link href="/sign-in">Sign In</Link>
-          <Link href="/sign-up">Sign Up</Link>
+          <Link href="/sign-in" className={`buttonLink ${styles.buttonLinkMain}`}>
+            Sign In
+          </Link>
+          <Link href="/sign-up" className={`buttonLink ${styles.buttonLinkMain}`}>
+            Sign Up
+          </Link>
         </div>
       </div>
     );
@@ -69,12 +56,18 @@ export default function MainPage() {
 
   return (
     <div className={styles.mainContent}>
-      <h1>Welcome Back, [Username]!</h1>
+      <h2>Welcome Back, [Username]!</h2>
       {generalInfo}
       <div className={styles.mainLinks}>
-        <Link href="/rest-client">REST Client</Link>
-        <Link href="/graphiql-client">GraphiQL Client</Link>
-        <Link href="/history">History</Link>
+        <Link href="/rest-client" className={`buttonLink ${styles.buttonLinkMain}`}>
+          REST Client
+        </Link>
+        <Link href="/graphiql-client" className={`buttonLink ${styles.buttonLinkMain}`}>
+          GraphiQL Client
+        </Link>
+        <Link href="/history" className={`buttonLink ${styles.buttonLinkMain}`}>
+          History
+        </Link>
       </div>
     </div>
   );

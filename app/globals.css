@@ -1,17 +1,23 @@
 :root {
-  --color-bg-light: rgb(100, 149, 237, 0.05);
-  --color-bg-dark: rgb(51, 51, 51);
+  --color-brand: rgb(9, 123, 237);
+  --color-bg-light: rgb(255, 255, 255);
+  --color-bg-dark: rgb(249, 249, 249);
+
+  --color-text-title: rgb(80, 80, 80);
   --color-text-light: rgb(222, 231, 247);
-  --color-text-dark: rgb(51, 51, 51);
-  --color-black: rgb(0, 0, 0);
-  --color-hover: rgb(100, 149, 237);
+  --color-text-dark: rgb(107, 107, 107);
 
-  --color-bg-header-sticky: rgb(51, 51, 51, 0.8);
-  --shadow-header: 0 4px 6px -2px rgba(0, 0, 0, 0.3);
-  --shadow-header-sticky: 0 4px 6px -2px rgb(100, 149, 237, 0.8);
-  --shadow-footer: 0 -4px 6px -4px rgb(0, 0, 0, 0.3);
+  --color-bg-btn: rgb(224, 224, 224);
+  --color-bg-btn-hover: var(--color-brand);
+  --color-bg-btn-active: rgb(2, 101, 210);
+  --color-text-btn: rgb(48, 48, 48);
+  --color-text-btn-hover: rgb(255, 255, 255);
 
-  --input-border: 2px solid rgb(51, 51, 51);
+  --color-bg-header-sticky: rgb(217, 217, 217, 0.9);
+  --shadow-header: 0 2px 6px -3px var(--color-text-dark);
+  --shadow-header-sticky: 0 2px 6px -3px var(-- --color-brand);
+  --shadow-footer: 0 -2px 6px -3px var(--color-text-dark);
+
   --border-radius: 5px;
   --transition: all 0.2s ease-in;
 }
@@ -35,6 +41,11 @@ body {
   background-color: var(--color-bg-light);
 }
 
+main {
+  flex-grow: 1;
+  font-size: 2.4rem;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -43,8 +54,10 @@ a {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   text-align: center;
+  color: var(--color-text-title);
 }
 
 input {
@@ -54,27 +67,30 @@ input {
   padding: 6px 12px;
   font-family: inherit;
   color: inherit;
-  border: var(--input-border);
   border-radius: var(--border-radius);
   outline: none;
 }
 
-button {
-  display: block;
-  padding: 0.7rem 1.5rem;
-  min-width: 14rem;
+button,
+.buttonLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.5rem;
   font-family: inherit;
   font-size: inherit;
-  color: var(--color-text-light);
-  background-color: var(--color-bg-dark);
-  box-shadow: 1px 1px 4px var(--color-black);
+  color: var(--color-text-btn);
+  background-color: var(--color-bg-btn);
+  box-shadow: 1px 1px 4px -2px var(--color-text-title);
   border: unset;
   border-radius: var(--border-radius);
   transition: var(--transition);
   cursor: pointer;
+  text-align: center;
 }
 
-button:disabled {
+button:disabled,
+.buttonLink:disabled {
   pointer-events: none;
   filter: grayscale(1);
 }
@@ -84,9 +100,15 @@ button:disabled {
     color: var(--color-hover);
   }
 
-  button:hover {
-    background-color: var(--color-hover);
-    color: var(--color-black);
+  button:hover,
+  .buttonLink:hover {
+    background-color: var(--color-brand);
+    color: var(--color-text-btn-hover);
+  }
+
+  button:active,
+  .buttonLink:active {
+    background-color: var(--color-bg-btn-active);
   }
 }
 
@@ -110,9 +132,4 @@ button:disabled {
   width: 100%;
   max-width: 1440px;
   height: 100%;
-}
-
-main {
-  flex-grow: 1;
-  font-size: 2.4rem;
 }

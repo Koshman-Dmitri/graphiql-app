@@ -28,22 +28,20 @@ export default function Header() {
     <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
       <div className="container">
         <div className={styles.headerWrapper}>
-          <div className={styles.logo}>
-            <Link className={styles.navLogo} href="/">
-              <Image
-                src="./images/logo.svg"
-                className={styles.logoImg}
-                alt="App logo"
-                width={38}
-                height={38}
-              />
-            </Link>
-          </div>
+          <Link className={styles.navLogo} href="/">
+            <Image
+              src="./images/logo.svg"
+              className={styles.logoImg}
+              alt="App logo"
+              width={38}
+              height={38}
+            />
+          </Link>
           <nav className={styles.nav}>
-            <Link href="/sign-in">Sign In</Link>
-            <button className={styles['nav-link']} type="button">
-              Language
-            </button>
+            <Link href="/sign-in" className="buttonLink">
+              Sign In
+            </Link>
+            <button type="button">EN</button>
           </nav>
         </div>
       </div>
