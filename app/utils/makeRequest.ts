@@ -10,12 +10,12 @@ export default async function makeRequest({ params, searchParams }: UrlParams) {
   if (fetchParams && fetchParams.length > 3) notFound();
 
   if (fetchParams && fetchParams.length > 1) {
-    const method = fetchParams[0];
-    const url = atob(decodeURIComponent(fetchParams[1]));
-    const body = fetchParams[2] ? atob(decodeURIComponent(fetchParams[2])) : null;
-    const headers = searchParams || null;
-
     try {
+      const method = fetchParams[0];
+      const url = atob(decodeURIComponent(fetchParams[1]));
+      const body = fetchParams[2] ? atob(decodeURIComponent(fetchParams[2])) : null;
+      const headers = searchParams || null;
+
       const response = await fetch(url, {
         method,
         headers,

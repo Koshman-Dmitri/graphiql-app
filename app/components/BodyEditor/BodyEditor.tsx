@@ -7,7 +7,6 @@ interface Props {
   rows: number;
   cols: number;
   placeholder: string;
-  readonly: boolean;
   handleChangeBody: (value: string) => void;
 }
 
@@ -17,7 +16,6 @@ export default function BodyEditor({
   cols,
   name,
   placeholder,
-  readonly,
   handleChangeBody,
 }: Props) {
   const [isJSON, setIsJSON] = useState(true);
@@ -66,7 +64,6 @@ export default function BodyEditor({
         cols={cols}
         name={name}
         placeholder={placeholder}
-        readOnly={readonly}
         onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChangeBody(e.target.value)}
       />
       {error && <p className={styles.errorMsg}>{error.message}</p>}

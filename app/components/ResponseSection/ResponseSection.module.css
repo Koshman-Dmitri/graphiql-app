@@ -1,0 +1,33 @@
+.responseSection {
+  border: 1px solid blue;
+}
+
+.errorWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorTitle {
+  color: red;
+}
+
+.errorMessage {
+  color: rebeccapurple;
+}
+
+.textarea {
+  display: block;
+  padding: 6px;
+  font-size: 2rem;
+  border: 1px solid black;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.status {
+  color: green;
+}

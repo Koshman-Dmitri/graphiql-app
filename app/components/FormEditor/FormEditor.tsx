@@ -132,7 +132,6 @@ export default function FormEditor() {
         cols={40}
         name="bodyEditor"
         placeholder="Use JSON or Plain text syntax"
-        readonly={false}
         handleChangeBody={handleChangeBody}
       />
     </form>
