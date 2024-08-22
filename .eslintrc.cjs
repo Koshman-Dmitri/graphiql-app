@@ -28,11 +28,12 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: 'tsconfig.json',
+    project: './tsconfig.json',
   },
   plugins: ['@typescript-eslint', 'react', 'eslint-plugin-react-compiler'],
   ignorePatterns: ['**/*.css', '**/*.svg'],
   rules: {
+    'react/function-component-definition': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     'react/react-in-jsx-scope': 'off',
     'import/no-extraneous-dependencies': 'off',
