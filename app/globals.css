@@ -1,25 +1,29 @@
 :root {
   --color-brand: rgb(9, 123, 237);
+
+  --color-bg-dark: rgb(220, 225, 230);
   --color-bg-light: rgb(255, 255, 255);
-  --color-bg-dark: rgb(249, 249, 249);
+  --color-bg-header-sticky: rgb(215, 224, 237, 0.9);
+  --color-bg-logo: rgb(246, 248, 255);
 
-  --color-text-title: rgb(80, 80, 80);
-  --color-text-light: rgb(222, 231, 247);
-  --color-text-dark: rgb(107, 107, 107);
+  --color-bg-btn: rgb(9, 123, 237);
+  --color-bg-btn-hover: rgb(3, 110, 218);
+  --color-bg-btn-active: rgb(2, 98, 193);
 
-  --color-bg-btn: rgb(224, 224, 224);
-  --color-bg-btn-hover: var(--color-brand);
-  --color-bg-btn-active: rgb(2, 101, 210);
-  --color-text-btn: rgb(48, 48, 48);
-  --color-text-btn-hover: rgb(255, 255, 255);
+  --color-text-dark: rgb(67, 67, 67);
+  --color-text-grey: rgb(107, 107, 107);
+  --color-text-white: rgb(255, 255, 255);
 
-  --color-bg-header-sticky: rgb(217, 217, 217, 0.9);
-  --shadow-header: 0 2px 6px -3px var(--color-text-dark);
-  --shadow-header-sticky: 0 2px 6px -3px var(-- --color-brand);
-  --shadow-footer: 0 -2px 6px -3px var(--color-text-dark);
+  --shadow-header: 0 4px 10px rgb(107, 107, 107, 0.4);
+  --shadow-header-sticky: 0 2px 10px rgb(9, 123, 237, 0.8);
+
+  --shadow-footer: 0 -4px 10px rgb(107, 107, 107, 0.4);
+
+  --shadow-grey-small: 0 1px 4px rgb(107, 107, 107, 0.6);
+  --shadow-brand-small: 0 1px 4px rgb(9, 123, 237);
 
   --border-radius: 5px;
-  --transition: all 0.2s ease-in;
+  --transition: all 0.3s ease;
 }
 
 * {
@@ -37,7 +41,7 @@ html {
 
 body {
   height: 100%;
-  color: var(--color-text-dark);
+  color: var(--color-text-grey);
   background-color: var(--color-bg-light);
 }
 
@@ -57,7 +61,7 @@ h1,
 h2,
 h3 {
   text-align: center;
-  color: var(--color-text-title);
+  color: var(--color-text-dark);
 }
 
 input {
@@ -76,17 +80,17 @@ button,
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.9rem 1.5rem;
+  text-align: center;
   font-family: inherit;
   font-size: inherit;
-  color: var(--color-text-btn);
-  background-color: var(--color-bg-btn);
-  box-shadow: 1px 1px 4px -2px var(--color-text-title);
+  padding: 0.7rem 1.5rem;
   border: unset;
+  color: var(--color-text-white);
+  background-color: var(--color-bg-btn);
+  box-shadow: var(--shadow-grey-small);
   border-radius: var(--border-radius);
   transition: var(--transition);
   cursor: pointer;
-  text-align: center;
 }
 
 button:disabled,
@@ -102,8 +106,9 @@ button:disabled,
 
   button:hover,
   .buttonLink:hover {
-    background-color: var(--color-brand);
-    color: var(--color-text-btn-hover);
+    background-color: var(--color-bg-btn-hover);
+    color: var(--color-text-white);
+    box-shadow: var(--shadow-brand-small);
   }
 
   button:active,
