@@ -1,12 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './Header.module.css';
 
 export default function Header() {
-  const router = useRouter();
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
@@ -27,29 +26,27 @@ export default function Header() {
 
   return (
     <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
-      <div className={styles.logo}>
-        <button onClick={() => router.push('/')} type="button" className={styles['nav-logo']}>
-          <Image
-            src="./images/logo.svg"
-            className={styles['logo-img']}
-            alt="App logo"
-            width={38}
-            height={38}
-          />
-        </button>
+      <div className="container">
+        <div className={styles.headerWrapper}>
+          <div className={styles.logo}>
+            <Link className={styles.navLogo} href="/">
+              <Image
+                src="./images/logo.svg"
+                className={styles.logoImg}
+                alt="App logo"
+                width={38}
+                height={38}
+              />
+            </Link>
+          </div>
+          <nav className={styles.nav}>
+            <Link href="/sign-in">Sign In</Link>
+            <button className={styles['nav-link']} type="button">
+              Language
+            </button>
+          </nav>
+        </div>
       </div>
-      <nav className={styles.nav}>
-        <button
-          onClick={() => router.push('/sign-in')}
-          type="button"
-          className={styles['nav-link']}
-        >
-          Sign In
-        </button>
-        <button className={styles['nav-link']} type="button">
-          Language
-        </button>
-      </nav>
     </header>
   );
 }

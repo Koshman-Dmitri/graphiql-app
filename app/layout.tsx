@@ -16,9 +16,9 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </head>
       <body>
-        <div className="container">
+        <div className="page">
           <Header />
-          <main className="main">{children}</main>
+          <main className="container">{children}</main>
           <Footer />
         </div>
       </body>
