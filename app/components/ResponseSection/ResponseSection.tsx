@@ -25,6 +25,14 @@ export default function ResponceSection({ data, status, errorMsg }: Props) {
     );
   }
 
+  if (!data) {
+    return (
+      <section className={styles.responseSection}>
+        <h3 className={styles.title}>Send your request</h3>
+      </section>
+    );
+  }
+
   const value = JSON.stringify(JSON.parse(data), undefined, 2);
 
   return (
