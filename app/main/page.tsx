@@ -1,8 +1,24 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import styles from './page.module.css';
+import { auth } from '../firebase/config';
 
 export default function MainPage() {
-  const isAuthenticated = true;
+  const [userData] = useAuthState(auth);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      console.log('Not authenticated');
+    } else {
+      setIsAuthenticated(true);
+      console.log(user);
+    }
+  });
 
   const generalInfo = (
     <>
@@ -56,7 +72,7 @@ export default function MainPage() {
 
   return (
     <div className={styles.mainContent}>
-      <h2>Welcome Back, [Username]!</h2>
+      <h2>Welcome Back, {userData?.displayName}!</h2>
       {generalInfo}
       <div className={styles.mainLinks}>
         <Link href="/rest-client" className={`buttonLink ${styles.buttonLinkMain}`}>

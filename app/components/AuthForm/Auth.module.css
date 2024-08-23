@@ -1,0 +1,20 @@
+.inputContainer {
+  width: 55rem;
+  margin: 6rem auto;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-grey-small);
+  background-color: #fff;
+}
+
+.title {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 3rem;
+  color: var(--color-text-dark);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}

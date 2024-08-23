@@ -1,12 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/app/firebase/config';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Header.module.css';
 
 export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +28,16 @@ export default function Header() {
     };
   }, []);
 
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log('User signed out');
+      })
+      .catch((error) => {
+        console.error('Error signing out:', error);
+      });
+  };
+
   return (
     <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
       <div className="container">
@@ -38,9 +52,16 @@ export default function Header() {
             />
           </Link>
           <nav className={styles.nav}>
-            <Link href="/sign-in" className="buttonLink">
-              Sign In
-            </Link>
+            {user ? (
+              <button type="button" onClick={handleSignOut} className="buttonLink">
+                Sign out
+              </button>
+            ) : (
+              <Link href="/sign-in" className="buttonLink">
+                Sign In
+              </Link>
+            )}
+
             <button type="button">EN</button>
           </nav>
         </div>
