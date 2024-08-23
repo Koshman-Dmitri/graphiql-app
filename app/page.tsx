@@ -1,11 +1,5 @@
-import SignUp from './components/Auth/SignUp/SignUp';
-import SignIn from './components/Auth/SingIn/SignIn';
+import MainPage from './main/page';
 
-export default function Home() {
-  return (
-    <>
-      <SignUp />
-      <SignIn />
-    </>
-  );
+export default function HomePage() {
+  return <MainPage />;
 }
