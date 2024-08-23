@@ -1,0 +1,27 @@
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.mainLinks {
+  display: flex;
+  gap: 2rem;
+}
+
+.buttonLinkMain {
+  min-width: 20rem;
+}
+
+@media (max-width: 768px) {
+  .mainLinks {
+    flex-direction: column;
+  }
+
+  .buttonLinkMain {
+    min-width: 30vw;
+    height: 5rem;
+  }
+}
