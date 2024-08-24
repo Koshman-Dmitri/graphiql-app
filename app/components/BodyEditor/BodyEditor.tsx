@@ -39,34 +39,40 @@ export default function BodyEditor({
   };
 
   return (
-    <div>
-      <div className={styles.title}>Body:</div>
-      <select
-        className={styles.select}
-        onChange={() => {
-          setError(null);
-          setIsJSON(!isJSON);
-        }}
-      >
-        <option value="JSON">JSON</option>
-        <option value="Text">Text</option>
-      </select>
-      {isJSON && (
-        <button className={styles.prettifyBtn} type="button" onClick={handlePrettifyBody}>
-          Prettify
-        </button>
-      )}
-      <textarea
-        ref={textareaRef}
-        className={styles.textarea}
-        value={value}
-        rows={rows}
-        cols={cols}
-        name={name}
-        placeholder={placeholder}
-        onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChangeBody(e.target.value)}
-      />
-      {error && <p className={styles.errorMsg}>{error.message}</p>}
+    <div className={styles.bodyEditor}>
+      <h2 className={styles.title}>Body</h2>
+      <div className={styles.wrapper}>
+        <div className={styles.textareaWrapper}>
+          <textarea
+            ref={textareaRef}
+            className={styles.textarea}
+            value={value}
+            rows={rows}
+            cols={cols}
+            name={name}
+            placeholder={placeholder}
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChangeBody(e.target.value)}
+          />
+          {error && <p className={styles.errorMsg}>{error.message}</p>}
+        </div>
+        <div className={styles.controlWrapper}>
+          <select
+            className={styles.select}
+            onChange={() => {
+              setError(null);
+              setIsJSON(!isJSON);
+            }}
+          >
+            <option value="JSON">JSON</option>
+            <option value="Text">Text</option>
+          </select>
+          {isJSON && (
+            <button className={styles.prettifyBtn} type="button" onClick={handlePrettifyBody}>
+              Prettify
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

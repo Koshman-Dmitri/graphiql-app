@@ -1,32 +1,44 @@
+.tableEditor {
+  padding: 0 2rem 2rem;
+  text-align: center;
+  border: 4px ridge var(--color-bg-dark);
+  border-radius: 10px;
+}
+
 .title {
   display: inline-block;
-  margin: 20px;
+  padding: 0 4rem;
+  font-size: inherit;
+  background-color: var(--color-bg-light);
+  transform: translateY(-50%);
 }
 
 .addBtn {
-  display: inline-block;
-  padding: 4px;
-  max-width: 160px;
+  margin: 0 auto;
 }
 
 .table {
-  border-collapse: collapse;
+  margin-bottom: 6px;
   width: 100%;
-  border: 1px solid black;
+  border-spacing: 14px;
+  transform: translateY(-10px);
 }
 
 .table td {
-  padding: 5px;
   word-break: break-word;
-  border: 1px solid black;
 }
 
-.table tr:has(.input:focus) {
-  background-color: lightgrey;
+.table td:last-child {
+  max-width: 25px;
+}
+
+.table tr:first-of-type td {
+  padding: 6px;
+  border-radius: 5px;
+  background-color: var(--color-bg-dark);
 }
 
 .removeBtn {
   margin: 0 auto;
-  max-width: 50px;
-  border-radius: 50%;
+  border-radius: 30%;
 }

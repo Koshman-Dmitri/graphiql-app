@@ -1,30 +1,54 @@
-.title {
-  display: inline-block;
-  margin: 0 20px 20px 0;
+.bodyEditor {
+  padding: 0 2rem 2rem;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 3px var(--color-brand);
 }
 
-.select {
+.title {
   display: inline-block;
-  margin-right: 20px;
-  font-size: 0.8em;
-  border: 1px solid black;
-  border-radius: 4px;
+  padding: 0 4rem;
+  font-size: inherit;
+  transform: translateY(-50%);
+  background-color: var(--color-bg-light);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .textarea {
   display: block;
   padding: 6px;
-  font-size: 2rem;
-  border: 1px solid black;
+  font-size: inherit;
+  border: 5px double var(--color-bg-dark);
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.textarea:focus {
+  border-color: var(--color-brand);
+}
+
+.select {
+  display: block;
+  padding: 7.5px;
+  font-size: inherit;
+  border-radius: 5px;
+  color: inherit;
+  box-shadow: 0 0 4px var(--color-text-dark);
+  cursor: pointer;
 }
 
 .prettifyBtn {
-  display: inline-block;
-  max-width: 100px;
+  margin-top: 70px;
 }
 
 .errorMsg {
   margin: 10px 0;
+  max-width: 400px;
   font-size: 2rem;
-  color: red;
+  color: var(--color-text-error);
 }

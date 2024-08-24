@@ -25,7 +25,10 @@ export default function VariablesEditor({
         {isVisible ? 'Close variables' : 'Manage variables'}
       </button>
       <div className={wrapperClassName}>
-        <p className={styles.warningMsg}>{'To use variable, type {{variable_key}}'}</p>
+        <p className={styles.warningMsg}>
+          {'To use variable, type '}
+          <span className={styles.accentMsg}>{`{{variable_key}}`}</span>
+        </p>
         <TableEditor
           title={title}
           data={data}

@@ -17,19 +17,16 @@ function TableEditor({
   handleChangeData,
   handleRemoveData,
 }: TableProps) {
-  const tableTitle = `${title[0].toUpperCase()}${title.slice(1)}:`;
+  const tableTitle = `${title[0].toUpperCase()}${title.slice(1)}`;
 
   return (
-    <>
-      <div className={styles.title}>{tableTitle}</div>
-      <button className={styles.addBtn} type="button" onClick={handleAddData}>
-        {`Add ${title.slice(0, -1)}`}
-      </button>
+    <div className={styles.tableEditor}>
+      <h2 className={styles.title}>{tableTitle}</h2>
       <table className={styles.table}>
         <tbody>
           <tr>
             <td>Key</td>
-            <td>Value</td>
+            <td colSpan={2}>Value</td>
           </tr>
           {data.map((el) => (
             <tr key={el.id}>
@@ -64,7 +61,10 @@ function TableEditor({
           ))}
         </tbody>
       </table>
-    </>
+      <button className={styles.addBtn} type="button" onClick={handleAddData}>
+        {`Add ${title.slice(0, -1)}`}
+      </button>
+    </div>
   );
 }
 

@@ -14,7 +14,7 @@ export default function Footer() {
           >
             <span>RS School</span>
             <Image
-              src="./images/rss-logo.svg"
+              src="/images/rss-logo.svg"
               className={styles.footerLogo}
               alt="Rolling Scopes School logo"
               width={24}
@@ -30,7 +30,7 @@ export default function Footer() {
             >
               <span>koshman-dmitri</span>
               <Image
-                src="./images/github-logo.svg"
+                src="/images/github-logo.svg"
                 className={styles.footerLogo}
                 alt="GitHub logo"
                 width={24}
@@ -45,7 +45,7 @@ export default function Footer() {
             >
               <span>digitalfantazy</span>
               <Image
-                src="./images/github-logo.svg"
+                src="/images/github-logo.svg"
                 className={styles.footerLogo}
                 alt="GitHub logo"
                 width={24}
@@ -60,7 +60,7 @@ export default function Footer() {
             >
               <span>liudmilarodzina</span>
               <Image
-                src="./images/github-logo.svg"
+                src="/images/github-logo.svg"
                 className={styles.footerLogo}
                 alt="GitHub logo"
                 width={24}

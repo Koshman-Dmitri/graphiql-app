@@ -88,7 +88,7 @@ export default function FormEditor() {
 
   const handleChangeBody = (value: string): void => setBody(value);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (e: FormEvent<HTMLButtonElement>): void => {
     e.preventDefault();
 
     const path = makeRestPath({ method, url: endpointUrl, headers, variables, body });
@@ -98,7 +98,7 @@ export default function FormEditor() {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form}>
       <div className={styles.submitWrapper}>
         <MethodEditor method={method} handleChangeMethod={handleChangeMethod} />
         <ControlledInput
@@ -108,7 +108,7 @@ export default function FormEditor() {
           placeholder="Enter URL or paste text"
           handleChange={handleChangeEndpointUrl}
         />
-        <button className={styles.submitBtn} type="submit">
+        <button className={styles.submitBtn} type="button" onClick={handleSubmit}>
           Send
         </button>
       </div>
@@ -119,20 +119,20 @@ export default function FormEditor() {
         handleChangeData={handleChangeHeader}
         handleRemoveData={handleRemoveHeader}
       />
+      <BodyEditor
+        value={body}
+        rows={8}
+        cols={30}
+        name="bodyEditor"
+        placeholder="Use JSON or Plain text syntax"
+        handleChangeBody={handleChangeBody}
+      />
       <VariablesEditor
         title="variables"
         data={variables}
         handleAddData={handleAddVariables}
         handleChangeData={handleChangeVariables}
         handleRemoveData={handleRemoveVariables}
-      />
-      <BodyEditor
-        value={body}
-        rows={10}
-        cols={40}
-        name="bodyEditor"
-        placeholder="Use JSON or Plain text syntax"
-        handleChangeBody={handleChangeBody}
       />
     </form>
   );
