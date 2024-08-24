@@ -1,23 +1,35 @@
 'use client';
 
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import makeRestPath from '@/app/utils/makeRestPath';
+import { Query } from '@/app/utils/globalTypes';
+import localStorageApi from '@/app/services/localStorageApi/localStorageApi';
+import useLocalStorage from '@/app/services/localStorageApi/useLocalStorage';
 import { RowElement } from './types';
-import styles from './FormEditor.module.css';
+import styles from './RestFormEditor.module.css';
 import MethodEditor from '../MethodEditor/MethodEditor';
 import TableEditor from '../TableEditor/TableEditor';
 import ControlledInput from '../ControlledInput/ControlledInput';
 import VariablesEditor from '../VariablesEditor/VariablesEditor';
 import BodyEditor from '../BodyEditor/BodyEditor';
 
-export default function FormEditor() {
+export default function RestFormEditor() {
+  const initData = useLocalStorage();
   const router = useRouter();
-  const [method, setMethod] = useState('GET');
-  const [endpointUrl, setEndpointUrl] = useState('');
-  const [headers, setHeaders] = useState<RowElement[]>([{ id: 0, key: '', value: '' }]);
-  const [variables, setVariables] = useState<RowElement[]>([{ id: 0, key: '', value: '' }]);
-  const [body, setBody] = useState('');
+  const [method, setMethod] = useState(initData.method);
+  const [endpointUrl, setEndpointUrl] = useState(initData.url);
+  const [headers, setHeaders] = useState<RowElement[]>(initData.headers);
+  const [variables, setVariables] = useState<RowElement[]>(initData.variables);
+  const [body, setBody] = useState(initData.body);
+
+  useEffect(() => {
+    setMethod(initData.method);
+    setEndpointUrl(initData.url);
+    setHeaders(initData.headers);
+    setVariables(initData.variables);
+    setBody(initData.body);
+  }, [initData]);
 
   const handleChangeMethod = (value: string): void => setMethod(value);
 
@@ -90,11 +102,23 @@ export default function FormEditor() {
 
   const handleSubmit = (e: FormEvent<HTMLButtonElement>): void => {
     e.preventDefault();
+    if (!endpointUrl) return;
 
     const path = makeRestPath({ method, url: endpointUrl, headers, variables, body });
-    router.push(`/rest/${path}`);
-    console.log('TODO SAVE TO LOCAL STORAGE');
-    console.log('TODO RESTORE INPUTS VALUES');
+    router.push(path);
+
+    const newQuery = {
+      id: crypto.randomUUID(),
+      type: 'rest',
+      method,
+      url: endpointUrl,
+      encodedUrl: path,
+      headers,
+      variables,
+      body,
+    } satisfies Query;
+
+    localStorageApi.saveQuery(newQuery);
   };
 
   return (

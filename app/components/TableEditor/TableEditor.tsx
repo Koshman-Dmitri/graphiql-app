@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import styles from './TableEditor.module.css';
-import { RowElement } from '../FormEditor/types';
+import { RowElement } from '../RestFormEditor/types';
 
 export interface TableProps {
   title: string;

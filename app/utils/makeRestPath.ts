@@ -1,4 +1,4 @@
-import { RowElement } from '../components/FormEditor/types';
+import { RowElement } from '../components/RestFormEditor/types';
 
 type RequestProps = {
   method: string;
@@ -29,7 +29,7 @@ export default function makeRestPath({
   });
 
   const encodedURL = btoa(tempUrl);
-  if (method.toLowerCase() === 'get') return `/${method}/${encodedURL}`;
+  if (method.toLowerCase() === 'get') return `/rest/${method}/${encodedURL}`;
 
   const encodedBody = btoa(tempBody.replace(/\s+/g, ''));
 
@@ -37,5 +37,5 @@ export default function makeRestPath({
     .map((header) => `${encodeURIComponent(header.key)}=${encodeURIComponent(header.value)}`)
     .join('&');
 
-  return `/${method}/${encodedURL}/${encodedBody}?${encodedHeaders}`;
+  return `/rest/${method}/${encodedURL}/${encodedBody}?${encodedHeaders}`;
 }
