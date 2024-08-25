@@ -59,10 +59,10 @@ export default function MainPage() {
       <h2>Welcome Back, [Username]!</h2>
       {generalInfo}
       <div className={styles.mainLinks}>
-        <Link href="/rest-client" className={`buttonLink ${styles.buttonLinkMain}`}>
+        <Link href="/rest" className={`buttonLink ${styles.buttonLinkMain}`}>
           REST Client
         </Link>
-        <Link href="/graphiql-client" className={`buttonLink ${styles.buttonLinkMain}`}>
+        <Link href="/graphql" className={`buttonLink ${styles.buttonLinkMain}`}>
           GraphiQL Client
         </Link>
         <Link href="/history" className={`buttonLink ${styles.buttonLinkMain}`}>

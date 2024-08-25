@@ -30,7 +30,7 @@ export default function Header() {
         <div className={styles.headerWrapper}>
           <Link className={styles.navLogo} href="/">
             <Image
-              src="./images/logo.svg"
+              src="/images/logo.svg"
               className={styles.logoImg}
               alt="App logo"
               width={38}

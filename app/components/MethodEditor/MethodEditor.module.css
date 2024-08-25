@@ -1,0 +1,8 @@
+.select {
+  padding: 7.5px;
+  font-size: inherit;
+  border-radius: 5px;
+  color: inherit;
+  box-shadow: 0 0 4px var(--color-text-dark);
+  cursor: pointer;
+}
