@@ -14,4 +14,5 @@ export type Query = {
   headers: RowElement[];
   variables: RowElement[];
   body: string;
+  sdlUrl?: string;
 };

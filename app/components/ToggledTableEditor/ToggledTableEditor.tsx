@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import TableEditor, { TableProps } from '../TableEditor/TableEditor';
-import styles from './VariablesEditor.module.css';
+import styles from './ToggledTableEditor.module.css';
 
-export default function VariablesEditor({
+export default function ToggledTableEditor({
   title,
   data,
   handleAddData,
@@ -22,13 +22,17 @@ export default function VariablesEditor({
         type="button"
         onClick={() => setIsVisible(!isVisible)}
       >
-        {isVisible ? 'Close variables' : 'Manage variables'}
+        {isVisible ? `Close ${title}` : `Manage ${title}`}
       </button>
       <div className={wrapperClassName}>
-        <p className={styles.warningMsg}>
-          {'To use variable, type '}
-          <span className={styles.accentMsg}>{`{{variable_key}}`}</span>
-        </p>
+        {title === 'variables' ? (
+          <p className={styles.warningMsg}>
+            {'To use variable, type '}
+            <span className={styles.accentMsg}>{`{{variable_key}}`}</span>
+          </p>
+        ) : (
+          <br />
+        )}
         <TableEditor
           title={title}
           data={data}

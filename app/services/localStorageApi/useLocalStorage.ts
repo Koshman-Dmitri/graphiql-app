@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Query } from '@/app/utils/globalTypes';
 import localStorageApi from './localStorageApi';
 
-type InitQuery = Pick<Query, 'method' | 'url' | 'headers' | 'variables' | 'body'>;
+type InitQuery = Pick<Query, 'method' | 'url' | 'headers' | 'variables' | 'body' | 'sdlUrl'>;
 
 const initQuery: InitQuery = {
   method: 'GET',
