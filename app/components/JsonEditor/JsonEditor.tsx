@@ -1,28 +1,30 @@
 import { ChangeEvent, useRef, useState } from 'react';
-import styles from './BodyEditor.module.css';
+import styles from './JsonEditor.module.css';
 
 interface Props {
+  title: string;
   value: string;
   name: string;
   rows: number;
   cols: number;
   placeholder: string;
-  handleChangeBody: (value: string) => void;
+  handleChangeValue: (value: string) => void;
 }
 
-export default function BodyEditor({
+export default function JsonEditor({
+  title,
   value,
   rows,
   cols,
   name,
   placeholder,
-  handleChangeBody,
+  handleChangeValue,
 }: Props) {
   const [isJSON, setIsJSON] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const handlePrettifyBody = (): void => {
+  const handlePrettify = (): void => {
     const textareaValue = textareaRef.current?.value || '';
     let uglyJSON;
 
@@ -35,12 +37,12 @@ export default function BodyEditor({
     }
 
     const prettyJSON = JSON.stringify(uglyJSON, undefined, 2);
-    handleChangeBody(prettyJSON);
+    handleChangeValue(prettyJSON);
   };
 
   return (
-    <div className={styles.bodyEditor}>
-      <h2 className={styles.title}>Body</h2>
+    <div className={styles.jsonEditor}>
+      <h2 className={styles.title}>{title}</h2>
       <div className={styles.wrapper}>
         <div className={styles.textareaWrapper}>
           <textarea
@@ -51,23 +53,25 @@ export default function BodyEditor({
             cols={cols}
             name={name}
             placeholder={placeholder}
-            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChangeBody(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChangeValue(e.target.value)}
           />
           {error && <p className={styles.errorMsg}>{error.message}</p>}
         </div>
         <div className={styles.controlWrapper}>
-          <select
-            className={styles.select}
-            onChange={() => {
-              setError(null);
-              setIsJSON(!isJSON);
-            }}
-          >
-            <option value="JSON">JSON</option>
-            <option value="Text">Text</option>
-          </select>
+          {title === 'Body' && (
+            <select
+              className={styles.select}
+              onChange={() => {
+                setError(null);
+                setIsJSON(!isJSON);
+              }}
+            >
+              <option value="JSON">JSON</option>
+              <option value="Text">Text</option>
+            </select>
+          )}
           {isJSON && (
-            <button className={styles.prettifyBtn} type="button" onClick={handlePrettifyBody}>
+            <button type="button" onClick={handlePrettify}>
               Prettify
             </button>
           )}

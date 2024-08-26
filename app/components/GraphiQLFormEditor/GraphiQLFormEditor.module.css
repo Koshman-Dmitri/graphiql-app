@@ -2,3 +2,20 @@
   min-width: max-content;
   cursor: pointer;
 }
+
+.variablesWrapper {
+  padding: 2px;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.variablesWrapper.visible {
+  max-height: 580px;
+  overflow: auto;
+}
+
+.visibilityBtn {
+  max-width: 220px;
+  width: 100%;
+}

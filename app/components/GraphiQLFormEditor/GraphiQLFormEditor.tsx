@@ -8,6 +8,7 @@ import selfStyles from './GraphiQLFormEditor.module.css';
 import styles from '../shared/editForm.module.css';
 import ControlledInput from '../ControlledInput/ControlledInput';
 import QueryEditor from '../QueryEditor/QueryEditor';
+import VariablesEditor from '../JsonEditor/JsonEditor';
 import ToggledTableEditor from '../ToggledTableEditor/ToggledTableEditor';
 
 export default function GraphiQLFormEditor() {
@@ -15,8 +16,13 @@ export default function GraphiQLFormEditor() {
   const [endpointUrl, setEndpointUrl] = useState(initData.url);
   const [sdlUrl, setSdlUrl] = useState(initData.sdlUrl || `${endpointUrl}?sdl`);
   const [query, setQuery] = useState(initData.body);
-  const [variables, setVariables] = useState<RowElement[]>(initData.variables);
+  const [variables, setVariables] = useState(initData.jsonVariables || '');
   const [headers, setHeaders] = useState<RowElement[]>(initData.headers);
+
+  const [isVisibleVarEditor, setIsVisibleVarEditor] = useState(false);
+  const wrapperClassName = isVisibleVarEditor
+    ? `${selfStyles.variablesWrapper} ${selfStyles.visible}`
+    : selfStyles.variablesWrapper;
 
   const handleChangeEndpointUrl = (e: ChangeEvent<HTMLInputElement>): void => {
     const endpoint = e.target.value.trim();
@@ -30,10 +36,7 @@ export default function GraphiQLFormEditor() {
 
   const handleChangeQuery = (value: string): void => setQuery(value);
 
-  const handleAddVariables = () => addEmptyRow(setVariables, variables);
-  const handleRemoveVariables = (id: number) => removeRow(setVariables, variables, id);
-  const handleChangeVariables = (e: ChangeEvent<HTMLInputElement>, id: number) =>
-    changeRow(e, id, setVariables, variables);
+  const handleChangeVariables = (value: string): void => setVariables(value);
 
   const handleAddHeader = () => addEmptyRow(setHeaders, headers);
   const handleRemoveHeader = (id: number) => removeRow(setHeaders, headers, id);
@@ -58,7 +61,12 @@ export default function GraphiQLFormEditor() {
           placeholder="Enter URL or paste text"
           handleChange={handleChangeEndpointUrl}
         />
-        <button className={styles.submitBtn} type="button" onClick={handleSubmit}>
+        <button
+          className={styles.submitBtn}
+          type="button"
+          onClick={handleSubmit}
+          disabled={Boolean(!endpointUrl)}
+        >
           Send
         </button>
       </div>
@@ -82,13 +90,27 @@ export default function GraphiQLFormEditor() {
         placeholder="Use GraphQL syntax"
         handleChangeQuery={handleChangeQuery}
       />
-      <ToggledTableEditor
-        title="variables"
-        data={variables}
-        handleAddData={handleAddVariables}
-        handleChangeData={handleChangeVariables}
-        handleRemoveData={handleRemoveVariables}
-      />
+      <div>
+        <button
+          className={selfStyles.visibilityBtn}
+          type="button"
+          onClick={() => setIsVisibleVarEditor(!isVisibleVarEditor)}
+        >
+          {isVisibleVarEditor ? 'Close variables' : 'Manage variables'}
+        </button>
+        <div className={wrapperClassName}>
+          <br />
+          <VariablesEditor
+            title="Variables"
+            value={variables}
+            rows={8}
+            cols={30}
+            name="variableEditor"
+            placeholder="Use JSON syntax"
+            handleChangeValue={handleChangeVariables}
+          />
+        </div>
+      </div>
       <ToggledTableEditor
         title="headers"
         data={headers}

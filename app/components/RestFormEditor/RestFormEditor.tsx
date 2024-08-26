@@ -14,7 +14,7 @@ import MethodEditor from '../MethodEditor/MethodEditor';
 import TableEditor from '../TableEditor/TableEditor';
 import ControlledInput from '../ControlledInput/ControlledInput';
 import ToggledTableEditor from '../ToggledTableEditor/ToggledTableEditor';
-import BodyEditor from '../BodyEditor/BodyEditor';
+import BodyEditor from '../JsonEditor/JsonEditor';
 
 export default function RestFormEditor() {
   const initData = useLocalStorage();
@@ -52,7 +52,6 @@ export default function RestFormEditor() {
 
   const handleSubmit = (e: FormEvent<HTMLButtonElement>): void => {
     e.preventDefault();
-    if (!endpointUrl) return;
 
     const path = makeRestPath({ method, url: endpointUrl, headers, variables, body });
     router.push(path);
@@ -66,6 +65,8 @@ export default function RestFormEditor() {
       headers,
       variables,
       body,
+      sdlUrl: '',
+      jsonVariables: '',
     } satisfies Query;
 
     localStorageApi.saveQuery(newQuery);
@@ -85,7 +86,12 @@ export default function RestFormEditor() {
           placeholder="Enter URL or paste text"
           handleChange={handleChangeEndpointUrl}
         />
-        <button className={selfStyles.submitBtn} type="button" onClick={handleSubmit}>
+        <button
+          className={selfStyles.submitBtn}
+          type="button"
+          onClick={handleSubmit}
+          disabled={Boolean(!endpointUrl)}
+        >
           Send
         </button>
       </div>
@@ -97,12 +103,13 @@ export default function RestFormEditor() {
         handleRemoveData={handleRemoveHeader}
       />
       <BodyEditor
+        title="Body"
         value={body}
         rows={8}
         cols={30}
         name="bodyEditor"
         placeholder="Use JSON or Plain text syntax"
-        handleChangeBody={handleChangeBody}
+        handleChangeValue={handleChangeBody}
       />
       <ToggledTableEditor
         title="variables"
