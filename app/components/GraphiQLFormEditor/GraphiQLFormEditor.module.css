@@ -19,3 +19,10 @@
   max-width: 220px;
   width: 100%;
 }
+
+.errorMsg {
+  margin: -10px 0;
+  font-size: 2rem;
+  text-align: right;
+  color: var(--color-text-error);
+}

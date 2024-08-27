@@ -26,18 +26,17 @@ export default function JsonEditor({
 
   const handlePrettify = (): void => {
     const textareaValue = textareaRef.current?.value || '';
-    let uglyJSON;
 
     try {
-      uglyJSON = JSON.parse(textareaValue) as object;
+      const uglyJSON = JSON.parse(textareaValue) as object;
+      const prettyJSON = JSON.stringify(uglyJSON, undefined, 2);
+
       setError(null);
+      handleChangeValue(prettyJSON);
     } catch (e) {
       const newError = e as Error;
       setError(newError);
     }
-
-    const prettyJSON = JSON.stringify(uglyJSON, undefined, 2);
-    handleChangeValue(prettyJSON);
   };
 
   return (

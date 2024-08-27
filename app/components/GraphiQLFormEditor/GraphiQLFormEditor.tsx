@@ -3,6 +3,10 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import useLocalStorage from '@/app/services/localStorageApi/useLocalStorage';
 import { addEmptyRow, changeRow, removeRow } from '@/app/utils/tableEditorHelpers';
+import makeGraphQlPath from '@/app/utils/makeGraphQlPath';
+import { useRouter } from 'next/navigation';
+import { Query } from '@/app/utils/globalTypes';
+import localStorageApi from '@/app/services/localStorageApi/localStorageApi';
 import { RowElement } from '../RestFormEditor/types';
 import selfStyles from './GraphiQLFormEditor.module.css';
 import styles from '../shared/editForm.module.css';
@@ -12,6 +16,7 @@ import VariablesEditor from '../JsonEditor/JsonEditor';
 import ToggledTableEditor from '../ToggledTableEditor/ToggledTableEditor';
 
 export default function GraphiQLFormEditor() {
+  const router = useRouter();
   const initData = useLocalStorage();
   const [endpointUrl, setEndpointUrl] = useState(initData.url);
   const [sdlUrl, setSdlUrl] = useState(initData.sdlUrl || `${endpointUrl}?sdl`);
@@ -19,7 +24,9 @@ export default function GraphiQLFormEditor() {
   const [variables, setVariables] = useState(initData.jsonVariables || '');
   const [headers, setHeaders] = useState<RowElement[]>(initData.headers);
 
+  const [isValidVars, setIsValidVars] = useState(true);
   const [isVisibleVarEditor, setIsVisibleVarEditor] = useState(false);
+
   const wrapperClassName = isVisibleVarEditor
     ? `${selfStyles.variablesWrapper} ${selfStyles.visible}`
     : selfStyles.variablesWrapper;
@@ -36,7 +43,10 @@ export default function GraphiQLFormEditor() {
 
   const handleChangeQuery = (value: string): void => setQuery(value);
 
-  const handleChangeVariables = (value: string): void => setVariables(value);
+  const handleChangeVariables = (value: string): void => {
+    setVariables(value);
+    setIsValidVars(true);
+  };
 
   const handleAddHeader = () => addEmptyRow(setHeaders, headers);
   const handleRemoveHeader = (id: number) => removeRow(setHeaders, headers, id);
@@ -45,7 +55,28 @@ export default function GraphiQLFormEditor() {
 
   const handleSubmit = (e: FormEvent<HTMLButtonElement>): void => {
     e.preventDefault();
-    console.log('TODO HANDLE SUBMIT');
+
+    try {
+      const path = makeGraphQlPath({ url: endpointUrl, query, headers, variables });
+      router.push(path);
+
+      const newQuery = {
+        id: crypto.randomUUID(),
+        type: 'graphql',
+        method: 'POST',
+        url: endpointUrl,
+        encodedUrl: path,
+        headers,
+        variables: [],
+        body: query,
+        sdlUrl,
+        jsonVariables: variables,
+      } satisfies Query;
+
+      localStorageApi.saveQuery(newQuery);
+    } catch {
+      setIsValidVars(false);
+    }
   };
 
   return (
@@ -65,11 +96,14 @@ export default function GraphiQLFormEditor() {
           className={styles.submitBtn}
           type="button"
           onClick={handleSubmit}
-          disabled={Boolean(!endpointUrl)}
+          disabled={Boolean(!endpointUrl) || !isValidVars}
         >
           Send
         </button>
       </div>
+      {!isValidVars && (
+        <p className={selfStyles.errorMsg}>Variables editor contains not valid JSON</p>
+      )}
       <div className={styles.sdlInputWrapper}>
         <ControlledInput
           className=""
@@ -106,7 +140,7 @@ export default function GraphiQLFormEditor() {
             rows={8}
             cols={30}
             name="variableEditor"
-            placeholder="Use JSON syntax"
+            placeholder="Use valid JSON syntax"
             handleChangeValue={handleChangeVariables}
           />
         </div>

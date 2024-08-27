@@ -37,5 +37,5 @@ export default function makeRestPath({
     .map((header) => `${encodeURIComponent(header.key)}=${encodeURIComponent(header.value)}`)
     .join('&');
 
-  return `/rest/${method}/${encodedURL}/${encodedBody}?${encodedHeaders}`;
+  return `/rest/${method}/${encodedURL}${encodedBody ? `/${encodedBody}` : ''}${encodedHeaders !== '=' ? `?${encodedHeaders}` : ''}`;
 }
