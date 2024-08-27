@@ -11,7 +11,9 @@ export default async function makeRequest({ params, searchParams }: UrlParams) {
 
   if (fetchParams && fetchParams.length > 1) {
     try {
-      const method = fetchParams[0];
+      let method = fetchParams[0];
+      if (method === 'GRAPHQL') method = 'POST';
+
       const url = atob(decodeURIComponent(fetchParams[1]));
       const body = fetchParams[2] ? atob(decodeURIComponent(fetchParams[2])) : null;
       const headers = searchParams || null;

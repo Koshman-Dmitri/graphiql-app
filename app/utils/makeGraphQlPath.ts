@@ -27,7 +27,12 @@ export default function makeGraphQlPath({ url, query, variables, headers }: Requ
   }
 
   const encodedURL = btoa(tempUrl);
-  const encodedQuery = btoa(tempQuery.replace(/\s+/g, ''));
+  const encodedQuery = btoa(
+    JSON.stringify({
+      query: tempQuery,
+      variables,
+    })
+  );
 
   const encodedHeaders = tempHeaders
     .map((header) => `${encodeURIComponent(header.key)}=${encodeURIComponent(header.value)}`)
