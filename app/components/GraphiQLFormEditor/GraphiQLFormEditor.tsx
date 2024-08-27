@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import useLocalStorage from '@/app/services/localStorageApi/useLocalStorage';
 import { addEmptyRow, changeRow, removeRow } from '@/app/utils/tableEditorHelpers';
 import makeGraphQlPath from '@/app/utils/makeGraphQlPath';
@@ -14,6 +14,7 @@ import ControlledInput from '../ControlledInput/ControlledInput';
 import QueryEditor from '../QueryEditor/QueryEditor';
 import VariablesEditor from '../JsonEditor/JsonEditor';
 import ToggledTableEditor from '../ToggledTableEditor/ToggledTableEditor';
+import GraphQlSchema from '../GraphQlSchema/GraphQlSchema';
 
 export default function GraphiQLFormEditor() {
   const router = useRouter();
@@ -24,8 +25,31 @@ export default function GraphiQLFormEditor() {
   const [variables, setVariables] = useState(initData.jsonVariables || '');
   const [headers, setHeaders] = useState<RowElement[]>(initData.headers);
 
+  const [schema, setSchema] = useState('');
+  const [isSchemaError, setIsSchemaError] = useState(true);
+
   const [isValidVars, setIsValidVars] = useState(true);
   const [isVisibleVarEditor, setIsVisibleVarEditor] = useState(false);
+
+  useEffect(() => {
+    setEndpointUrl(initData.url);
+    setSdlUrl(initData.sdlUrl);
+    setQuery(initData.body);
+    setVariables(initData.jsonVariables);
+    setHeaders(initData.headers);
+
+    if (initData.sdlUrl.length) {
+      fetch(initData.sdlUrl)
+        .then((res) => res.text())
+        .then((data) => {
+          if (!data.startsWith('<!')) {
+            setSchema(data);
+            setIsSchemaError(false);
+          }
+        })
+        .catch(() => setIsSchemaError(true));
+    }
+  }, [initData]);
 
   const wrapperClassName = isVisibleVarEditor
     ? `${selfStyles.variablesWrapper} ${selfStyles.visible}`
@@ -80,78 +104,81 @@ export default function GraphiQLFormEditor() {
   };
 
   return (
-    <form className={styles.form}>
-      <div className={styles.submitWrapper}>
-        <ControlledInput
-          className=""
-          labelName="Endpoint URL: "
-          labelClassName={selfStyles.labelInput}
-          id="graphEndpointUrl"
-          name="endpointUrl"
-          value={endpointUrl}
-          placeholder="Enter URL or paste text"
-          handleChange={handleChangeEndpointUrl}
-        />
-        <button
-          className={styles.submitBtn}
-          type="button"
-          onClick={handleSubmit}
-          disabled={Boolean(!endpointUrl) || !isValidVars}
-        >
-          Send
-        </button>
-      </div>
-      {!isValidVars && (
-        <p className={selfStyles.errorMsg}>Variables editor contains not valid JSON</p>
-      )}
-      <div className={styles.sdlInputWrapper}>
-        <ControlledInput
-          className=""
-          labelName="SDL URL: "
-          labelClassName={selfStyles.labelInput}
-          id="graphSdlUrl"
-          name="sdlUrl"
-          value={sdlUrl}
-          placeholder="Enter URL for SDL endpoint"
-          handleChange={handleChangeSdlUrl}
-        />
-      </div>
-      <QueryEditor
-        value={query}
-        rows={10}
-        cols={30}
-        name="queryEditor"
-        placeholder="Use GraphQL syntax"
-        handleChangeQuery={handleChangeQuery}
-      />
-      <div>
-        <button
-          className={selfStyles.visibilityBtn}
-          type="button"
-          onClick={() => setIsVisibleVarEditor(!isVisibleVarEditor)}
-        >
-          {isVisibleVarEditor ? 'Close variables' : 'Manage variables'}
-        </button>
-        <div className={wrapperClassName}>
-          <br />
-          <VariablesEditor
-            title="Variables"
-            value={variables}
-            rows={8}
-            cols={30}
-            name="variableEditor"
-            placeholder="Use valid JSON syntax"
-            handleChangeValue={handleChangeVariables}
+    <>
+      <form className={styles.form}>
+        <div className={styles.submitWrapper}>
+          <ControlledInput
+            className=""
+            labelName="Endpoint URL: "
+            labelClassName={selfStyles.labelInput}
+            id="graphEndpointUrl"
+            name="endpointUrl"
+            value={endpointUrl}
+            placeholder="Enter URL or paste text"
+            handleChange={handleChangeEndpointUrl}
+          />
+          <button
+            className={styles.submitBtn}
+            type="button"
+            onClick={handleSubmit}
+            disabled={Boolean(!endpointUrl) || !isValidVars}
+          >
+            Send
+          </button>
+        </div>
+        {!isValidVars && (
+          <p className={selfStyles.errorMsg}>Variables editor contains not valid JSON</p>
+        )}
+        <div className={styles.sdlInputWrapper}>
+          <ControlledInput
+            className=""
+            labelName="SDL URL: "
+            labelClassName={selfStyles.labelInput}
+            id="graphSdlUrl"
+            name="sdlUrl"
+            value={sdlUrl}
+            placeholder="Enter URL for SDL endpoint"
+            handleChange={handleChangeSdlUrl}
           />
         </div>
-      </div>
-      <ToggledTableEditor
-        title="headers"
-        data={headers}
-        handleAddData={handleAddHeader}
-        handleChangeData={handleChangeHeader}
-        handleRemoveData={handleRemoveHeader}
-      />
-    </form>
+        <QueryEditor
+          value={query}
+          rows={10}
+          cols={30}
+          name="queryEditor"
+          placeholder="Use GraphQL syntax"
+          handleChangeQuery={handleChangeQuery}
+        />
+        <div>
+          <button
+            className={selfStyles.visibilityBtn}
+            type="button"
+            onClick={() => setIsVisibleVarEditor(!isVisibleVarEditor)}
+          >
+            {isVisibleVarEditor ? 'Close variables' : 'Manage variables'}
+          </button>
+          <div className={wrapperClassName}>
+            <br />
+            <VariablesEditor
+              title="Variables"
+              value={variables}
+              rows={8}
+              cols={30}
+              name="variableEditor"
+              placeholder="Use valid JSON syntax"
+              handleChangeValue={handleChangeVariables}
+            />
+          </div>
+        </div>
+        <ToggledTableEditor
+          title="headers"
+          data={headers}
+          handleAddData={handleAddHeader}
+          handleChangeData={handleChangeHeader}
+          handleRemoveData={handleRemoveHeader}
+        />
+      </form>
+      <GraphQlSchema schema={schema} isError={isSchemaError} />
+    </>
   );
 }
