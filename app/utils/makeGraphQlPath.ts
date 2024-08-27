@@ -7,13 +7,15 @@ type RequestProps = {
   headers: RowElement[];
 };
 
+type VariableType = { [key: string]: string };
+
 export default function makeGraphQlPath({ url, query, variables, headers }: RequestProps): string {
   let tempUrl = url;
   let tempQuery = query;
   let tempHeaders = headers.slice();
 
   if (variables) {
-    const varsObject = JSON.parse(variables) as { [key: string]: string };
+    const varsObject = JSON.parse(variables) as VariableType;
 
     Object.keys(varsObject).forEach((key) => {
       const variable = `{{${key}}}`;
@@ -30,7 +32,7 @@ export default function makeGraphQlPath({ url, query, variables, headers }: Requ
   const encodedQuery = btoa(
     JSON.stringify({
       query: tempQuery,
-      variables,
+      variables: JSON.parse(variables) as VariableType,
     })
   );
 
