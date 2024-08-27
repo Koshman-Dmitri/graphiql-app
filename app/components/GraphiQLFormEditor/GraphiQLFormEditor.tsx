@@ -32,6 +32,8 @@ export default function GraphiQLFormEditor() {
   const [isVisibleVarEditor, setIsVisibleVarEditor] = useState(false);
 
   useEffect(() => {
+    if (initData.type !== 'graphql') return;
+
     setEndpointUrl(initData.url);
     setSdlUrl(initData.sdlUrl);
     setQuery(initData.body);

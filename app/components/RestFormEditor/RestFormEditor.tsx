@@ -26,6 +26,8 @@ export default function RestFormEditor() {
   const [body, setBody] = useState(initData.body);
 
   useEffect(() => {
+    if (initData.type !== 'rest') return;
+
     setMethod(initData.method);
     setEndpointUrl(initData.url);
     setHeaders(initData.headers);
