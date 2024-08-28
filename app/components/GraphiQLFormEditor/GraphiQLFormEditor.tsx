@@ -40,7 +40,7 @@ export default function GraphiQLFormEditor() {
     setVariables(initData.jsonVariables);
     setHeaders(initData.headers);
 
-    if (initData.sdlUrl.length) {
+    if (initData.sdlUrl.length && window.location.pathname !== '/graphql') {
       fetch(initData.sdlUrl)
         .then((res) => res.text())
         .then((data) => {
