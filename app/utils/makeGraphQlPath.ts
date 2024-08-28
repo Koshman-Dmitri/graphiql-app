@@ -32,7 +32,7 @@ export default function makeGraphQlPath({ url, query, variables, headers }: Requ
   const encodedQuery = btoa(
     JSON.stringify({
       query: tempQuery,
-      variables: JSON.parse(variables) as VariableType,
+      variables: variables ? (JSON.parse(variables) as VariableType) : {},
     })
   );
 
