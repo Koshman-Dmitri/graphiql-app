@@ -6,13 +6,15 @@ import makeRestPath from '@/app/utils/makeRestPath';
 import { Query } from '@/app/utils/globalTypes';
 import localStorageApi from '@/app/services/localStorageApi/localStorageApi';
 import useLocalStorage from '@/app/services/localStorageApi/useLocalStorage';
+import { addEmptyRow, changeRow, removeRow } from '@/app/utils/tableEditorHelpers';
 import { RowElement } from './types';
-import styles from './RestFormEditor.module.css';
+import selfStyles from './RestFormEditor.module.css';
+import styles from '../shared/editForm.module.css';
 import MethodEditor from '../MethodEditor/MethodEditor';
 import TableEditor from '../TableEditor/TableEditor';
 import ControlledInput from '../ControlledInput/ControlledInput';
-import VariablesEditor from '../VariablesEditor/VariablesEditor';
-import BodyEditor from '../BodyEditor/BodyEditor';
+import ToggledTableEditor from '../ToggledTableEditor/ToggledTableEditor';
+import BodyEditor from '../JsonEditor/JsonEditor';
 
 export default function RestFormEditor() {
   const initData = useLocalStorage();
@@ -24,6 +26,8 @@ export default function RestFormEditor() {
   const [body, setBody] = useState(initData.body);
 
   useEffect(() => {
+    if (initData.type !== 'rest') return;
+
     setMethod(initData.method);
     setEndpointUrl(initData.url);
     setHeaders(initData.headers);
@@ -36,73 +40,20 @@ export default function RestFormEditor() {
   const handleChangeEndpointUrl = (e: ChangeEvent<HTMLInputElement>): void =>
     setEndpointUrl(e.target.value.trim());
 
-  const handleAddHeader = (): void => {
-    setHeaders([
-      ...headers,
-      {
-        id: headers.length,
-        key: '',
-        value: '',
-      },
-    ]);
-  };
+  const handleAddHeader = () => addEmptyRow(setHeaders, headers);
+  const handleRemoveHeader = (id: number) => removeRow(setHeaders, headers, id);
+  const handleChangeHeader = (e: ChangeEvent<HTMLInputElement>, id: number) =>
+    changeRow(e, id, setHeaders, headers);
 
-  const handleChangeHeader = (e: ChangeEvent<HTMLInputElement>, id: number): void => {
-    const { value, name } = e.target;
-
-    const newHeaders = headers.slice();
-    if (name === 'key') newHeaders[id].key = value;
-    if (name === 'value') newHeaders[id].value = value;
-
-    setHeaders(newHeaders);
-  };
-
-  const handleRemoveHeader = (id: number): void => {
-    const newHeaders = headers.filter((el) => el.id !== id);
-
-    if (newHeaders.length) {
-      setHeaders(newHeaders);
-    } else {
-      setHeaders([{ id: 0, key: '', value: '' }]);
-    }
-  };
-
-  const handleAddVariables = (): void => {
-    setVariables([
-      ...variables,
-      {
-        id: variables.length,
-        key: '',
-        value: '',
-      },
-    ]);
-  };
-
-  const handleChangeVariables = (e: ChangeEvent<HTMLInputElement>, id: number): void => {
-    const { value, name } = e.target;
-
-    const newVariables = variables.slice();
-    if (name === 'key') newVariables[id].key = value;
-    if (name === 'value') newVariables[id].value = value;
-
-    setVariables(newVariables);
-  };
-
-  const handleRemoveVariables = (id: number): void => {
-    const newVariables = variables.filter((el) => el.id !== id);
-
-    if (newVariables.length) {
-      setVariables(newVariables);
-    } else {
-      setVariables([{ id: 0, key: '', value: '' }]);
-    }
-  };
+  const handleAddVariables = () => addEmptyRow(setVariables, variables);
+  const handleRemoveVariables = (id: number) => removeRow(setVariables, variables, id);
+  const handleChangeVariables = (e: ChangeEvent<HTMLInputElement>, id: number) =>
+    changeRow(e, id, setVariables, variables);
 
   const handleChangeBody = (value: string): void => setBody(value);
 
   const handleSubmit = (e: FormEvent<HTMLButtonElement>): void => {
     e.preventDefault();
-    if (!endpointUrl) return;
 
     const path = makeRestPath({ method, url: endpointUrl, headers, variables, body });
     router.push(path);
@@ -116,6 +67,8 @@ export default function RestFormEditor() {
       headers,
       variables,
       body,
+      sdlUrl: '',
+      jsonVariables: '',
     } satisfies Query;
 
     localStorageApi.saveQuery(newQuery);
@@ -127,12 +80,20 @@ export default function RestFormEditor() {
         <MethodEditor method={method} handleChangeMethod={handleChangeMethod} />
         <ControlledInput
           className=""
+          labelName=""
+          labelClassName=""
+          id=""
           name="endpointUrl"
           value={endpointUrl}
           placeholder="Enter URL or paste text"
           handleChange={handleChangeEndpointUrl}
         />
-        <button className={styles.submitBtn} type="button" onClick={handleSubmit}>
+        <button
+          className={selfStyles.submitBtn}
+          type="button"
+          onClick={handleSubmit}
+          disabled={Boolean(!endpointUrl)}
+        >
           Send
         </button>
       </div>
@@ -144,14 +105,15 @@ export default function RestFormEditor() {
         handleRemoveData={handleRemoveHeader}
       />
       <BodyEditor
+        title="Body"
         value={body}
         rows={8}
         cols={30}
         name="bodyEditor"
         placeholder="Use JSON or Plain text syntax"
-        handleChangeBody={handleChangeBody}
+        handleChangeValue={handleChangeBody}
       />
-      <VariablesEditor
+      <ToggledTableEditor
         title="variables"
         data={variables}
         handleAddData={handleAddVariables}

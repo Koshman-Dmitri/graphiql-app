@@ -1,4 +1,4 @@
-.bodyEditor {
+.jsonEditor {
   padding: 0 2rem 2rem;
   text-align: center;
   border-radius: 10px;
@@ -42,13 +42,15 @@
   cursor: pointer;
 }
 
-.prettifyBtn {
-  margin-top: 70px;
-}
-
 .errorMsg {
   margin: 10px 0;
   max-width: 400px;
   font-size: 2rem;
   color: var(--color-text-error);
+}
+
+.controlWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
