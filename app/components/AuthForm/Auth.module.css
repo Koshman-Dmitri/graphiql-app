@@ -18,3 +18,22 @@
   display: flex;
   flex-direction: column;
 }
+
+.newHere {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.6rem;
+  color: var(--color-text-dark);
+}
+
+.createAccountLink {
+  margin-left: 0.3rem;
+  color: var(--color-brand);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .createAccountLink:hover {
+    color: var(--color-brand);
+    text-decoration: underline;
+  }
+}

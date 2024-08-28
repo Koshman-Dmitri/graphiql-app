@@ -12,7 +12,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
-    'plugin:@next/next/recommended',
+    // 'plugin:@next/next/recommended',
     'plugin:prettier/recommended',
     'prettier',
   ],
@@ -28,7 +28,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './tsconfig.json',
+    project: 'tsconfig.json',
   },
   plugins: ['@typescript-eslint', 'react', 'eslint-plugin-react-compiler'],
   ignorePatterns: ['**/*.css', '**/*.svg'],

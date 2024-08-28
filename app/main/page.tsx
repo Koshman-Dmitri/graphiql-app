@@ -1,24 +1,19 @@
-'use client';
-
-import { useState } from 'react';
 import Link from 'next/link';
-import { onAuthStateChanged } from 'firebase/auth';
-import { useAuthState } from 'react-firebase-hooks/auth';
+// import { useAuthState } from 'react-firebase-hooks/auth';
+import { getTokens } from 'next-firebase-auth-edge';
+import { cookies } from 'next/headers';
+import { clientConfig, serverConfig } from '../servises/firebase/config';
 import styles from './page.module.css';
-import { auth } from '../firebase/config';
 
-export default function MainPage() {
-  const [userData] = useAuthState(auth);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      console.log('Not authenticated');
-    } else {
-      setIsAuthenticated(true);
-      console.log(user);
-    }
+export default async function MainPage() {
+  const tokens = await getTokens(cookies(), {
+    apiKey: clientConfig.apiKey,
+    cookieName: serverConfig.cookieName,
+    cookieSignatureKeys: serverConfig.cookieSignatureKeys,
+    serviceAccount: serverConfig.serviceAccount,
   });
+
+  // console.log('Token', tokens?.decodedToken);
 
   const generalInfo = (
     <>
@@ -53,7 +48,7 @@ export default function MainPage() {
     </>
   );
 
-  if (!isAuthenticated) {
+  if (!tokens) {
     return (
       <div className={styles.mainContent}>
         <h1>Welcome!</h1>
@@ -72,13 +67,13 @@ export default function MainPage() {
 
   return (
     <div className={styles.mainContent}>
-      <h2>Welcome Back, {userData?.displayName}!</h2>
+      <h2>Welcome Back, {tokens?.decodedToken.name}!</h2>
       {generalInfo}
       <div className={styles.mainLinks}>
-        <Link href="/rest-client" className={`buttonLink ${styles.buttonLinkMain}`}>
+        <Link href="/rest" className={`buttonLink ${styles.buttonLinkMain}`}>
           REST Client
         </Link>
-        <Link href="/graphiql-client" className={`buttonLink ${styles.buttonLinkMain}`}>
+        <Link href="/graphiql" className={`buttonLink ${styles.buttonLinkMain}`}>
           GraphiQL Client
         </Link>
         <Link href="/history" className={`buttonLink ${styles.buttonLinkMain}`}>

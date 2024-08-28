@@ -3,13 +3,15 @@
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signOut } from 'firebase/auth';
-import { auth } from '@/app/firebase/config';
-import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
+import { auth } from '@/app/servises/firebase/firebase';
 import styles from './Header.module.css';
 
 export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
+  const router = useRouter();
   const [user] = useAuthState(auth);
 
   useEffect(() => {
@@ -28,14 +30,19 @@ export default function Header() {
     };
   }, []);
 
-  const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        console.log('User signed out');
-      })
-      .catch((error) => {
-        console.error('Error signing out:', error);
-      });
+  const handleSignOut = async () => {
+    await signOut(auth);
+    await fetch('/api/logout', {
+      headers: {
+        'Cache-Control': 'no-cache',
+      },
+    });
+    router.refresh();
+  };
+
+  const handleSubmit = (event: React.MouseEvent) => {
+    event.preventDefault();
+    handleSignOut().catch((err) => console.error('Error during sign out:', err));
   };
 
   return (
@@ -53,7 +60,7 @@ export default function Header() {
           </Link>
           <nav className={styles.nav}>
             {user ? (
-              <button type="button" onClick={handleSignOut} className="buttonLink">
+              <button type="button" onClick={handleSubmit} className="buttonLink">
                 Sign out
               </button>
             ) : (
