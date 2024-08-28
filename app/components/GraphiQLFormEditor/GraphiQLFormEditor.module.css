@@ -1,0 +1,28 @@
+.labelInput {
+  min-width: max-content;
+  cursor: pointer;
+}
+
+.variablesWrapper {
+  padding: 2px;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.variablesWrapper.visible {
+  max-height: 580px;
+  overflow: auto;
+}
+
+.visibilityBtn {
+  max-width: 220px;
+  width: 100%;
+}
+
+.errorMsg {
+  margin: -10px 0;
+  font-size: 2rem;
+  text-align: right;
+  color: var(--color-text-error);
+}

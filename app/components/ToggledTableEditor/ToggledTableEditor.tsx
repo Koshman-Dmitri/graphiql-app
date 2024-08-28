@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import TableEditor, { TableProps } from '../TableEditor/TableEditor';
-import styles from './VariablesEditor.module.css';
+import styles from './ToggledTableEditor.module.css';
 
-export default function VariablesEditor({
+export default function ToggledTableEditor({
   title,
   data,
   handleAddData,
@@ -10,6 +11,7 @@ export default function VariablesEditor({
   handleRemoveData,
 }: TableProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useTranslation('common');
 
   const wrapperClassName = isVisible
     ? `${styles.variablesWrapper} ${styles.visible}`
@@ -22,13 +24,17 @@ export default function VariablesEditor({
         type="button"
         onClick={() => setIsVisible(!isVisible)}
       >
-        {isVisible ? 'Close variables' : 'Manage variables'}
+        {isVisible ? `${t('close')} ${title}` : `${t('manage')} ${title}`}
       </button>
       <div className={wrapperClassName}>
-        <p className={styles.warningMsg}>
-          {'To use variable, type '}
-          <span className={styles.accentMsg}>{`{{variable_key}}`}</span>
-        </p>
+        {title === t('variables') ? (
+          <p className={styles.warningMsg}>
+            {t('use_variable')}
+            <span className={styles.accentMsg}>{` {{variable_key}}`}</span>
+          </p>
+        ) : (
+          <br />
+        )}
         <TableEditor
           title={title}
           data={data}

@@ -108,6 +108,11 @@ textarea:focus {
   outline: none;
 }
 
+.pageTitle {
+  margin: 20px 0;
+  font-size: 36px;
+}
+
 @media (hover: hover) and (pointer: fine) {
   a:hover {
     color: var(--color-hover);

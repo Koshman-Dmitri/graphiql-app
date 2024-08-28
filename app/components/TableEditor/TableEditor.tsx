@@ -1,6 +1,14 @@
 import { ChangeEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './TableEditor.module.css';
 import { RowElement } from '../RestFormEditor/types';
+
+const titleTranslationMap: { [key: string]: string } = {
+  headers: 'header_singular',
+  заголовки: 'header_singular',
+  variables: 'variable_singular',
+  переменные: 'variable_singular',
+};
 
 export interface TableProps {
   title: string;
@@ -19,14 +27,17 @@ function TableEditor({
 }: TableProps) {
   const tableTitle = `${title[0].toUpperCase()}${title.slice(1)}`;
 
+  const { t } = useTranslation('common');
+  const key = titleTranslationMap[title];
+
   return (
     <div className={styles.tableEditor}>
       <h2 className={styles.title}>{tableTitle}</h2>
       <table className={styles.table}>
         <tbody>
           <tr>
-            <td>Key</td>
-            <td colSpan={2}>Value</td>
+            <td>{t('key')}</td>
+            <td colSpan={2}>{t('value')}</td>
           </tr>
           {data.map((el) => (
             <tr key={el.id}>
@@ -36,7 +47,7 @@ function TableEditor({
                   name="key"
                   value={el.key}
                   onChange={(e) => handleChangeData(e, el.id)}
-                  placeholder="Key"
+                  placeholder={t('key')}
                 />
               </td>
               <td>
@@ -45,7 +56,7 @@ function TableEditor({
                   name="value"
                   value={el.value}
                   onChange={(e) => handleChangeData(e, el.id)}
-                  placeholder="Value"
+                  placeholder={t('value')}
                 />
               </td>
               <td>
@@ -62,7 +73,7 @@ function TableEditor({
         </tbody>
       </table>
       <button className={styles.addBtn} type="button" onClick={handleAddData}>
-        {`Add ${title.slice(0, -1)}`}
+        {t('add', { item: t(key) })}
       </button>
     </div>
   );

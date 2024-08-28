@@ -27,7 +27,7 @@ export default function ResponceSection({ data, status, errorMsg }: Props) {
   if (!data) {
     return (
       <section className={styles.responseSection}>
-        <h2 className={styles.title}>Responce</h2>
+        <h2 className={styles.title}>Response</h2>
         <p className={styles.text}>Send your request</p>
       </section>
     );
@@ -38,7 +38,7 @@ export default function ResponceSection({ data, status, errorMsg }: Props) {
 
   return (
     <section className={styles.responseSection}>
-      <h2 className={styles.title}>Responce</h2>
+      <h2 className={styles.title}>Response</h2>
       <p className={statusClassName}>Status: {status}</p>
       <textarea className={styles.textarea} value={value} rows={10} cols={36} readOnly />
     </section>
