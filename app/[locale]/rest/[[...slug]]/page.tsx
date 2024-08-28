@@ -1,6 +1,6 @@
 import ResponseSection from '@/app/components/ResponseSection/ResponseSection';
 import RestFormEditor from '@/app/components/RestFormEditor/RestFormEditor';
-import initTranslations from '@/app/i18n';
+import initTranslations from '@/app/services/internationalization/i18n';
 import { UrlParams } from '@/app/utils/globalTypes';
 import makeRequest from '@/app/utils/makeRequest';
 

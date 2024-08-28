@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import initTranslations from '@/app/i18n';
+import initTranslations from '@/app/services/internationalization/i18n';
 import styles from './page.module.css';
 
 export default async function MainPage({ params: { locale } }: { params: { locale: string } }) {

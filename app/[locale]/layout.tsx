@@ -4,7 +4,7 @@ import './globals.css';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import TranslationsProvider from '../components/TranslationsProvider/TranslationsProvider';
-import initTranslations from '../i18n';
+import initTranslations from '../services/internationalization/i18n';
 
 export const metadata: Metadata = {
   title: 'Graphiql App',
