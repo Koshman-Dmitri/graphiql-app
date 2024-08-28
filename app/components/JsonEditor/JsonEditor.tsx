@@ -59,7 +59,7 @@ export default function JsonEditor({
           {error && <p className={styles.errorMsg}>{error.message}</p>}
         </div>
         <div className={styles.controlWrapper}>
-          {title === 'Body' && (
+          {title === t('body') && (
             <select
               className={styles.select}
               onChange={() => {

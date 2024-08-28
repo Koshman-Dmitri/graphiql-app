@@ -107,7 +107,7 @@ export default function RestFormEditor() {
         handleRemoveData={handleRemoveHeader}
       />
       <BodyEditor
-        title="Body"
+        title={t('body')}
         value={body}
         rows={8}
         cols={30}
