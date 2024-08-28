@@ -38,7 +38,11 @@ export default function HistoryRequests() {
     <ul className={styles.historyList}>
       {requests.map((req) => (
         <li key={req.id} className={styles.historyElement}>
-          <Link href={req.type === 'rest' ? '/rest' : '/graphql'} className={styles.historyLink}>
+          <Link
+            href={`${req.type}`}
+            className={styles.historyLink}
+            onClick={() => localStorageApi.saveRestoreQuery(req)}
+          >
             <span className={styles.method}>{req.type === 'rest' ? req.method : 'GRAPHQL'}</span>
             <span className={styles.url}>{req.url}</span>
           </Link>
