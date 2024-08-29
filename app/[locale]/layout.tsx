@@ -15,7 +15,7 @@ interface LayoutProps extends PropsWithChildren {
   params: { locale: string };
 }
 
-const namespaces = ['main', 'common', 'rest'];
+const namespaces = ['main', 'common', 'rest', 'graphiql', 'history'];
 
 export default async function RootLayout({ children, params: { locale } }: LayoutProps) {
   const { resources } = await initTranslations(locale, namespaces);
