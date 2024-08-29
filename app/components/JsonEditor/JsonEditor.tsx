@@ -68,7 +68,7 @@ export default function JsonEditor({
               }}
             >
               <option value="JSON">JSON</option>
-              <option value="Text">Text</option>
+              <option value="Text">{t('text')}</option>
             </select>
           )}
           {isJSON && (

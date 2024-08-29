@@ -7,6 +7,7 @@ import makeGraphQlPath from '@/app/utils/makeGraphQlPath';
 import { useRouter } from 'next/navigation';
 import { Query } from '@/app/utils/globalTypes';
 import localStorageApi from '@/app/services/localStorageApi/localStorageApi';
+import { useTranslation } from 'react-i18next';
 import { RowElement } from '../RestFormEditor/types';
 import selfStyles from './GraphiQLFormEditor.module.css';
 import styles from '../shared/editForm.module.css';
@@ -30,6 +31,8 @@ export default function GraphiQLFormEditor() {
 
   const [isValidVars, setIsValidVars] = useState(true);
   const [isVisibleVarEditor, setIsVisibleVarEditor] = useState(false);
+
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     if (initData.type !== 'graphql') return;
@@ -111,12 +114,12 @@ export default function GraphiQLFormEditor() {
         <div className={styles.submitWrapper}>
           <ControlledInput
             className=""
-            labelName="Endpoint URL: "
+            labelName={t('endpoint_url')}
             labelClassName={selfStyles.labelInput}
             id="graphEndpointUrl"
             name="endpointUrl"
             value={endpointUrl}
-            placeholder="Enter URL or paste text"
+            placeholder={t('search_placeholder')}
             handleChange={handleChangeEndpointUrl}
           />
           <button
@@ -125,12 +128,10 @@ export default function GraphiQLFormEditor() {
             onClick={handleSubmit}
             disabled={Boolean(!endpointUrl) || !isValidVars}
           >
-            Send
+            {t('send')}
           </button>
         </div>
-        {!isValidVars && (
-          <p className={selfStyles.errorMsg}>Variables editor contains not valid JSON</p>
-        )}
+        {!isValidVars && <p className={selfStyles.errorMsg}>{t('invalid_json')}</p>}
         <div className={styles.sdlInputWrapper}>
           <ControlledInput
             className=""
@@ -139,7 +140,7 @@ export default function GraphiQLFormEditor() {
             id="graphSdlUrl"
             name="sdlUrl"
             value={sdlUrl}
-            placeholder="Enter URL for SDL endpoint"
+            placeholder={t('enter_sdl_url_placeholder')}
             handleChange={handleChangeSdlUrl}
           />
         </div>
@@ -148,7 +149,7 @@ export default function GraphiQLFormEditor() {
           rows={10}
           cols={30}
           name="queryEditor"
-          placeholder="Use GraphQL syntax"
+          placeholder={t('use_graphql_syntax')}
           handleChangeQuery={handleChangeQuery}
         />
         <div>
@@ -157,23 +158,25 @@ export default function GraphiQLFormEditor() {
             type="button"
             onClick={() => setIsVisibleVarEditor(!isVisibleVarEditor)}
           >
-            {isVisibleVarEditor ? 'Close variables' : 'Manage variables'}
+            {isVisibleVarEditor
+              ? `${t('close')} ${t('variables')}`
+              : `${t('manage')} ${t('variables')}`}
           </button>
           <div className={wrapperClassName}>
             <br />
             <VariablesEditor
-              title="Variables"
+              title={t('variables_upper')}
               value={variables}
               rows={8}
               cols={30}
               name="variableEditor"
-              placeholder="Use valid JSON syntax"
+              placeholder={t('use_valid_json')}
               handleChangeValue={handleChangeVariables}
             />
           </div>
         </div>
         <ToggledTableEditor
-          title="headers"
+          title={t('headers')}
           data={headers}
           handleAddData={handleAddHeader}
           handleChangeData={handleChangeHeader}

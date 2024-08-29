@@ -40,7 +40,7 @@ export default async function MainPage({ params: { locale } }: { params: { local
           {t('rest_client')}
         </Link>
         <Link href="/graphql" className={`buttonLink ${styles.buttonLinkMain}`}>
-          {t('graphql_client')}
+          {t('graphiql_client')}
         </Link>
         <Link href="/history" className={`buttonLink ${styles.buttonLinkMain}`}>
           {t('history')}

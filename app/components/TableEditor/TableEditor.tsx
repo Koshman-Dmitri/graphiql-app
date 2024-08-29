@@ -4,10 +4,10 @@ import styles from './TableEditor.module.css';
 import { RowElement } from '../RestFormEditor/types';
 
 const titleTranslationMap: { [key: string]: string } = {
-  headers: 'header_singular',
-  заголовки: 'header_singular',
-  variables: 'variable_singular',
-  переменные: 'variable_singular',
+  headers: 'header',
+  заголовки: 'header',
+  variables: 'variable',
+  переменные: 'variable',
 };
 
 export interface TableProps {
