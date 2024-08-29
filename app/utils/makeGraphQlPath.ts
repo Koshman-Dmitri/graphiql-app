@@ -40,5 +40,5 @@ export default function makeGraphQlPath({ url, query, variables, headers }: Requ
     .map((header) => `${encodeURIComponent(header.key)}=${encodeURIComponent(header.value)}`)
     .join('&');
 
-  return `/graphql/GRAPHQL/${encodedURL}${encodedQuery ? `/${encodedQuery}` : ''}${encodedHeaders !== '=' ? `?${encodedHeaders}` : ''}`;
+  return `/graphql/GRAPHQL/${encodedURL}/${encodedQuery}${encodedHeaders !== '=' ? `?${encodedHeaders}` : ''}`;
 }
