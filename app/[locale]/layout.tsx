@@ -15,13 +15,13 @@ interface LayoutProps extends PropsWithChildren {
   params: { locale: string };
 }
 
-const namespaces = ['main', 'common', 'rest', 'graphiql', 'history'];
+const namespaces = ['main', 'common', 'rest', 'graphiql', 'history', 'not-found'];
 
 export default async function RootLayout({ children, params: { locale } }: LayoutProps) {
   const { resources } = await initTranslations(locale, namespaces);
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </head>
