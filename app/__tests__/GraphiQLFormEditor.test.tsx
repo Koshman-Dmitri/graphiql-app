@@ -11,7 +11,7 @@ describe('GraphiQLFormEditor', () => {
     const initQuery = {
       id: '123',
       type: 'graphql',
-      method: 'GET',
+      method: 'POST',
       url: 'https://',
       encodedUrl: '',
       headers: [{ id: 0, key: '', value: '' }],
