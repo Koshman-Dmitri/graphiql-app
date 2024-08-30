@@ -1,11 +1,9 @@
 import Link from 'next/link';
 import initTranslations from '@/app/services/internationalization/i18n';
-import { UrlParams } from '@/app/utils/globalTypes';
+import { RouteParams } from '@/app/utils/globalTypes';
 import styles from './page.module.css';
 
-type MainPageParams = Pick<UrlParams, 'params'>;
-
-export default async function MainPage({ params }: MainPageParams) {
+export default async function MainPage({ params }: RouteParams) {
   const isAuthenticated = true;
 
   const { t } = await initTranslations(params.locale, ['main', 'common']);

@@ -1,19 +1,10 @@
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 import initTranslations from '@/app/services/internationalization/i18n';
+import { RouteParams } from '@/app/utils/globalTypes';
 import styles from './page.module.css';
 
-export default async function NotFoundPage({
-  params,
-}: {
-  params: { locale?: string; slug?: string[] };
-}) {
-  if (!params || !params.locale) {
-    notFound();
-  }
-
-  const { locale } = params;
-  const { t } = await initTranslations(locale, ['not-found']);
+export default async function NotFoundPage({ params }: RouteParams) {
+  const { t } = await initTranslations(params.locale, ['not-found']);
 
   return (
     <div className={styles.notFound}>

@@ -20,6 +20,8 @@ export default function LanguageSelect() {
     } else {
       router.push(currentPathname.replace(`/${currentLocale}`, `/${newLocale}`));
     }
+
+    router.refresh();
   };
 
   return (

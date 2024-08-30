@@ -68,7 +68,7 @@ export default function Footer() {
               />
             </a>
           </div>
-          <span className={styles.footerCopy}>&copy;2024</span>
+          <span className={styles.footerCopy}>&copy; 2024</span>
         </div>
       </div>
     </footer>

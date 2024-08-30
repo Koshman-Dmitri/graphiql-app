@@ -6,9 +6,7 @@ import makeRequest from '@/app/utils/makeRequest';
 
 export default async function GraphQLPage({ params, searchParams }: UrlParams) {
   const { data, status, errorMsg } = await makeRequest({ params, searchParams });
-
-  const { locale } = params;
-  const { t } = await initTranslations(locale, ['common', 'graphiql']);
+  const { t } = await initTranslations(params.locale, ['common', 'graphiql']);
 
   return (
     <>

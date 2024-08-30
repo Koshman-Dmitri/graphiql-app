@@ -17,3 +17,5 @@ export type Query = {
   sdlUrl: string;
   jsonVariables: string;
 };
+
+export type RouteParams = Pick<UrlParams, 'params'>;
