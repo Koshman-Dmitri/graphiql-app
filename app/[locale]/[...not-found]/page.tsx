@@ -4,7 +4,7 @@ import { RouteParams } from '@/app/utils/globalTypes';
 import styles from './page.module.css';
 
 export default async function NotFoundPage({ params }: RouteParams) {
-  const { t } = await initTranslations(params.locale, ['not-found']);
+  const { t } = await initTranslations(params?.locale, ['not-found']);
 
   return (
     <div className={styles.notFound}>
