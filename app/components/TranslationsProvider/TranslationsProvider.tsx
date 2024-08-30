@@ -3,7 +3,8 @@
 import { I18nextProvider } from 'react-i18next';
 import initTranslations from '@/app/services/internationalization/i18n';
 import { createInstance, Resource } from 'i18next';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
+import styles from './TranslationsProvider.module.css';
 
 export default function TranslationsProvider({
   children,
@@ -16,11 +17,23 @@ export default function TranslationsProvider({
   namespaces: string[];
   resources: Resource;
 }) {
-  const i18n = createInstance();
+  const [error, setError] = useState<Error | null>(null);
 
-  // TODO
-  // eslint-disable-next-line @typescript-eslint/no-floating-promises
-  initTranslations(locale, namespaces, i18n, resources);
+  const [i18n] = useState(() => {
+    const instance = createInstance();
 
-  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+    initTranslations(locale, namespaces, instance, resources).catch((e) => {
+      const newError = e as Error;
+      setError(newError);
+    });
+
+    return instance;
+  });
+
+  return (
+    <>
+      {error && <p className={styles.errorMsg}>{error.message}</p>}
+      <I18nextProvider i18n={i18n}>{children}</I18nextProvider>
+    </>
+  );
 }

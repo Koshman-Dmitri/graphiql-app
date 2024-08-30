@@ -3,7 +3,6 @@ import i18nConfig from './i18nConfig';
 import { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  console.log('Request received with locale:', request.nextUrl.locale);
   return i18nRouter(request, i18nConfig);
 }
 
