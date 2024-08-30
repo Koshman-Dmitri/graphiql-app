@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import initTranslations from '@/app/services/internationalization/i18n';
+import { UrlParams } from '@/app/utils/globalTypes';
 import styles from './page.module.css';
 
-export default async function MainPage({ params: { locale } }: { params: { locale: string } }) {
+export default async function MainPage({ params }: UrlParams) {
   const isAuthenticated = true;
 
-  const { t } = await initTranslations(locale, ['main', 'common']);
+  const { t } = await initTranslations(params.locale, ['main', 'common']);
 
   const generalInfo = (
     <>

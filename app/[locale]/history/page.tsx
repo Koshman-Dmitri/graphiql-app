@@ -1,8 +1,9 @@
 import initTranslations from '@/app/services/internationalization/i18n';
+import { UrlParams } from '@/app/utils/globalTypes';
 import HistoryRequests from '../../components/HistoryRequests/HistoryRequests';
 
-export default async function HistoryPage({ params: { locale } }: { params: { locale: string } }) {
-  const { t } = await initTranslations(locale, ['common', 'history']);
+export default async function HistoryPage({ params }: UrlParams) {
+  const { t } = await initTranslations(params.locale, ['common', 'history']);
 
   return (
     <>

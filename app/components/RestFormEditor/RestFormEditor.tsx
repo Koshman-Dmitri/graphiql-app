@@ -9,7 +9,6 @@ import useLocalStorage from '@/app/services/localStorageApi/useLocalStorage';
 import { addEmptyRow, changeRow, removeRow } from '@/app/utils/tableEditorHelpers';
 import { useTranslation } from 'react-i18next';
 import { RowElement } from './types';
-import selfStyles from './RestFormEditor.module.css';
 import styles from '../shared/editForm.module.css';
 import MethodEditor from '../MethodEditor/MethodEditor';
 import TableEditor from '../TableEditor/TableEditor';
@@ -90,12 +89,7 @@ export default function RestFormEditor() {
           placeholder={t('search_placeholder')}
           handleChange={handleChangeEndpointUrl}
         />
-        <button
-          className={selfStyles.submitBtn}
-          type="button"
-          onClick={handleSubmit}
-          disabled={Boolean(!endpointUrl)}
-        >
+        <button type="button" onClick={handleSubmit} disabled={Boolean(!endpointUrl)}>
           {t('send')}
         </button>
       </div>

@@ -2,7 +2,7 @@ import { RowElement } from '../components/RestFormEditor/types';
 
 export type UrlParams = {
   params: { slug: string | string[]; locale: string };
-  searchParams: { [key: string]: string };
+  searchParams?: { [key: string]: string };
 };
 
 export type Query = {
