@@ -1,5 +1,6 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import gqlPrettier from 'graphql-prettier';
+import { useTranslation } from 'react-i18next';
 import styles from './QueryEditor.module.css';
 
 interface Props {
@@ -21,6 +22,7 @@ export default function QueryEditor({
 }: Props) {
   const [error, setError] = useState<Error | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const { t } = useTranslation('common');
 
   const handlePrettifyBody = (): void => {
     let textareaValue = textareaRef.current?.value || '';
@@ -38,7 +40,7 @@ export default function QueryEditor({
 
   return (
     <div className={styles.queryEditor}>
-      <h2 className={styles.title}>Query</h2>
+      <h2 className={styles.title}>{t('query')}</h2>
       <div className={styles.wrapper}>
         <div>
           <textarea
@@ -54,7 +56,7 @@ export default function QueryEditor({
           {error && <p className={styles.errorMsg}>{error.message}</p>}
         </div>
         <button type="button" onClick={handlePrettifyBody}>
-          Prettify
+          {t('prettify')}
         </button>
       </div>
     </div>
