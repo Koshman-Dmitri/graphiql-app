@@ -3,7 +3,9 @@ import initTranslations from '@/app/services/internationalization/i18n';
 import { UrlParams } from '@/app/utils/globalTypes';
 import styles from './page.module.css';
 
-export default async function MainPage({ params }: UrlParams) {
+type MainPageParams = Pick<UrlParams, 'params'>;
+
+export default async function MainPage({ params }: MainPageParams) {
   const isAuthenticated = true;
 
   const { t } = await initTranslations(params.locale, ['main', 'common']);
