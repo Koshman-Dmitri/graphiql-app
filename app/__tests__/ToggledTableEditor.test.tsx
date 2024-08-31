@@ -3,6 +3,10 @@ import userEvent from '@testing-library/user-event';
 import ToggledTableEditor from '../components/ToggledTableEditor/ToggledTableEditor';
 
 describe('ToggledTableEditor', () => {
+  beforeEach(() => {
+    vi.spyOn(console, 'warn').mockImplementation(() => null);
+  });
+
   test('Should be render for type "variables"', async () => {
     const props = {
       title: 'variables',

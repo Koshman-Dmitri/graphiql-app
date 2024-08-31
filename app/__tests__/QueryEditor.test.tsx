@@ -3,6 +3,10 @@ import userEvent from '@testing-library/user-event';
 import QueryEditor from '../components/QueryEditor/QueryEditor';
 
 describe('QueryEditor', () => {
+  beforeEach(() => {
+    vi.spyOn(console, 'warn').mockImplementation(() => null);
+  });
+
   const props = {
     value: 'value',
     name: 'name',

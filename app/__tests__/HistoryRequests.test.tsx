@@ -3,6 +3,10 @@ import userEvent from '@testing-library/user-event';
 import HistoryRequests from '../components/HistoryRequests/HistoryRequests';
 
 describe('HistoryRequests', () => {
+  beforeEach(() => {
+    vi.spyOn(console, 'warn').mockImplementation(() => null);
+  });
+
   test('Should be render loading if no requests', () => {
     render(<HistoryRequests />);
 

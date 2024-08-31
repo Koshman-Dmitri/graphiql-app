@@ -3,6 +3,10 @@ import { userEvent } from '@testing-library/user-event';
 import RestFormEditor from '../components/RestFormEditor/RestFormEditor';
 
 describe('RestFormEditor', () => {
+  beforeEach(() => {
+    vi.spyOn(console, 'warn').mockImplementation(() => null);
+  });
+
   afterAll(() => {
     localStorage.clear();
   });

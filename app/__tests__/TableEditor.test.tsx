@@ -3,6 +3,10 @@ import userEvent from '@testing-library/user-event';
 import TableEditor from '../components/TableEditor/TableEditor';
 
 describe('TableEditor', () => {
+  beforeEach(() => {
+    vi.spyOn(console, 'warn').mockImplementation(() => null);
+  });
+
   test('Should be render without data', () => {
     const props = {
       title: 'title',

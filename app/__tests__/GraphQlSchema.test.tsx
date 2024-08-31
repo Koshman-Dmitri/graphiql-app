@@ -2,6 +2,10 @@ import { render, screen } from '@testing-library/react';
 import GraphQlSchema from '../components/GraphQlSchema/GraphQlSchema';
 
 describe('GraphQlSchema', () => {
+  beforeEach(() => {
+    vi.spyOn(console, 'warn').mockImplementation(() => null);
+  });
+
   test('Should rendered correct with no schema found', () => {
     const props = {
       schema: 'schema',

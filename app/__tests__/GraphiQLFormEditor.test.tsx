@@ -3,6 +3,10 @@ import { userEvent } from '@testing-library/user-event';
 import GraphiQLFormEditor from '../components/GraphiQLFormEditor/GraphiQLFormEditor';
 
 describe('GraphiQLFormEditor', () => {
+  beforeEach(() => {
+    vi.spyOn(console, 'warn').mockImplementation(() => null);
+  });
+
   afterAll(() => {
     localStorage.clear();
   });

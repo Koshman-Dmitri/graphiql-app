@@ -3,6 +3,10 @@ import userEvent from '@testing-library/user-event';
 import JsonEditor from '../components/JsonEditor/JsonEditor';
 
 describe('JsonEditor', () => {
+  beforeEach(() => {
+    vi.spyOn(console, 'warn').mockImplementation(() => null);
+  });
+
   const props = {
     title: 'body',
     value: '',
