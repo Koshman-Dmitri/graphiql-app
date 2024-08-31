@@ -42,10 +42,6 @@ const AuthInput = forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-AuthInput.defaultProps = {
-  value: '',
-};
-
 AuthInput.displayName = 'AuthInput';
 
 export default AuthInput;
