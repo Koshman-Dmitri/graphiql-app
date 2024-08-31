@@ -31,7 +31,7 @@ describe('RestFormEditor', () => {
 
     render(<RestFormEditor />);
 
-    const sendBtn = screen.getByText('Send');
+    const sendBtn = screen.getByText('send');
     await userEvent.click(sendBtn);
     expect(sendBtn).toBeDefined();
 
@@ -39,7 +39,7 @@ describe('RestFormEditor', () => {
     await userEvent.type(urlInput[0], 'localhost');
     expect(urlInput[0].value).toBe('https://localhost');
 
-    const valueInput = screen.getAllByPlaceholderText<HTMLInputElement>('Value');
+    const valueInput = screen.getAllByPlaceholderText<HTMLInputElement>('value');
     await userEvent.type(valueInput[0], '1');
     expect(valueInput[0].value).toBe('1');
 
@@ -71,7 +71,7 @@ describe('RestFormEditor', () => {
 
     render(<RestFormEditor />);
 
-    const sendBtn = screen.getByText('Send');
+    const sendBtn = screen.getByText('send');
     await userEvent.click(sendBtn);
     expect(sendBtn).toBeDefined();
   });

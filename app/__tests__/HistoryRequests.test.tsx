@@ -6,7 +6,7 @@ describe('HistoryRequests', () => {
   test('Should be render loading if no requests', () => {
     render(<HistoryRequests />);
 
-    const text = screen.getByText("You haven't executed any requests");
+    const text = screen.getByText('no_requests');
     expect(text).toBeInTheDocument();
   });
 

@@ -22,10 +22,10 @@ describe('ToggledTableEditor', () => {
       />
     );
 
-    const visBtn = screen.getByText(`Manage ${props.title}`);
+    const visBtn = screen.getByText(`manage ${props.title}`);
     await userEvent.click(visBtn);
 
-    const text = screen.getByText('To use variable, type');
+    const text = screen.getByText('use_variable');
     expect(text).toBeInTheDocument();
   });
 
@@ -48,10 +48,10 @@ describe('ToggledTableEditor', () => {
       />
     );
 
-    const visBtn = screen.getByText(`Manage ${props.title}`);
+    const visBtn = screen.getByText(`manage ${props.title}`);
     await userEvent.click(visBtn);
 
-    const text = screen.queryByText('To use variable, type');
+    const text = screen.queryByText('use_variable');
     expect(text).not.toBeInTheDocument();
   });
 });

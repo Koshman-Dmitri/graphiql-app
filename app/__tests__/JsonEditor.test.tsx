@@ -4,7 +4,7 @@ import JsonEditor from '../components/JsonEditor/JsonEditor';
 
 describe('JsonEditor', () => {
   const props = {
-    title: 'Body',
+    title: 'body',
     value: '',
     name: 'name',
     rows: 10,
@@ -44,13 +44,13 @@ describe('JsonEditor', () => {
       />
     );
 
-    const prettifyBtn = screen.getByText('Prettify');
+    const prettifyBtn = screen.getByText('prettify');
     await userEvent.click(prettifyBtn);
   });
 
   test('Should pretty valid json', async () => {
     const badProps = {
-      title: 'Body',
+      title: 'body',
       value: '{"test":"test"}',
       name: 'name',
       rows: 10,
@@ -71,13 +71,13 @@ describe('JsonEditor', () => {
       />
     );
 
-    const prettifyBtn = screen.getByText('Prettify');
+    const prettifyBtn = screen.getByText('prettify');
     await userEvent.click(prettifyBtn);
   });
 
   test('Should hide pretty button on Text select', async () => {
     const badProps = {
-      title: 'Body',
+      title: 'body',
       value: '{"test":"test"}',
       name: 'name',
       rows: 10,
@@ -101,7 +101,7 @@ describe('JsonEditor', () => {
     const select = screen.getByRole('combobox');
     await userEvent.selectOptions(select, 'Text');
 
-    const prettifyBtn = screen.queryByText('Prettify');
+    const prettifyBtn = screen.queryByText('prettify');
     expect(prettifyBtn).not.toBeInTheDocument();
   });
 });

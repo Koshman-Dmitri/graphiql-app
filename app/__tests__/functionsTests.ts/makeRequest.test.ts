@@ -9,6 +9,7 @@ describe('makeRequest', () => {
           'aHR0cHM6Ly9qc29ucGxhY2Vob2xkZXIudHlwaWNvZGUuY29tL3Bvc3RzLzE%3D',
           'eyJ0ZXN0IjoidmFsdWUifQ%3D%3D',
         ],
+        locale: 'en',
       },
       searchParams: { 'Content-Type': 'application/json' },
     };
@@ -36,6 +37,7 @@ describe('makeRequest', () => {
           'aHR0cHM6Ly9qc29ucGxhY2Vob2xkZXIudHlwaWNvZGUuY29tL3Bvc3RzLzE%3D',
           'eyJ0ZXN0IjoidmFsdWUifQ%3D%3D',
         ],
+        locale: 'en',
       },
       searchParams: { 'Content-Type': 'application/json' },
     };
@@ -53,7 +55,7 @@ describe('makeRequest', () => {
 
   test('Return empty data if no url parameters', async () => {
     const mockProps = {
-      params: { slug: [] },
+      params: { slug: [], locale: '' },
       searchParams: {},
     };
 
@@ -68,6 +70,7 @@ describe('makeRequest', () => {
     const mockProps = {
       params: {
         slug: ['GRAPHQL', 'aHR0cHM6Ly9qc29ucGxhY2Vob2xkZXIudHlwaWNvZGUuY29tL3Bvc3RzLzE%3D'],
+        locale: 'en',
       },
       searchParams: null!,
     };
@@ -87,7 +90,7 @@ describe('makeRequest', () => {
     });
   });
 
-  test('Do success request', async () => {
+  test('Redirect when wrong url structure', async () => {
     const mockProps = {
       params: {
         slug: [
@@ -96,14 +99,13 @@ describe('makeRequest', () => {
           'eyJ0ZXN0IjoidmFsdWUifQ%3D%3D',
           'more',
         ],
+        locale: 'en',
       },
       searchParams: { 'Content-Type': 'application/json' },
     };
 
     vitest.mock('next/navigation', () => ({
-      notFound() {
-        return null;
-      },
+      redirect: vi.fn(),
     }));
 
     vi.spyOn(globalThis, 'fetch').mockImplementationOnce(() => {

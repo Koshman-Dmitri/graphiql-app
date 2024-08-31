@@ -10,7 +10,7 @@ describe('GraphQlSchema', () => {
 
     render(<GraphQlSchema schema={props.schema} isError={props.isError} />);
 
-    const text = screen.getByText('Schema not found');
+    const text = screen.getByText('schema_not_found');
     expect(text).toBeInTheDocument();
   });
 

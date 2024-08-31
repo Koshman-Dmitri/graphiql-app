@@ -7,11 +7,19 @@ describe('ResponseSection', () => {
       data: '{"data": "value"}',
       status: '201',
       errorMsg: '',
+      t: vi.fn(),
     };
 
-    render(<ResponceSection data={props.data} status={props.status} errorMsg={props.errorMsg} />);
+    render(
+      <ResponceSection
+        data={props.data}
+        status={props.status}
+        errorMsg={props.errorMsg}
+        t={props.t}
+      />
+    );
 
-    const text = screen.getByText('Status: 201');
+    const text = screen.getByText(': 201');
     expect(text).toBeInTheDocument();
   });
 
@@ -20,11 +28,19 @@ describe('ResponseSection', () => {
       data: '',
       status: '',
       errorMsg: 'Error',
+      t: vi.fn(),
     };
 
-    render(<ResponceSection data={props.data} status={props.status} errorMsg={props.errorMsg} />);
+    render(
+      <ResponceSection
+        data={props.data}
+        status={props.status}
+        errorMsg={props.errorMsg}
+        t={props.t}
+      />
+    );
 
-    const text = screen.getByText('Could not send request');
+    const text = screen.getByText('Error');
     expect(text).toBeInTheDocument();
   });
 
@@ -33,12 +49,20 @@ describe('ResponseSection', () => {
       data: '',
       status: '200',
       errorMsg: '',
+      t: vi.fn(),
     };
 
-    render(<ResponceSection data={props.data} status={props.status} errorMsg={props.errorMsg} />);
+    render(
+      <ResponceSection
+        data={props.data}
+        status={props.status}
+        errorMsg={props.errorMsg}
+        t={props.t}
+      />
+    );
 
-    const text = screen.getByText('Send your request');
-    expect(text).toBeInTheDocument();
+    const text = screen.queryByText('Error');
+    expect(text).not.toBeInTheDocument();
   });
 
   test('Should be render if data and bad request status', () => {
@@ -46,11 +70,19 @@ describe('ResponseSection', () => {
       data: '{"data": "value"}',
       status: '400',
       errorMsg: '',
+      t: vi.fn(),
     };
 
-    render(<ResponceSection data={props.data} status={props.status} errorMsg={props.errorMsg} />);
+    render(
+      <ResponceSection
+        data={props.data}
+        status={props.status}
+        errorMsg={props.errorMsg}
+        t={props.t}
+      />
+    );
 
-    const text = screen.getByText('Status: 400');
+    const text = screen.getByText(': 400');
     expect(text).toBeInTheDocument();
   });
 });

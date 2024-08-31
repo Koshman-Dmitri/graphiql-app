@@ -16,7 +16,7 @@ export default function ResponseSection({ data, status, errorMsg, t }: Props) {
         <Image
           className={styles.errorImg}
           src="/images/request-error.png"
-          alt={t('request_error_picture')}
+          alt={t('request_error_picture') || ''}
           width={200}
           height={200}
         />

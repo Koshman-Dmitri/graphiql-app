@@ -31,11 +31,11 @@ describe('GraphiQLFormEditor', () => {
 
     render(<GraphiQLFormEditor />);
 
-    const sendBtn = screen.getByText('Send');
+    const sendBtn = screen.getByText('send');
     await userEvent.click(sendBtn);
     expect(sendBtn).toBeDefined();
 
-    const urlInput = screen.getByLabelText<HTMLInputElement>('Endpoint URL:');
+    const urlInput = screen.getByLabelText<HTMLInputElement>('endpoint_url');
     await userEvent.type(urlInput, 'url');
     expect(urlInput.value).toBe('https://url');
 
@@ -43,15 +43,15 @@ describe('GraphiQLFormEditor', () => {
     await userEvent.type(sdlInput, 'sdl');
     expect(sdlInput.value).toBe('https://url?sdlsdl');
 
-    const headerInput = screen.getAllByPlaceholderText<HTMLInputElement>('Value');
+    const headerInput = screen.getAllByPlaceholderText<HTMLInputElement>('value');
     await userEvent.type(headerInput[0], '1');
     expect(headerInput[0].value).toBe('1');
 
-    const variableInput = screen.getByPlaceholderText<HTMLTextAreaElement>('Use valid JSON syntax');
+    const variableInput = screen.getByPlaceholderText<HTMLTextAreaElement>('use_valid_json');
     await userEvent.type(variableInput, '1');
     expect(variableInput.value).toBe('1');
 
-    const manageVariablesBtn = screen.getByText('Manage variables');
+    const manageVariablesBtn = screen.getByText('manage variables');
     await userEvent.click(manageVariablesBtn);
     expect(manageVariablesBtn).toBeDefined();
   });

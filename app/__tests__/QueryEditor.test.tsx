@@ -41,7 +41,7 @@ describe('QueryEditor', () => {
       />
     );
 
-    const prettifyBtn = screen.getByText('Prettify');
+    const prettifyBtn = screen.getByText('prettify');
     await userEvent.click(prettifyBtn);
   });
 
@@ -72,7 +72,7 @@ describe('QueryEditor', () => {
       />
     );
 
-    const prettifyBtn = screen.getByText('Prettify');
+    const prettifyBtn = screen.getByText('prettify');
     await userEvent.click(prettifyBtn);
   });
 
@@ -97,7 +97,7 @@ describe('QueryEditor', () => {
       />
     );
 
-    const prettifyBtn = screen.getByText('Prettify');
+    const prettifyBtn = screen.getByText('prettify');
     await userEvent.click(prettifyBtn);
   });
 });
