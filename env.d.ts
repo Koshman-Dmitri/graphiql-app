@@ -12,5 +12,8 @@ declare namespace NodeJS {
     AUTH_COOKIE_SIGNATURE_KEY_PREVIOUS: string;
     FIREBASE_ADMIN_PRIVATE_KEY: string;
     FIREBASE_ADMIN_CLIENT_EMAIL: string;
+    USE_SECURE_COOKIES: boolean;
+    FIREBASE_API_KEY: string;
+    FIREBASE_PROJECT_ID: string;
   }
 }

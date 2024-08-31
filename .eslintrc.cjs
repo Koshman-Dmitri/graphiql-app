@@ -12,7 +12,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
-    // 'plugin:@next/next/recommended',
+    'plugin:@next/next/recommended',
     'plugin:prettier/recommended',
     'prettier',
   ],

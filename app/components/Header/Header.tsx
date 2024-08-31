@@ -1,18 +1,21 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { User } from '@/app/auth/AuthContext';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { auth } from '@/app/servises/firebase/firebase';
+import { auth } from '@/config/firebase';
 import styles from './Header.module.css';
 
-export default function Header() {
+interface HeaderProps {
+  user: User | null;
+}
+
+export default function Header({ user }: HeaderProps) {
   const [isSticky, setIsSticky] = useState(false);
   const router = useRouter();
-  const [user] = useAuthState(auth);
 
   useEffect(() => {
     const handleScroll = () => {

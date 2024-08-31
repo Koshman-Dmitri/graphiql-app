@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { authMiddleware, redirectToHome, redirectToLogin } from 'next-firebase-auth-edge';
-import { clientConfig, serverConfig } from './app/servises/firebase/config';
+import { authConfig } from './config/config';
 
 const PUBLIC_PATHS = ['/sign-up', '/sign-in'];
 
@@ -9,17 +9,13 @@ export async function middleware(request: NextRequest) {
   return authMiddleware(request, {
     loginPath: '/api/login',
     logoutPath: '/api/logout',
-    apiKey: clientConfig.apiKey,
-    cookieName: serverConfig.cookieName,
-    cookieSignatureKeys: serverConfig.cookieSignatureKeys,
-    cookieSerializeOptions: {
-      path: '/',
-      httpOnly: true,
-      secure: false,
-      sameSite: 'lax' as const,
-      maxAge: 60 * 60,
-    },
-    serviceAccount: serverConfig.serviceAccount,
+    refreshTokenPath: '/api/refresh-token',
+    enableMultipleCookies: authConfig.enableMultipleCookies,
+    apiKey: authConfig.apiKey,
+    cookieName: authConfig.cookieName,
+    cookieSignatureKeys: authConfig.cookieSignatureKeys,
+    cookieSerializeOptions: authConfig.cookieSerializeOptions,
+    serviceAccount: authConfig.serviceAccount,
 
     handleValidToken: ({ decodedToken }, headers) => {
       if (PUBLIC_PATHS.includes(currentPath)) {
@@ -65,5 +61,6 @@ export const config = {
     '/graphiql',
     '/api/login',
     '/api/logout',
+    '/api/refresh-token',
   ],
 };

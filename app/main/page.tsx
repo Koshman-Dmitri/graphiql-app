@@ -2,18 +2,11 @@ import Link from 'next/link';
 // import { useAuthState } from 'react-firebase-hooks/auth';
 import { getTokens } from 'next-firebase-auth-edge';
 import { cookies } from 'next/headers';
-import { clientConfig, serverConfig } from '../servises/firebase/config';
+import { authConfig } from '../../config/config';
 import styles from './page.module.css';
 
 export default async function MainPage() {
-  const tokens = await getTokens(cookies(), {
-    apiKey: clientConfig.apiKey,
-    cookieName: serverConfig.cookieName,
-    cookieSignatureKeys: serverConfig.cookieSignatureKeys,
-    serviceAccount: serverConfig.serviceAccount,
-  });
-
-  // console.log('Token', tokens?.decodedToken);
+  const tokens = await getTokens(cookies(), authConfig);
 
   const generalInfo = (
     <>

@@ -4,10 +4,11 @@ import { FormEvent, useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { auth } from '@/app/servises/firebase/firebase';
+import { auth } from '@/config/firebase';
 import styles from '../components/AuthForm/Auth.module.css';
 import AuthInput from '../components/AuthForm/Inputs/AuthInput';
 import Loader from '../components/Loader/Loader';
+import getErrorMessage from '../utils/getErrorMessage';
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -27,10 +28,11 @@ function SignIn() {
           Authorization: `Bearer ${idToken}`,
         },
       });
-
       router.refresh();
     } catch (e) {
-      setError((e as Error).message);
+      const errorCode = (e as Error).message;
+      const errorMessage = getErrorMessage(errorCode);
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -52,6 +54,7 @@ function SignIn() {
           type="email"
           title="Email"
           id="email"
+          error={error}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -59,6 +62,7 @@ function SignIn() {
           type="password"
           title="Password"
           id="password"
+          error={error}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -68,9 +72,10 @@ function SignIn() {
             Create an account
           </Link>
         </div>
-        <button type="submit">Sign In</button>
+        <button type="submit" className={`${error ? styles.disabledButton : ''} `}>
+          Sign In
+        </button>
       </form>
-      {error && <p>Error: {error}</p>}
     </div>
   );
 }

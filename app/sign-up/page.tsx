@@ -1,43 +1,53 @@
 'use client';
 
 import { useState } from 'react';
-// import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/navigation';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { doc, setDoc } from 'firebase/firestore';
-import { auth, db } from '@/app/servises/firebase/firebase';
+import { auth, db } from '@/config/firebase';
 import styles from '../components/AuthForm/Auth.module.css';
 import AuthInput from '../components/AuthForm/Inputs/AuthInput';
 import Loader from '../components/Loader/Loader';
+import { RegistrationValidationSchema, IFormData } from '../utils/yup';
 
 function SignUp() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmation, setConfirmation] = useState('');
-  const [error, setError] = useState('');
-  const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
 
-  const submitForm = async () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<IFormData>({
+    resolver: yupResolver(RegistrationValidationSchema),
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+  });
+
+  const nameInput = register('name');
+  const emailInput = register('email');
+  const passwordInput = register('password');
+  const confirmPasswordInput = register('confirmPassword');
+
+  const onSubmit: SubmitHandler<IFormData> = async (data) => {
     setError('');
     setLoading(true);
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const res = await createUserWithEmailAndPassword(auth, data.email, data.password);
       if (res?.user) {
         await setDoc(doc(db, 'users', res.user.uid), {
           uid: res.user.uid,
-          email,
-          name,
+          email: data.email,
+          name: data.name,
         });
 
         await updateProfile(res.user, {
-          displayName: name,
+          displayName: data.name,
         });
 
-        setEmail('');
-        setPassword('');
-        setName('');
         router.replace('/sign-in');
       }
     } catch (err) {
@@ -48,45 +58,55 @@ function SignUp() {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    submitForm().catch((err) => console.error('Error during form submission:', err));
-  };
   return loading ? (
     <Loader />
   ) : (
     <div className={styles.inputContainer}>
       <h2 className={styles.title}>Sign up</h2>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <AuthInput
           type="text"
           title="Name"
           id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          error={errors.name?.message || ''}
+          name={nameInput.name}
+          onChange={nameInput.onChange}
+          onBlur={nameInput.onBlur}
+          ref={nameInput.ref}
         />
         <AuthInput
           type="email"
           title="Email"
           id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          error={errors.email?.message || ''}
+          name={emailInput.name}
+          onChange={emailInput.onChange}
+          onBlur={emailInput.onBlur}
+          ref={emailInput.ref}
         />
         <AuthInput
           type="password"
           title="Password"
           id="password"
-          value={password}
-          onChange={(e) => setConfirmation(e.target.value)}
+          error={errors.password?.message || ''}
+          name={passwordInput.name}
+          onChange={passwordInput.onChange}
+          onBlur={passwordInput.onBlur}
+          ref={passwordInput.ref}
         />
         <AuthInput
           type="password"
           title="Confirm Password"
-          id="Confirm Password"
-          value={confirmation}
-          onChange={(e) => setName(e.target.value)}
+          id="ConfirmPassword"
+          error={errors.confirmPassword?.message || ''}
+          name={confirmPasswordInput.name}
+          onChange={confirmPasswordInput.onChange}
+          onBlur={confirmPasswordInput.onBlur}
+          ref={confirmPasswordInput.ref}
         />
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={!isValid}>
+          Sign Up
+        </button>
       </form>
       {error && <p>Error: {error}</p>}
     </div>

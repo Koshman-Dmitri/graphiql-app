@@ -28,3 +28,16 @@
   border-color: #0071f3cc;
   outline: none;
 }
+
+.errorInput {
+  border-color: red;
+  background-color: #ffebee;
+}
+
+.errorText {
+  color: #e57373;
+  font-size: 12px;
+  margin-top: 5px;
+  min-height: 18px;
+  line-height: 18px;
+}
