@@ -9,11 +9,6 @@
   overflow: auto;
 }
 
-.visibilityBtn {
-  max-width: 220px;
-  width: 100%;
-}
-
 .warningMsg {
   padding: 10px 0;
   text-align: left;

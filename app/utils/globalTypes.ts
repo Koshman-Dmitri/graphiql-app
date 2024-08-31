@@ -1,7 +1,7 @@
 import { RowElement } from '../components/RestFormEditor/types';
 
 export type UrlParams = {
-  params: { slug: string } | { slug: string[] };
+  params: { slug: string | string[]; locale: string };
   searchParams: { [key: string]: string };
 };
 
@@ -17,3 +17,5 @@ export type Query = {
   sdlUrl: string;
   jsonVariables: string;
 };
+
+export type RouteParams = Pick<UrlParams, 'params'>;

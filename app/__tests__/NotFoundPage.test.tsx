@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import NotFoundPage from '../not-found/page';
+import NotFoundPage from '../[locale]/[...not-found]/page';
 
 describe('NotFoundPage', () => {
   test('Renders the 404 page with correct text', () => {

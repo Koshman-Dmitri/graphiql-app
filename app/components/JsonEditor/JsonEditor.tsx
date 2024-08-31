@@ -1,4 +1,5 @@
 import { ChangeEvent, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './JsonEditor.module.css';
 
 interface Props {
@@ -23,6 +24,7 @@ export default function JsonEditor({
   const [isJSON, setIsJSON] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const { t } = useTranslation('common');
 
   const handlePrettify = (): void => {
     const textareaValue = textareaRef.current?.value || '';
@@ -57,7 +59,7 @@ export default function JsonEditor({
           {error && <p className={styles.errorMsg}>{error.message}</p>}
         </div>
         <div className={styles.controlWrapper}>
-          {title === 'Body' && (
+          {title === t('body') && (
             <select
               className={styles.select}
               onChange={() => {
@@ -66,12 +68,12 @@ export default function JsonEditor({
               }}
             >
               <option value="JSON">JSON</option>
-              <option value="Text">Text</option>
+              <option value="Text">{t('text')}</option>
             </select>
           )}
           {isJSON && (
             <button type="button" onClick={handlePrettify}>
-              Prettify
+              {t('prettify')}
             </button>
           )}
         </div>

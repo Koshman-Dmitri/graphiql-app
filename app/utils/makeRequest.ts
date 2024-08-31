@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { UrlParams } from './globalTypes';
 
 export default async function makeRequest({ params, searchParams }: UrlParams) {
@@ -7,7 +7,7 @@ export default async function makeRequest({ params, searchParams }: UrlParams) {
   let errorMsg = '';
   const fetchParams = params.slug;
 
-  if (fetchParams && fetchParams.length > 3) notFound();
+  if (fetchParams && fetchParams.length > 3) redirect('/wrong-request-structure');
 
   if (fetchParams && fetchParams.length > 1) {
     try {

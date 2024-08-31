@@ -3,10 +3,13 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import styles from './Header.module.css';
+import LanguageSelect from '../LanguageSelect/LanguageSelect';
 
 export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,9 +42,9 @@ export default function Header() {
           </Link>
           <nav className={styles.nav}>
             <Link href="/sign-in" className="buttonLink">
-              Sign In
+              {t('sign_in')}
             </Link>
-            <button type="button">EN</button>
+            <LanguageSelect />
           </nav>
         </div>
       </div>

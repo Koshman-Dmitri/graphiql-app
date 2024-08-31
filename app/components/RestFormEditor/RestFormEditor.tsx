@@ -7,8 +7,8 @@ import { Query } from '@/app/utils/globalTypes';
 import localStorageApi from '@/app/services/localStorageApi/localStorageApi';
 import useLocalStorage from '@/app/services/localStorageApi/useLocalStorage';
 import { addEmptyRow, changeRow, removeRow } from '@/app/utils/tableEditorHelpers';
+import { useTranslation } from 'react-i18next';
 import { RowElement } from './types';
-import selfStyles from './RestFormEditor.module.css';
 import styles from '../shared/editForm.module.css';
 import MethodEditor from '../MethodEditor/MethodEditor';
 import TableEditor from '../TableEditor/TableEditor';
@@ -24,6 +24,7 @@ export default function RestFormEditor() {
   const [headers, setHeaders] = useState<RowElement[]>(initData.headers);
   const [variables, setVariables] = useState<RowElement[]>(initData.variables);
   const [body, setBody] = useState(initData.body);
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     if (initData.type !== 'rest') return;
@@ -85,36 +86,31 @@ export default function RestFormEditor() {
           id=""
           name="endpointUrl"
           value={endpointUrl}
-          placeholder="Enter URL or paste text"
+          placeholder={t('search_placeholder')}
           handleChange={handleChangeEndpointUrl}
         />
-        <button
-          className={selfStyles.submitBtn}
-          type="button"
-          onClick={handleSubmit}
-          disabled={Boolean(!endpointUrl)}
-        >
-          Send
+        <button type="button" onClick={handleSubmit} disabled={Boolean(!endpointUrl)}>
+          {t('send')}
         </button>
       </div>
       <TableEditor
-        title="headers"
+        title={t('headers')}
         data={headers}
         handleAddData={handleAddHeader}
         handleChangeData={handleChangeHeader}
         handleRemoveData={handleRemoveHeader}
       />
       <BodyEditor
-        title="Body"
+        title={t('body')}
         value={body}
         rows={8}
         cols={30}
         name="bodyEditor"
-        placeholder="Use JSON or Plain text syntax"
+        placeholder={t('body_placeholder')}
         handleChangeValue={handleChangeBody}
       />
       <ToggledTableEditor
-        title="variables"
+        title={t('variables')}
         data={variables}
         handleAddData={handleAddVariables}
         handleChangeData={handleChangeVariables}

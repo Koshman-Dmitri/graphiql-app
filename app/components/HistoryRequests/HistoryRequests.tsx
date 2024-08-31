@@ -4,10 +4,13 @@ import { useEffect, useState } from 'react';
 import { Query } from '@/app/utils/globalTypes';
 import Link from 'next/link';
 import localStorageApi from '@/app/services/localStorageApi/localStorageApi';
+import { useTranslation } from 'react-i18next';
 import styles from './HistoryRequests.module.css';
 
 export default function HistoryRequests() {
   const [requests, setRequests] = useState<Query[] | null | 'loading'>('loading');
+
+  const { t } = useTranslation(['history', 'main']);
 
   useEffect(() => {
     const lsRequests = localStorageApi.getAllQueries();
@@ -15,20 +18,20 @@ export default function HistoryRequests() {
   }, []);
 
   if (requests === 'loading') {
-    return <p className={styles.loading}>LOADING...</p>;
+    return <p className={styles.loading}>{t('loading')}</p>;
   }
 
   if (!requests)
     return (
       <div className={styles.emptyContent}>
-        <p>You haven&apos;t executed any requests</p>
-        <p>It&apos;s empty here. Try those options:</p>
+        <p>{t('no_requests')}</p>
+        <p>{t('try_options')}</p>
         <div className={styles.pageLinksWrapper}>
           <Link href="/rest" className={`buttonLink ${styles.pageLink}`}>
-            REST Clent
+            {t('main:rest_client')}
           </Link>
           <Link href="/graphql" className={`buttonLink ${styles.pageLink}`}>
-            GraphiQL Client
+            {t('main:graphiql_client')}
           </Link>
         </div>
       </div>
