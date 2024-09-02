@@ -2,7 +2,6 @@ import { act, render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 import TestErrorComponent from '../components/ErrorBoundary/TestError';
-import '@testing-library/jest-dom/vitest';
 
 describe('ErrorBoundary', () => {
   test('Should not render on init', () => {
