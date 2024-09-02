@@ -5,6 +5,7 @@ import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import TranslationsProvider from '../components/TranslationsProvider/TranslationsProvider';
 import initTranslations from '../services/internationalization/i18n';
+import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
 export const metadata: Metadata = {
   title: 'Graphiql App',
@@ -27,11 +28,13 @@ export default async function RootLayout({ children, params: { locale } }: Layou
       </head>
       <body>
         <TranslationsProvider locale={locale} namespaces={namespaces} resources={resources}>
-          <div className="page">
-            <Header />
-            <main className="container">{children}</main>
-            <Footer />
-          </div>
+          <ErrorBoundary>
+            <div className="page">
+              <Header />
+              <main className="container">{children}</main>
+              <Footer />
+            </div>
+          </ErrorBoundary>
         </TranslationsProvider>
       </body>
     </html>
