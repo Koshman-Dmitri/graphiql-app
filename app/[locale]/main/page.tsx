@@ -35,13 +35,13 @@ export default async function MainPage({ params }: RouteParams) {
       <MainPageInfo />
       <div className={styles.apiLinks}>
         <Link href="/rest" className={`buttonLink ${styles.apiButton}`}>
-          {t('rest_client')}
+          {t('rest_btn')}
         </Link>
         <Link href="/graphql" className={`buttonLink ${styles.apiButton}`}>
-          {t('graphiql_client')}
+          {t('graphiql_btn')}
         </Link>
         <Link href="/history" className={`buttonLink ${styles.apiButton}`}>
-          {t('history')}
+          {t('history_btn')}
         </Link>
       </div>
     </div>
