@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import initTranslations from '@/app/services/internationalization/i18n';
 import { RouteParams } from '@/app/utils/globalTypes';
+import MainPageInfo from '@/app/components/MainPageInfo/MainPageInfo';
 import styles from './page.module.css';
 
 export default async function MainPage({ params }: RouteParams) {
@@ -8,42 +9,38 @@ export default async function MainPage({ params }: RouteParams) {
 
   const { t } = await initTranslations(params.locale, ['main', 'common']);
 
-  const generalInfo = (
-    <>
-      <h3>{t('title_secondary')}</h3>
-      <p>{t('description')}</p>
-    </>
-  );
-
   if (!isAuthenticated) {
     return (
       <div className={styles.mainContent}>
-        <h2>{t('title_primary')}</h2>
-        {generalInfo}
-        <div className={styles.mainLinks}>
-          <Link href="/sign-in" className={`buttonLink ${styles.buttonLinkMain}`}>
+        <div className={styles.authLinks}>
+          <Link href="/sign-in" className={`buttonLink ${styles.authButton}`}>
             {t('common:sign_in')}
           </Link>
-          <Link href="/sign-up" className={`buttonLink ${styles.buttonLinkMain}`}>
+          <Link href="/sign-up" className={`buttonLink ${styles.authButton}`}>
             {t('common:sign_up')}
           </Link>
         </div>
+        <h1 className="pageTitle">{t('title_primary')}</h1>
+        <MainPageInfo />
       </div>
     );
   }
 
   return (
     <div className={styles.mainContent}>
-      <h2>{t('title_primary')}</h2>
-      {generalInfo}
-      <div className={styles.mainLinks}>
-        <Link href="/rest" className={`buttonLink ${styles.buttonLinkMain}`}>
+      <Link href="/rest" className={`buttonLink ${styles.mainPageLink}`}>
+        Main Page
+      </Link>
+      <h1 className="pageTitle">{t('title_primary')}</h1>
+      <MainPageInfo />
+      <div className={styles.apiLinks}>
+        <Link href="/rest" className={`buttonLink ${styles.apiButton}`}>
           {t('rest_client')}
         </Link>
-        <Link href="/graphql" className={`buttonLink ${styles.buttonLinkMain}`}>
+        <Link href="/graphql" className={`buttonLink ${styles.apiButton}`}>
           {t('graphiql_client')}
         </Link>
-        <Link href="/history" className={`buttonLink ${styles.buttonLinkMain}`}>
+        <Link href="/history" className={`buttonLink ${styles.apiButton}`}>
           {t('history')}
         </Link>
       </div>

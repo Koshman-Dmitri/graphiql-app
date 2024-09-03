@@ -26,8 +26,8 @@ export default function LanguageSelect() {
 
   return (
     <select onChange={handleChange} value={currentLocale} className={styles.select}>
-      <option value="en">English</option>
-      <option value="ru">Русский</option>
+      <option value="en">En</option>
+      <option value="ru">Ru</option>
     </select>
   );
 }

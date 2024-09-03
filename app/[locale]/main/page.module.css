@@ -3,24 +3,35 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
 }
 
-.mainLinks {
+.authLinks {
+  display: flex;
+  align-self: end;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.mainPageLink {
+  align-self: end;
+}
+
+.apiLinks {
   display: flex;
   gap: 2rem;
+  margin-bottom: 2rem;
 }
 
-.buttonLinkMain {
+.apiButton {
   min-width: 20rem;
 }
 
 @media (max-width: 768px) {
-  .mainLinks {
+  .apiLinks {
     flex-direction: column;
   }
 
-  .buttonLinkMain {
+  .apiButton {
     min-width: 30vw;
     height: 5rem;
   }
