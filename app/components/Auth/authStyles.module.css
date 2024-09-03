@@ -1,0 +1,32 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10% auto;
+  padding: 3rem;
+  max-width: 700px;
+  font-size: 3rem;
+  text-align: center;
+  border-radius: 20px;
+  border: 8px ridge var(--color-brand);
+}
+
+.title {
+  margin-bottom: 3.6rem;
+  font-size: inherit;
+}
+
+.link {
+  text-decoration: underline;
+  color: var(--color-brand);
+}
+
+.submitButton {
+  margin: 20px auto 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    color: var(--color-text-success);
+  }
+}
