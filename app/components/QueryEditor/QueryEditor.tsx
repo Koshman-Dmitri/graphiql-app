@@ -10,6 +10,7 @@ interface Props {
   cols: number;
   placeholder: string;
   handleChangeQuery: (value: string) => void;
+  handleFocusOut: () => void;
 }
 
 export default function QueryEditor({
@@ -19,6 +20,7 @@ export default function QueryEditor({
   name,
   placeholder,
   handleChangeQuery,
+  handleFocusOut,
 }: Props) {
   const [error, setError] = useState<Error | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -52,6 +54,7 @@ export default function QueryEditor({
             name={name}
             placeholder={placeholder}
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChangeQuery(e.target.value)}
+            onBlur={handleFocusOut}
           />
           {error && <p className={styles.errorMsg}>{error.message}</p>}
         </div>

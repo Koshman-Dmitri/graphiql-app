@@ -16,6 +16,7 @@ export interface TableProps {
   handleAddData: () => void;
   handleChangeData: (e: ChangeEvent<HTMLInputElement>, id: number) => void;
   handleRemoveData: (id: number) => void;
+  handleFocusOut: () => void;
 }
 
 function TableEditor({
@@ -24,6 +25,7 @@ function TableEditor({
   handleAddData,
   handleChangeData,
   handleRemoveData,
+  handleFocusOut,
 }: TableProps) {
   const tableTitle = `${title[0].toUpperCase()}${title.slice(1)}`;
 
@@ -33,7 +35,7 @@ function TableEditor({
   return (
     <div className={styles.tableEditor}>
       <h2 className={styles.title}>{tableTitle}</h2>
-      <table className={styles.table}>
+      <table className={styles.table} onBlur={handleFocusOut}>
         <tbody>
           <tr>
             <td>{t('key')}</td>

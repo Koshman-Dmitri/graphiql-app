@@ -10,6 +10,7 @@ interface Props {
   cols: number;
   placeholder: string;
   handleChangeValue: (value: string) => void;
+  handleFocusOut: () => void;
 }
 
 export default function JsonEditor({
@@ -20,6 +21,7 @@ export default function JsonEditor({
   name,
   placeholder,
   handleChangeValue,
+  handleFocusOut,
 }: Props) {
   const [isJSON, setIsJSON] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -55,6 +57,7 @@ export default function JsonEditor({
             name={name}
             placeholder={placeholder}
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChangeValue(e.target.value)}
+            onBlur={handleFocusOut}
           />
           {error && <p className={styles.errorMsg}>{error.message}</p>}
         </div>

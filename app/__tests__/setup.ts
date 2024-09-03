@@ -1,6 +1,10 @@
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
 
+beforeEach(() => {
+  vi.spyOn(window.history, 'replaceState').mockImplementation(() => null);
+});
+
 afterEach(() => {
   cleanup();
 });

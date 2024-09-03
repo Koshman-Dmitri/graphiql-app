@@ -9,6 +9,7 @@ export default function ToggledTableEditor({
   handleAddData,
   handleChangeData,
   handleRemoveData,
+  handleFocusOut,
 }: TableProps) {
   const [isVisible, setIsVisible] = useState(false);
   const { t } = useTranslation('common');
@@ -41,6 +42,7 @@ export default function ToggledTableEditor({
           handleAddData={handleAddData}
           handleChangeData={handleChangeData}
           handleRemoveData={handleRemoveData}
+          handleFocusOut={handleFocusOut}
         />
       </div>
     </div>

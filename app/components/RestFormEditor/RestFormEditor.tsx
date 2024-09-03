@@ -36,10 +36,25 @@ export default function RestFormEditor() {
     setBody(initData.body);
   }, [initData]);
 
-  const handleChangeMethod = (value: string): void => setMethod(value);
+  const handleFocusOut = (): void => {
+    const path = makeRestPath({ method, url: endpointUrl, headers, variables, body });
+    window.history.replaceState(null, '', `/${window.location.pathname.split('/')[1]}${path}`);
+  };
 
-  const handleChangeEndpointUrl = (e: ChangeEvent<HTMLInputElement>): void =>
-    setEndpointUrl(e.target.value.trim());
+  const handleChangeMethod = (value: string): void => {
+    const path = makeRestPath({ method: value, url: endpointUrl, headers, variables, body });
+    window.history.replaceState(null, '', `/${window.location.pathname.split('/')[1]}${path}`);
+
+    setMethod(value);
+  };
+
+  const handleChangeEndpointUrl = (e: ChangeEvent<HTMLInputElement>): void => {
+    const value = e.target.value.trim();
+    setEndpointUrl(value);
+
+    const path = makeRestPath({ method, url: value, headers, variables, body });
+    window.history.replaceState(null, '', `/${window.location.pathname.split('/')[1]}${path}`);
+  };
 
   const handleAddHeader = () => addEmptyRow(setHeaders, headers);
   const handleRemoveHeader = (id: number) => removeRow(setHeaders, headers, id);
@@ -99,6 +114,7 @@ export default function RestFormEditor() {
         handleAddData={handleAddHeader}
         handleChangeData={handleChangeHeader}
         handleRemoveData={handleRemoveHeader}
+        handleFocusOut={handleFocusOut}
       />
       <BodyEditor
         title={t('body')}
@@ -108,6 +124,7 @@ export default function RestFormEditor() {
         name="bodyEditor"
         placeholder={t('body_placeholder')}
         handleChangeValue={handleChangeBody}
+        handleFocusOut={handleFocusOut}
       />
       <ToggledTableEditor
         title={t('variables')}
@@ -115,6 +132,7 @@ export default function RestFormEditor() {
         handleAddData={handleAddVariables}
         handleChangeData={handleChangeVariables}
         handleRemoveData={handleRemoveVariables}
+        handleFocusOut={() => {}}
       />
     </form>
   );
