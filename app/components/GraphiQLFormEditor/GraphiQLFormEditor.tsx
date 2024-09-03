@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { Query } from '@/app/utils/globalTypes';
 import localStorageApi from '@/app/services/localStorageApi/localStorageApi';
 import { useTranslation } from 'react-i18next';
+import updateGraphUrl from '@/app/utils/updateGraphUrl';
 import { RowElement } from '../RestFormEditor/types';
 import selfStyles from './GraphiQLFormEditor.module.css';
 import styles from '../shared/editForm.module.css';
@@ -62,6 +63,7 @@ export default function GraphiQLFormEditor() {
 
   const handleChangeEndpointUrl = (e: ChangeEvent<HTMLInputElement>): void => {
     const endpoint = e.target.value.trim();
+    updateGraphUrl({ type: 'url', value: endpoint });
 
     setEndpointUrl(endpoint);
     setSdlUrl(`${endpoint}?sdl`);
@@ -81,6 +83,10 @@ export default function GraphiQLFormEditor() {
   const handleRemoveHeader = (id: number) => removeRow(setHeaders, headers, id);
   const handleChangeHeader = (e: ChangeEvent<HTMLInputElement>, id: number) =>
     changeRow(e, id, setHeaders, headers);
+
+  const handleFocusOutQuery = (): void => updateGraphUrl({ type: 'body', value: query });
+
+  const handleFocusOutHeader = (): void => updateGraphUrl({ type: 'headers', value: headers });
 
   const handleSubmit = (e: FormEvent<HTMLButtonElement>): void => {
     e.preventDefault();
@@ -151,6 +157,7 @@ export default function GraphiQLFormEditor() {
           name="queryEditor"
           placeholder={t('use_graphql_syntax')}
           handleChangeQuery={handleChangeQuery}
+          handleFocusOut={handleFocusOutQuery}
         />
         <div>
           <button
@@ -172,6 +179,7 @@ export default function GraphiQLFormEditor() {
               name="variableEditor"
               placeholder={t('use_valid_json')}
               handleChangeValue={handleChangeVariables}
+              handleFocusOut={() => {}}
             />
           </div>
         </div>
@@ -181,6 +189,7 @@ export default function GraphiQLFormEditor() {
           handleAddData={handleAddHeader}
           handleChangeData={handleChangeHeader}
           handleRemoveData={handleRemoveHeader}
+          handleFocusOut={handleFocusOutHeader}
         />
       </form>
       <GraphQlSchema schema={schema} isError={isSchemaError} />
