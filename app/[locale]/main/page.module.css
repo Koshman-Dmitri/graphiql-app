@@ -3,24 +3,26 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
 }
 
-.mainLinks {
+.apiLinks,
+.authLinks {
   display: flex;
   gap: 2rem;
+  margin-bottom: 2rem;
 }
 
-.buttonLinkMain {
+.apiButton,
+.authButton {
   min-width: 20rem;
 }
 
 @media (max-width: 768px) {
-  .mainLinks {
+  .apiLinks {
     flex-direction: column;
   }
 
-  .buttonLinkMain {
+  .apiButton {
     min-width: 30vw;
     height: 5rem;
   }
