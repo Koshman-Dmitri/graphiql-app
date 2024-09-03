@@ -11,6 +11,8 @@ export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
   const { t } = useTranslation('common');
 
+  const isAuthenticated = false;
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -41,9 +43,20 @@ export default function Header() {
             />
           </Link>
           <nav className={styles.nav}>
-            <Link href="/sign-in" className="buttonLink">
-              {t('sign_in')}
-            </Link>
+            {!isAuthenticated ? (
+              <>
+                <Link href="/sign-in" className="buttonLink">
+                  {t('sign_in')}
+                </Link>
+                <Link href="/sign-up" className="buttonLink">
+                  {t('sign_up')}
+                </Link>
+              </>
+            ) : (
+              <Link href="/" className="buttonLink">
+                {t('sign_out')}
+              </Link>
+            )}
             <LanguageSelect />
           </nav>
         </div>
