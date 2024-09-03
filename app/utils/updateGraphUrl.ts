@@ -23,7 +23,7 @@ export default function updateGraphUrl({ type, value }: Args): void {
       .map((header) => `${encodeURIComponent(header.key)}=${encodeURIComponent(header.value)}`)
       .join('&');
   }
-  console.log(headers);
+
   const updatedUrl = `${[empty, newLang, newPage, newMethod, newUrl, newBody].join('/')}${
     headers && headers !== '=' ? `?${headers}` : ''
   }`;
