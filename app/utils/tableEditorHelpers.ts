@@ -19,7 +19,11 @@ export function removeRow(
   elementsArr: RowElement[],
   id: number
 ): void {
-  const newArray = elementsArr.filter((el) => el.id !== id);
+  const newArray = elementsArr
+    .filter((el) => el.id !== id)
+    .map((el, i) => {
+      return { ...el, id: i };
+    });
 
   if (newArray.length) {
     callback(newArray);
