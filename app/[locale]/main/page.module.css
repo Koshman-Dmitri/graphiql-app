@@ -5,24 +5,15 @@
   align-items: center;
 }
 
+.apiLinks,
 .authLinks {
   display: flex;
-  align-self: end;
   gap: 2rem;
   margin-bottom: 2rem;
 }
 
-.mainPageLink {
-  align-self: end;
-}
-
-.apiLinks {
-  display: flex;
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.apiButton {
+.apiButton,
+.authButton {
   min-width: 20rem;
 }
 

@@ -5,13 +5,16 @@ import MainPageInfo from '@/app/components/MainPageInfo/MainPageInfo';
 import styles from './page.module.css';
 
 export default async function MainPage({ params }: RouteParams) {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
+  const name = 'John Doe';
 
   const { t } = await initTranslations(params.locale, ['main', 'common']);
 
   if (!isAuthenticated) {
     return (
       <div className={styles.mainContent}>
+        <h1 className="pageTitle">{t('title_primary_default')}</h1>
+        <MainPageInfo params={params} />
         <div className={styles.authLinks}>
           <Link href="/sign-in" className={`buttonLink ${styles.authButton}`}>
             {t('common:sign_in')}
@@ -20,19 +23,14 @@ export default async function MainPage({ params }: RouteParams) {
             {t('common:sign_up')}
           </Link>
         </div>
-        <h1 className="pageTitle">{t('title_primary')}</h1>
-        <MainPageInfo />
       </div>
     );
   }
 
   return (
     <div className={styles.mainContent}>
-      <Link href="/rest" className={`buttonLink ${styles.mainPageLink}`}>
-        Main Page
-      </Link>
-      <h1 className="pageTitle">{t('title_primary')}</h1>
-      <MainPageInfo />
+      <h1 className="pageTitle">{t('title_primary_auth', { name })}</h1>
+      <MainPageInfo params={params} />
       <div className={styles.apiLinks}>
         <Link href="/rest" className={`buttonLink ${styles.apiButton}`}>
           {t('rest_btn')}
