@@ -110,7 +110,7 @@ textarea:focus {
 
 .pageTitle {
   margin: 20px 0;
-  font-size: 36px;
+  font-size: 3rem;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -131,7 +131,19 @@ textarea:focus {
   }
 }
 
+@media (max-width: 1024px) {
+  html {
+    font-size: 9px;
+  }
+}
+
 @media (max-width: 768px) {
+  html {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 520px) {
   html {
     font-size: 6px;
   }
