@@ -9,19 +9,19 @@ import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IFormInput } from '../types';
 import AuthInput from '../AuthInput/AuthInput';
-import schema from '../schema';
 import styles from '../authStyles.module.css';
 import authStyles from '../AuthInput/AuthInput.module.css';
+import useValidationSchema from '../schema';
 
 export default function SignUpForm() {
   const nameRef = useRef<HTMLInputElement>(null);
+  const { t } = useTranslation('sign');
+  const schema = useValidationSchema();
 
   const {
     register,
     formState: { errors, isValid },
   } = useForm<IFormInput>({ resolver: yupResolver(schema), mode: 'onChange' });
-
-  const { t } = useTranslation('sign');
 
   return (
     <form className={styles.form}>
