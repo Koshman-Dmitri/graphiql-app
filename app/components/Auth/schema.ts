@@ -1,18 +1,25 @@
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
-const schema = yup.object({
-  email: yup
-    .string()
-    .required('Fill this field')
-    .email('Must be a valid email')
-    .matches(/^[\w-]+@([\w-]+\.)+[a-z]{2,4}$/, 'Must be a valid email'),
-  password: yup
-    .string()
-    .required('Fill this field')
-    .matches(/[0-9]/, 'At least one digit')
-    .matches(/[a-zA-Z]/, 'At least one letter')
-    .matches(/[!?@#$%^&*]/, 'At least one special character')
-    .min(8, 'Minimum 8 symbols'),
-});
+const useValidationSchema = () => {
+  const { t } = useTranslation('validation');
 
-export default schema;
+  const schema = yup.object({
+    email: yup
+      .string()
+      .required(t('required'))
+      .email(t('invalid_email'))
+      .matches(/^[\w-]+@([\w-]+\.)+[a-z]{2,4}$/, t('invalid_email')),
+    password: yup
+      .string()
+      .required(t('required'))
+      .matches(/[0-9]/, t('at_least_one_digit'))
+      .matches(/[a-zA-Z]/, t('at_least_one_letter'))
+      .matches(/[!?@#$%^&*]/, t('at_least_one_special_char'))
+      .min(8, t('min_symbols')),
+  });
+
+  return schema;
+};
+
+export default useValidationSchema;

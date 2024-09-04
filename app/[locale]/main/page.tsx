@@ -5,7 +5,7 @@ import MainPageInfo from '@/app/components/MainPageInfo/MainPageInfo';
 import styles from './page.module.css';
 
 export default async function MainPage({ params }: RouteParams) {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
   const name = 'John Doe';
 
   const { t } = await initTranslations(params.locale, ['main', 'common']);
