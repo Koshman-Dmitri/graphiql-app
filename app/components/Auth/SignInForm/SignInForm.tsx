@@ -30,7 +30,7 @@ function SignInForm() {
 
     if (res) {
       const token = await res.user.getIdToken();
-      setCookies(token, window.location.pathname.split('/')[1]);
+      setCookies(token, window.location.pathname.split('/')[1], res.user.displayName as string);
     }
   };
 

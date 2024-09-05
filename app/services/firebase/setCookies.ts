@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { COOKIE_NAME } from './config';
 
-function setCookies(token: string, locale: string) {
+function setCookies(token: string, locale: string, name: string) {
   const config = {
     maxAge: 60 * 60 * 24 * 7, // 1 week
     path: '/',
@@ -14,6 +14,8 @@ function setCookies(token: string, locale: string) {
   };
 
   cookies().set(COOKIE_NAME, token, config);
+  cookies().set('firebaseUserName', name, config);
+
   redirect(`/${locale}/`);
 }
 

@@ -6,9 +6,10 @@ import { onIdTokenChanged } from 'firebase/auth';
 import { auth } from '@/app/services/firebase/config';
 import styles from './MainPage.module.css';
 
-export default function MainPage({ hasToken }: { hasToken: boolean }) {
+export default function MainPage({ hasToken, userName }: { hasToken: boolean; userName: string }) {
   const [isAuth, setIsAuth] = useState(false);
-  // const name = 'John Doe';
+  console.log(userName);
+
   // const { t } = await initTranslations(params.locale, ['main', 'common']);
 
   useEffect(() => {
@@ -38,7 +39,7 @@ export default function MainPage({ hasToken }: { hasToken: boolean }) {
 
   return (
     <div className={styles.mainContent}>
-      <h1 className="pageTitle">{` {t('title_primary_auth', { name })} `}</h1>
+      <h1 className="pageTitle">{` {t('title_primary_auth', { userName })} `}</h1>
       {/* <MainPageInfo params={params} /> */}
       <div className={styles.apiLinks}>
         <Link href="/rest" className={`buttonLink ${styles.apiButton}`}>

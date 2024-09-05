@@ -6,6 +6,7 @@ import { COOKIE_NAME } from './config';
 
 function logOutAction(locale: string) {
   cookies().delete(COOKIE_NAME);
+  cookies().delete('firebaseUserName');
   redirect(`/${locale}/`);
 }
 

@@ -3,11 +3,12 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/services/firebase/config';
 import setCookies from '@/app/services/firebase/setCookies';
+import { updateProfile } from 'firebase/auth';
 import { IFormInput } from '../types';
 import AuthInput from '../AuthInput/AuthInput';
 import styles from '../authStyles.module.css';
@@ -16,9 +17,10 @@ import useValidationSchema from '../schema';
 import ProtectedRoute from '../ProtectRoutes/ProtectedRoute';
 
 function SignUpForm() {
+  const [name, setName] = useState('');
+
   const { t } = useTranslation('sign');
   const schema = useValidationSchema();
-  const nameRef = useRef<HTMLInputElement>(null);
 
   const [createUserWithEmailAndPassword, , loading, error] =
     useCreateUserWithEmailAndPassword(auth);
@@ -34,7 +36,8 @@ function SignUpForm() {
 
     if (res) {
       const token = await res.user.getIdToken();
-      setCookies(token, window.location.pathname.split('/')[1]);
+      setCookies(token, window.location.pathname.split('/')[1], name);
+      await updateProfile(res.user, { displayName: name });
     }
   };
 
@@ -44,7 +47,12 @@ function SignUpForm() {
 
       <label className={authStyles.label} htmlFor="name">
         <span className={authStyles.labelName}>{t('name')}</span>
-        <input ref={nameRef} className={authStyles.input} id="name" />
+        <input
+          className={authStyles.input}
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </label>
 
       <AuthInput
