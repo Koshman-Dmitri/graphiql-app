@@ -5,8 +5,6 @@ import { redirect } from 'next/navigation';
 import { COOKIE_NAME } from './config';
 
 function setCookies(token: string, locale: string) {
-  console.log('Hello From Register User Action');
-
   const config = {
     maxAge: 60 * 60 * 24 * 7, // 1 week
     path: '/',

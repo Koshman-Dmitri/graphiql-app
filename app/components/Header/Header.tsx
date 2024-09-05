@@ -4,14 +4,24 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '@/app/services/firebase/config';
+import logOutAction from '@/app/services/firebase/logOutAction';
 import styles from './Header.module.css';
 import LanguageSelect from '../LanguageSelect/LanguageSelect';
 
-export default function Header() {
+export default function Header({ hasToken }: { hasToken: boolean }) {
+  const [isAuth, setIsAuth] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const { t } = useTranslation('common');
 
-  const isAuthenticated = false;
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuth(Boolean(user));
+    });
+
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +53,7 @@ export default function Header() {
             />
           </Link>
           <nav className={styles.nav}>
-            {!isAuthenticated ? (
+            {!isAuth && !hasToken ? (
               <>
                 <Link href="/sign-in" className="buttonLink">
                   {t('sign_in')}
@@ -53,9 +63,16 @@ export default function Header() {
                 </Link>
               </>
             ) : (
-              <Link href="/" className="buttonLink">
+              <button
+                type="button"
+                className="buttonLink"
+                onClick={async () => {
+                  await signOut(auth);
+                  logOutAction(window.location.pathname.split('/')[1]);
+                }}
+              >
                 {t('sign_out')}
-              </Link>
+              </button>
             )}
             <LanguageSelect />
           </nav>
