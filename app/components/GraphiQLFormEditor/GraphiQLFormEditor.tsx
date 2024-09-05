@@ -17,10 +17,12 @@ import QueryEditor from '../QueryEditor/QueryEditor';
 import VariablesEditor from '../JsonEditor/JsonEditor';
 import ToggledTableEditor from '../ToggledTableEditor/ToggledTableEditor';
 import GraphQlSchema from '../GraphQlSchema/GraphQlSchema';
+import Loader from '../Loader/Loader';
 
 export default function GraphiQLFormEditor() {
-  const router = useRouter();
   const initData = useLocalStorage();
+  const router = useRouter();
+  const [loader, setLoader] = useState(false);
   const [endpointUrl, setEndpointUrl] = useState(initData.url);
   const [sdlUrl, setSdlUrl] = useState(initData.sdlUrl || `${endpointUrl}?sdl`);
   const [query, setQuery] = useState(initData.body);
@@ -94,6 +96,7 @@ export default function GraphiQLFormEditor() {
     try {
       const path = makeGraphQlPath({ url: endpointUrl, query, headers, variables });
       router.push(path);
+      setLoader(true);
 
       const newQuery = {
         id: crypto.randomUUID(),
@@ -193,6 +196,7 @@ export default function GraphiQLFormEditor() {
         />
       </form>
       <GraphQlSchema schema={schema} isError={isSchemaError} />
+      {loader && <Loader />}
     </>
   );
 }

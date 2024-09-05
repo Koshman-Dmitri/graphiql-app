@@ -15,10 +15,12 @@ import TableEditor from '../TableEditor/TableEditor';
 import ControlledInput from '../ControlledInput/ControlledInput';
 import ToggledTableEditor from '../ToggledTableEditor/ToggledTableEditor';
 import BodyEditor from '../JsonEditor/JsonEditor';
+import Loader from '../Loader/Loader';
 
 export default function RestFormEditor() {
   const initData = useLocalStorage();
   const router = useRouter();
+  const [loader, setLoader] = useState(false);
   const [method, setMethod] = useState(initData.method);
   const [endpointUrl, setEndpointUrl] = useState(initData.url);
   const [headers, setHeaders] = useState<RowElement[]>(initData.headers);
@@ -73,6 +75,7 @@ export default function RestFormEditor() {
 
     const path = makeRestPath({ method, url: endpointUrl, headers, variables, body });
     router.push(path);
+    setLoader(true);
 
     const newQuery = {
       id: crypto.randomUUID(),
@@ -134,6 +137,7 @@ export default function RestFormEditor() {
         handleRemoveData={handleRemoveVariables}
         handleFocusOut={() => {}}
       />
+      {loader && <Loader />}
     </form>
   );
 }
