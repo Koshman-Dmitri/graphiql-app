@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { onIdTokenChanged, signOut } from 'firebase/auth';
 import { auth } from '@/app/services/firebase/config';
 import logOutAction from '@/app/services/firebase/logOutAction';
 import styles from './Header.module.css';
@@ -16,7 +16,7 @@ export default function Header({ hasToken }: { hasToken: boolean }) {
   const { t } = useTranslation('common');
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onIdTokenChanged(auth, (user) => {
       setIsAuth(Boolean(user));
     });
 

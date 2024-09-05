@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onIdTokenChanged } from 'firebase/auth';
 import { auth } from '@/app/services/firebase/config';
 import styles from './MainPage.module.css';
 
@@ -12,7 +12,7 @@ export default function MainPage({ hasToken }: { hasToken: boolean }) {
   // const { t } = await initTranslations(params.locale, ['main', 'common']);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onIdTokenChanged(auth, (user) => {
       setIsAuth(Boolean(user));
     });
 
