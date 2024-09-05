@@ -1,6 +1,8 @@
-import { UrlParams } from '../utils/globalTypes';
-import MainPage from './main/page';
+import MainPage from '../components/MainPage/MainPage';
+import getAuthToken from '../services/firebase/getAuthToken';
 
-export default function HomePage({ params }: UrlParams) {
-  return <MainPage params={params} />;
+export default function HomePage() {
+  const hasToken = Boolean(getAuthToken());
+
+  return <MainPage hasToken={hasToken} />;
 }
