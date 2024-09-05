@@ -2,6 +2,7 @@ import { JSX, useEffect, useState } from 'react';
 import { onIdTokenChanged } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { auth } from '../../../services/firebase/config';
+import styles from './ProtectedRoute.module.css';
 
 const ProtectedRoute = (Component: () => JSX.Element, type: 'withAuth' | 'withoutAuth') => {
   function AuthenticatedComponent(props: JSX.IntrinsicAttributes) {
@@ -24,7 +25,11 @@ const ProtectedRoute = (Component: () => JSX.Element, type: 'withAuth' | 'withou
 
     if (isAuth) return <Component {...props} />;
 
-    return null;
+    return (
+      <div className={styles.wrapper}>
+        <h3 className={styles.title}>Checking authentification...</h3>
+      </div>
+    );
   }
 
   return AuthenticatedComponent;
