@@ -21,6 +21,11 @@
   color: var(--color-brand);
 }
 
+.errorMsg {
+  padding: 10px 0;
+  color: var(--color-text-error);
+}
+
 .submitButton {
   margin: 20px auto 0;
 }

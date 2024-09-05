@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { HTMLProps, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import styles from './AuthInput.module.css';
