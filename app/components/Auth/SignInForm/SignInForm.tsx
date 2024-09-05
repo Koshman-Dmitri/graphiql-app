@@ -4,15 +4,19 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useTranslation } from 'react-i18next';
 import { auth } from '@/app/services/firebase/config';
 import setCookies from '@/app/services/firebase/setCookies';
 import { IFormInput } from '../types';
 import AuthInput from '../AuthInput/AuthInput';
-import schema from '../schema';
 import styles from '../authStyles.module.css';
+import useValidationSchema from '../schema';
 import ProtectedRoute from '../ProtectRoutes/ProtectedRoute';
 
 function SignInForm() {
+  const { t } = useTranslation('sign');
+  const schema = useValidationSchema();
+
   const [signInWithEmailAndPassword, , loading, error] = useSignInWithEmailAndPassword(auth);
 
   const {
@@ -32,26 +36,26 @@ function SignInForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(handleSignIn)}>
-      <h1 className={styles.title}>Sign In</h1>
+      <h1 className={styles.title}>{t('sign_in')}</h1>
       <AuthInput
         register={register}
         type="text"
-        label="Email"
+        label={t('email')}
         name="email"
         error={errors.email?.message || ''}
       />
       <AuthInput
         register={register}
         type="password"
-        label="Password"
+        label={t('password')}
         name="password"
         error={errors.password?.message || ''}
       />
       {error && <p className={styles.errorMsg}>Error: {error?.code}</p>}
       <p>
-        Do not have an account?{' '}
+        {t('no_account')}{' '}
         <Link href="/sign-up" className={styles.link}>
-          Sign Up
+          {t('sign_up')}
         </Link>
       </p>
       <button className={styles.submitButton} type="submit" disabled={!isValid || loading}>

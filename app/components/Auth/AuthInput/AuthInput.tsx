@@ -1,3 +1,6 @@
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { HTMLProps, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import styles from './AuthInput.module.css';
@@ -36,8 +39,9 @@ function AuthInput(props: InputProps) {
               className={styles.passToggler}
               type="button"
               onClick={() => setIsPassVisible(!isPassVisible)}
+              aria-label={isPassVisible ? 'Hide password' : 'Show password'}
             >
-              {isPassVisible ? 'Hide' : 'View'}
+              <FontAwesomeIcon icon={isPassVisible ? faEyeSlash : faEye} />
             </button>
           </>
         )}
