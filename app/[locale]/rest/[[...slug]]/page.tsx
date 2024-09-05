@@ -17,8 +17,9 @@ export default async function RestPage({ params, searchParams }: UrlParams) {
   return (
     <>
       <h1 className="pageTitle">{t('rest:rest_title')}</h1>
-      <RestFormEditor />
-      <ResponseSection data={data} status={status} errorMsg={errorMsg} t={t} />
+      <RestFormEditor>
+        <ResponseSection data={data} status={status} errorMsg={errorMsg} t={t} />
+      </RestFormEditor>
     </>
   );
 }

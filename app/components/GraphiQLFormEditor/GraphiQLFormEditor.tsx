@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, PropsWithChildren, useEffect, useState } from 'react';
 import useLocalStorage from '@/app/services/localStorageApi/useLocalStorage';
 import { addEmptyRow, changeRow, removeRow } from '@/app/utils/tableEditorHelpers';
 import makeGraphQlPath from '@/app/utils/makeGraphQlPath';
@@ -12,6 +12,7 @@ import updateGraphUrl from '@/app/utils/updateGraphUrl';
 import { RowElement } from '../RestFormEditor/types';
 import selfStyles from './GraphiQLFormEditor.module.css';
 import styles from '../shared/editForm.module.css';
+import ProtectedRoute from '../Auth/ProtectRoutes/ProtectedRoute';
 import ControlledInput from '../ControlledInput/ControlledInput';
 import QueryEditor from '../QueryEditor/QueryEditor';
 import VariablesEditor from '../JsonEditor/JsonEditor';
@@ -19,7 +20,7 @@ import ToggledTableEditor from '../ToggledTableEditor/ToggledTableEditor';
 import GraphQlSchema from '../GraphQlSchema/GraphQlSchema';
 import Loader from '../Loader/Loader';
 
-export default function GraphiQLFormEditor() {
+function GraphiQLFormEditor({ children }: PropsWithChildren) {
   const initData = useLocalStorage();
   const router = useRouter();
   const [loader, setLoader] = useState(false);
@@ -196,7 +197,10 @@ export default function GraphiQLFormEditor() {
         />
       </form>
       <GraphQlSchema schema={schema} isError={isSchemaError} />
+      {children}
       {loader && <Loader />}
     </>
   );
 }
+
+export default ProtectedRoute(GraphiQLFormEditor, 'withAuth');

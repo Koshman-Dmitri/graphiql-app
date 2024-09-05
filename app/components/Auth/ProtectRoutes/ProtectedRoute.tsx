@@ -1,11 +1,14 @@
-import { JSX, useEffect, useState } from 'react';
+import { JSX, PropsWithChildren, useEffect, useState } from 'react';
 import { onIdTokenChanged } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { auth } from '../../../services/firebase/config';
 import styles from './ProtectedRoute.module.css';
 
-const ProtectedRoute = (Component: () => JSX.Element, type: 'withAuth' | 'withoutAuth') => {
-  function AuthenticatedComponent(props: JSX.IntrinsicAttributes) {
+const ProtectedRoute = (
+  Component: (props: PropsWithChildren) => JSX.Element,
+  type: 'withAuth' | 'withoutAuth'
+) => {
+  function AuthenticatedComponent(props: PropsWithChildren) {
     const [isAuth, setIsAuth] = useState(false);
     const router = useRouter();
 

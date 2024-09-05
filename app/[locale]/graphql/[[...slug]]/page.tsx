@@ -15,8 +15,9 @@ export default async function GraphQLPage({ params, searchParams }: UrlParams) {
   return (
     <>
       <h1 className="pageTitle">{t('graphiql:graphiql_title')}</h1>
-      <GraphiQLFormEditor />
-      <ResponseSection data={data} status={status} errorMsg={errorMsg} t={t} />
+      <GraphiQLFormEditor>
+        <ResponseSection data={data} status={status} errorMsg={errorMsg} t={t} />
+      </GraphiQLFormEditor>
     </>
   );
 }
