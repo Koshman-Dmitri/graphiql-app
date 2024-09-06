@@ -1,20 +1,30 @@
+'use client';
+
 import Link from 'next/link';
-import initTranslations from '@/app/services/internationalization/i18n';
-import { RouteParams } from '@/app/utils/globalTypes';
-import MainPageInfo from '@/app/components/MainPageInfo/MainPageInfo';
-import styles from './page.module.css';
+import { useEffect, useState } from 'react';
+import { onIdTokenChanged } from 'firebase/auth';
+import { auth } from '@/app/services/firebase/config';
+import { useTranslation } from 'react-i18next';
+import MainPageInfo from '../MainPageInfo/MainPageInfo';
+import styles from './MainPage.module.css';
 
-export default async function MainPage({ params }: RouteParams) {
-  const isAuthenticated = true;
-  const name = 'John Doe';
+export default function MainPage({ hasToken, name }: { hasToken: boolean; name: string }) {
+  const [isAuth, setIsAuth] = useState(false);
+  const { t } = useTranslation(['main', 'common']);
 
-  const { t } = await initTranslations(params.locale, ['main', 'common']);
+  useEffect(() => {
+    const unsubscribe = onIdTokenChanged(auth, (user) => {
+      setIsAuth(Boolean(user));
+    });
 
-  if (!isAuthenticated) {
+    return unsubscribe;
+  }, []);
+
+  if (!isAuth && !hasToken) {
     return (
       <div className={styles.mainContent}>
         <h1 className="pageTitle">{t('title_primary_default')}</h1>
-        <MainPageInfo params={params} />
+        <MainPageInfo />
         <div className={styles.authLinks}>
           <Link href="/sign-in" className={`buttonLink ${styles.authButton}`}>
             {t('common:sign_in')}
@@ -30,7 +40,7 @@ export default async function MainPage({ params }: RouteParams) {
   return (
     <div className={styles.mainContent}>
       <h1 className="pageTitle">{t('title_primary_auth', { name })}</h1>
-      <MainPageInfo params={params} />
+      <MainPageInfo />
       <div className={styles.apiLinks}>
         <Link href="/rest" className={`buttonLink ${styles.apiButton}`}>
           {t('rest_btn')}

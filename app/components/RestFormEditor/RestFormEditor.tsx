@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, PropsWithChildren, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import makeRestPath from '@/app/utils/makeRestPath';
 import { Query } from '@/app/utils/globalTypes';
@@ -10,15 +10,18 @@ import { addEmptyRow, changeRow, removeRow } from '@/app/utils/tableEditorHelper
 import { useTranslation } from 'react-i18next';
 import { RowElement } from './types';
 import styles from '../shared/editForm.module.css';
+import ProtectedRoute from '../Auth/ProtectRoutes/ProtectedRoute';
 import MethodEditor from '../MethodEditor/MethodEditor';
 import TableEditor from '../TableEditor/TableEditor';
 import ControlledInput from '../ControlledInput/ControlledInput';
 import ToggledTableEditor from '../ToggledTableEditor/ToggledTableEditor';
 import BodyEditor from '../JsonEditor/JsonEditor';
+import Loader from '../Loader/Loader';
 
-export default function RestFormEditor() {
+function RestFormEditor({ children }: PropsWithChildren) {
   const initData = useLocalStorage();
   const router = useRouter();
+  const [loader, setLoader] = useState(false);
   const [method, setMethod] = useState(initData.method);
   const [endpointUrl, setEndpointUrl] = useState(initData.url);
   const [headers, setHeaders] = useState<RowElement[]>(initData.headers);
@@ -73,6 +76,7 @@ export default function RestFormEditor() {
 
     const path = makeRestPath({ method, url: endpointUrl, headers, variables, body });
     router.push(path);
+    setLoader(true);
 
     const newQuery = {
       id: crypto.randomUUID(),
@@ -91,49 +95,55 @@ export default function RestFormEditor() {
   };
 
   return (
-    <form className={styles.form}>
-      <div className={styles.submitWrapper}>
-        <MethodEditor method={method} handleChangeMethod={handleChangeMethod} />
-        <ControlledInput
-          className=""
-          labelName=""
-          labelClassName=""
-          id=""
-          name="endpointUrl"
-          value={endpointUrl}
-          placeholder={t('search_placeholder')}
-          handleChange={handleChangeEndpointUrl}
+    <>
+      <form className={styles.form}>
+        <div className={styles.submitWrapper}>
+          <MethodEditor method={method} handleChangeMethod={handleChangeMethod} />
+          <ControlledInput
+            className=""
+            labelName=""
+            labelClassName=""
+            id=""
+            name="endpointUrl"
+            value={endpointUrl}
+            placeholder={t('search_placeholder')}
+            handleChange={handleChangeEndpointUrl}
+          />
+          <button type="button" onClick={handleSubmit} disabled={Boolean(!endpointUrl)}>
+            {t('send')}
+          </button>
+        </div>
+        <TableEditor
+          title={t('headers')}
+          data={headers}
+          handleAddData={handleAddHeader}
+          handleChangeData={handleChangeHeader}
+          handleRemoveData={handleRemoveHeader}
+          handleFocusOut={handleFocusOut}
         />
-        <button type="button" onClick={handleSubmit} disabled={Boolean(!endpointUrl)}>
-          {t('send')}
-        </button>
-      </div>
-      <TableEditor
-        title={t('headers')}
-        data={headers}
-        handleAddData={handleAddHeader}
-        handleChangeData={handleChangeHeader}
-        handleRemoveData={handleRemoveHeader}
-        handleFocusOut={handleFocusOut}
-      />
-      <BodyEditor
-        title={t('body')}
-        value={body}
-        rows={8}
-        cols={30}
-        name="bodyEditor"
-        placeholder={t('body_placeholder')}
-        handleChangeValue={handleChangeBody}
-        handleFocusOut={handleFocusOut}
-      />
-      <ToggledTableEditor
-        title={t('variables')}
-        data={variables}
-        handleAddData={handleAddVariables}
-        handleChangeData={handleChangeVariables}
-        handleRemoveData={handleRemoveVariables}
-        handleFocusOut={() => {}}
-      />
-    </form>
+        <BodyEditor
+          title={t('body')}
+          value={body}
+          rows={8}
+          cols={30}
+          name="bodyEditor"
+          placeholder={t('body_placeholder')}
+          handleChangeValue={handleChangeBody}
+          handleFocusOut={handleFocusOut}
+        />
+        <ToggledTableEditor
+          title={t('variables')}
+          data={variables}
+          handleAddData={handleAddVariables}
+          handleChangeData={handleChangeVariables}
+          handleRemoveData={handleRemoveVariables}
+          handleFocusOut={() => {}}
+        />
+        {loader && <Loader />}
+      </form>
+      {children}
+    </>
   );
 }
+
+export default ProtectedRoute(RestFormEditor, 'withAuth');

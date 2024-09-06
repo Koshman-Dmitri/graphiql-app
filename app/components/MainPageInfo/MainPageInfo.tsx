@@ -1,9 +1,9 @@
-import initTranslations from '@/app/services/internationalization/i18n';
-import { RouteParams } from '@/app/utils/globalTypes';
+import { useTranslation } from 'react-i18next';
 import styles from './MainPageInfo.module.css';
 
-export default async function MainPageInfo({ params }: RouteParams) {
-  const { t } = await initTranslations(params?.locale, ['main']);
+export default function MainPageInfo() {
+  const { t } = useTranslation('main');
+
   return (
     <div className={styles.contentContainer}>
       <div className={styles.sectionBox}>

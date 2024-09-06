@@ -6,8 +6,9 @@ import Link from 'next/link';
 import localStorageApi from '@/app/services/localStorageApi/localStorageApi';
 import { useTranslation } from 'react-i18next';
 import styles from './HistoryRequests.module.css';
+import ProtectedRoute from '../Auth/ProtectRoutes/ProtectedRoute';
 
-export default function HistoryRequests() {
+function HistoryRequests() {
   const [requests, setRequests] = useState<Query[] | null | 'loading'>('loading');
 
   const { t } = useTranslation(['history', 'main']);
@@ -54,3 +55,5 @@ export default function HistoryRequests() {
     </ul>
   );
 }
+
+export default ProtectedRoute(HistoryRequests, 'withAuth');
