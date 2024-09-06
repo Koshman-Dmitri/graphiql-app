@@ -12,11 +12,12 @@ import AuthInput from '../AuthInput/AuthInput';
 import styles from '../authStyles.module.css';
 import useValidationSchema from '../schema';
 import ProtectedRoute from '../ProtectRoutes/ProtectedRoute';
-import AuthErrors from '../errors';
+import useAuthErrors from '../errors';
 
 function SignInForm() {
   const { t } = useTranslation('sign');
   const schema = useValidationSchema();
+  const authErrors = useAuthErrors();
 
   const [signInWithEmailAndPassword, , loading, error] = useSignInWithEmailAndPassword(auth);
 
@@ -53,7 +54,7 @@ function SignInForm() {
         error={errors.password?.message || ''}
       />
       {error && (
-        <p className={styles.errorMsg}>{AuthErrors[error?.code] || AuthErrors.unexpectedError}</p>
+        <p className={styles.errorMsg}>{authErrors[error?.code] || authErrors.unexpectedError}</p>
       )}
       <p>
         {t('no_account')}{' '}
@@ -62,7 +63,7 @@ function SignInForm() {
         </Link>
       </p>
       <button className={styles.submitButton} type="submit" disabled={!isValid || loading}>
-        {loading ? 'Sending...' : 'Submit'}
+        {loading ? t('sending_btn') : t('submit_btn')}
       </button>
     </form>
   );

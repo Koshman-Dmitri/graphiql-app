@@ -26,6 +26,7 @@ const namespaces = [
   'not-found',
   'sign',
   'validation',
+  'auth',
 ];
 
 export default async function RootLayout({ children, params: { locale } }: LayoutProps) {

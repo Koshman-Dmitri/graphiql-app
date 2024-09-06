@@ -15,13 +15,14 @@ import styles from '../authStyles.module.css';
 import authStyles from '../AuthInput/AuthInput.module.css';
 import useValidationSchema from '../schema';
 import ProtectedRoute from '../ProtectRoutes/ProtectedRoute';
-import AuthErrors from '../errors';
+import useAuthErrors from '../errors';
 
 function SignUpForm() {
   const [name, setName] = useState('');
 
   const { t } = useTranslation('sign');
   const schema = useValidationSchema();
+  const authErrors = useAuthErrors();
 
   const [createUserWithEmailAndPassword, , loading, error] =
     useCreateUserWithEmailAndPassword(auth);
@@ -71,7 +72,7 @@ function SignUpForm() {
         error={errors.password?.message || ''}
       />
       {error && (
-        <p className={styles.errorMsg}>{AuthErrors[error?.code] || AuthErrors.unexpectedError}</p>
+        <p className={styles.errorMsg}>{authErrors[error?.code] || authErrors.unexpectedError}</p>
       )}
       <p>
         {t('have_account')}{' '}
@@ -80,7 +81,7 @@ function SignUpForm() {
         </Link>
       </p>
       <button className={styles.submitButton} type="submit" disabled={!isValid || loading}>
-        {loading ? 'Sending...' : 'Submit'}
+        {loading ? t('sending_btn') : t('submit_btn')}
       </button>
     </form>
   );

@@ -1,15 +1,23 @@
-const AuthErrors: { [key: string]: string } = {
-  'auth/invalid-credential': 'Ошибка: неправильные данные',
-  'auth/credential-already-in-use': 'Ошибка: данные уже используются',
-  'auth/email-already-in-use': 'Ошибка: данная почта уже используется',
-  'auth/invalid-email': 'Ошибка: неправильная почта',
-  'auth/internal-error': 'Ошибка: внутренняя ошибка',
-  'auth/invalid-user-token': 'Ошибка: неверный токен пользователя',
-  'auth/user-token-expired': 'Ошибка: токен истек',
-  'auth/timeout': 'Ошибка: попробуйте позже',
-  'auth/too-many-requests': 'Ошибка: слишком много запросов',
-  'auth/user-not-found': 'Ошибка: пользователь не найден',
-  unexpectedError: 'Ошибка: непредвиденная ошибка',
+import { useTranslation } from 'react-i18next';
+
+const useAuthErrors = () => {
+  const { t } = useTranslation('auth');
+
+  const errors: { [key: string]: string } = {
+    'auth/invalid-credential': t('invalid_credential'),
+    'auth/credential-already-in-use': t('credential_already_in_use'),
+    'auth/email-already-in-use': t('email_already_in_use'),
+    'auth/invalid-email': t('invalid_email'),
+    'auth/internal-error': t('internal_error'),
+    'auth/invalid-user-token': t('invalid_user_token'),
+    'auth/user-token-expired': t('user_token_expired'),
+    'auth/timeout': t('timeout'),
+    'auth/too-many-requests': t('too_many_requests'),
+    'auth/user-not-found': t('user_not_found'),
+    unexpectedError: t('unexpected_error'),
+  };
+
+  return errors;
 };
 
-export default AuthErrors;
+export default useAuthErrors;
