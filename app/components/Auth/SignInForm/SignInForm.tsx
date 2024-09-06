@@ -59,7 +59,7 @@ function SignInForm() {
         </Link>
       </p>
       <button className={styles.submitButton} type="submit" disabled={!isValid || loading}>
-        {loading ? 'Loading...' : 'Submit'}
+        {loading ? 'Sending...' : 'Submit'}
       </button>
     </form>
   );
