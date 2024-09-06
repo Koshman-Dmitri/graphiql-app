@@ -4,7 +4,7 @@ const useAuthErrors = () => {
   const { t } = useTranslation('auth');
 
   const errors: { [key: string]: string } = {
-    'auth/invalid-credential': t('invalid_credential'),
+    'auth/invalid-credential': t('invalid_credentials'),
     'auth/credential-already-in-use': t('credential_already_in_use'),
     'auth/email-already-in-use': t('email_already_in_use'),
     'auth/invalid-email': t('invalid_email'),
