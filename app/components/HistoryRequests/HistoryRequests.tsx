@@ -43,7 +43,7 @@ function HistoryRequests() {
       {requests.map((req) => (
         <li key={req.id} className={styles.historyElement}>
           <Link
-            href={`${req.type}`}
+            href={`${req.type === 'rest' ? req.method : 'GRAPHQL'}`}
             className={styles.historyLink}
             onClick={() => localStorageApi.saveRestoreQuery(req)}
           >
