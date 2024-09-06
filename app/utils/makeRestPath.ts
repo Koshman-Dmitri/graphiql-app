@@ -29,7 +29,7 @@ export default function makeRestPath({
   });
 
   const encodedURL = btoa(tempUrl);
-  if (method.toLowerCase() === 'get') return `/rest/${method}/${encodedURL}`;
+  if (method.toLowerCase() === 'get') return `/${method}/${encodedURL}`;
 
   const encodedBody = btoa(tempBody.replace(/\s+/g, ''));
 
@@ -37,5 +37,5 @@ export default function makeRestPath({
     .map((header) => `${encodeURIComponent(header.key)}=${encodeURIComponent(header.value)}`)
     .join('&');
 
-  return `/rest/${method}/${encodedURL}${encodedBody ? `/${encodedBody}` : ''}${encodedHeaders !== '=' ? `?${encodedHeaders}` : ''}`;
+  return `/${method}/${encodedURL}${encodedBody ? `/${encodedBody}` : ''}${encodedHeaders !== '=' ? `?${encodedHeaders}` : ''}`;
 }

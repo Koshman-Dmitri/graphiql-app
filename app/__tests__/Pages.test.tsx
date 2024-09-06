@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import NotFoundPage from '../[locale]/[...not-found]/page';
-import GraphQLPage from '../[locale]/graphql/[[...slug]]/page';
+import GraphQLPage from '../[locale]/GRAPHQL/[[...slug]]/page';
 import HistoryPage from '../[locale]/history/page';
-import RestPage from '../[locale]/rest/[[...slug]]/page';
+import RestPage from '../[locale]/[rest]/[...slug]/page';
 
 describe('Should render without crashing', () => {
   beforeEach(() => {

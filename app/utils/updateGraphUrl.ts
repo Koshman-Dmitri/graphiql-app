@@ -6,11 +6,10 @@ interface Args {
 }
 
 export default function updateGraphUrl({ type, value }: Args): void {
-  const [empty, lang, page, method, url, body] = window.location.pathname.split('/');
+  const [empty, lang, method, url, body] = window.location.pathname.split('/');
   let headers = window.location.search.slice(1);
 
   const newLang = lang || 'en';
-  const newPage = page || 'graphql';
   const newMethod = method || 'GRAPHQL';
   let newUrl = url || '';
   let newBody = body || '';
@@ -24,7 +23,7 @@ export default function updateGraphUrl({ type, value }: Args): void {
       .join('&');
   }
 
-  const updatedUrl = `${[empty, newLang, newPage, newMethod, newUrl, newBody].join('/')}${
+  const updatedUrl = `${[empty, newLang, newMethod, newUrl, newBody].join('/')}${
     headers && headers !== '=' ? `?${headers}` : ''
   }`;
 

@@ -28,10 +28,10 @@ function HistoryRequests() {
         <p>{t('no_requests')}</p>
         <p>{t('try_options')}</p>
         <div className={styles.pageLinksWrapper}>
-          <Link href="/rest" className={`buttonLink ${styles.pageLink}`}>
+          <Link href="/GET" className={`buttonLink ${styles.pageLink}`}>
             {t('main:rest_client')}
           </Link>
-          <Link href="/graphql" className={`buttonLink ${styles.pageLink}`}>
+          <Link href="/GRAPHQL" className={`buttonLink ${styles.pageLink}`}>
             {t('main:graphiql_client')}
           </Link>
         </div>
@@ -43,7 +43,7 @@ function HistoryRequests() {
       {requests.map((req) => (
         <li key={req.id} className={styles.historyElement}>
           <Link
-            href={`${req.type}`}
+            href={`${req.type === 'rest' ? req.method : 'GRAPHQL'}`}
             className={styles.historyLink}
             onClick={() => localStorageApi.saveRestoreQuery(req)}
           >
