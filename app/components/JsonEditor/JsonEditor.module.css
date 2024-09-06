@@ -19,16 +19,6 @@
   gap: 2rem;
 }
 
-.select {
-  display: block;
-  padding: 7.5px;
-  font-size: inherit;
-  border-radius: 5px;
-  color: inherit;
-  box-shadow: 0 0 4px var(--color-text-dark);
-  cursor: pointer;
-}
-
 .errorMsg {
   margin: 10px 0;
   max-width: 400px;

@@ -20,15 +20,17 @@ export default function MainPageInfo() {
           </a>
         </p>
         <p>
-          {t('tool_description_intro')}
+          {t('app_description_intro')}
           <span className={styles.bold}>REST</span>
-          {t('and')} <span className={styles.bold}>GraphQL</span>. {t('tool_description_outro')}
+          {t('and')} <span className={styles.bold}>GraphQL</span>. {t('app_description_outro')}
         </p>
       </div>
 
       <div className={styles.sectionBox}>
         <h4 className={styles.sectionTitle}>{t('title_technologies')}</h4>
-        <p>React 18, Next.js 14, TypeScript, Firebase, i18next, Vitest, Husky, ESLint, Prettier</p>
+        <p className={styles.paragraph}>
+          React 18, Next.js 14, TypeScript, Firebase, i18next, Vitest, Husky, ESLint, Prettier
+        </p>
       </div>
 
       <div className={styles.sectionBox}>

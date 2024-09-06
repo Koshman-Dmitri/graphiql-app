@@ -1,5 +1,4 @@
 import { ChangeEvent } from 'react';
-import styles from './MethodEditor.module.css';
 
 interface Props {
   method: string;
@@ -9,7 +8,6 @@ interface Props {
 export default function MethodEditor({ method, handleChangeMethod }: Props) {
   return (
     <select
-      className={styles.select}
       value={method}
       onChange={(e: ChangeEvent<HTMLSelectElement>) => handleChangeMethod(e.target.value)}
     >
