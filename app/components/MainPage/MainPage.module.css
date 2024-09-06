@@ -18,11 +18,13 @@
 }
 
 @media (max-width: 768px) {
-  .apiLinks {
+  .apiLinks,
+  .authLinks {
     flex-direction: column;
   }
 
-  .apiButton {
+  .apiButton,
+  .authButton {
     min-width: 30vw;
     height: 5rem;
   }

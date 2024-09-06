@@ -47,7 +47,6 @@ export default function QueryEditor({
         <div>
           <textarea
             ref={textareaRef}
-            className={styles.textarea}
             value={value}
             rows={rows}
             cols={cols}
