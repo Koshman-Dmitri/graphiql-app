@@ -17,6 +17,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@hookform/resolvers": "^3.9.0",
+    "firebase": "^10.13.1",
     "graphql-prettier": "^1.0.6",
     "i18next": "^23.14.0",
     "i18next-resources-to-backend": "^1.2.1",
@@ -24,6 +25,7 @@
     "next-i18n-router": "^5.5.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-firebase-hooks": "^5.1.1",
     "react-hook-form": "^7.53.0",
     "react-i18next": "^15.0.1",
     "yup": "^1.4.0"

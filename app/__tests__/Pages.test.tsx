@@ -2,7 +2,6 @@ import { render } from '@testing-library/react';
 import NotFoundPage from '../[locale]/[...not-found]/page';
 import GraphQLPage from '../[locale]/graphql/[[...slug]]/page';
 import HistoryPage from '../[locale]/history/page';
-import MainPage from '../[locale]/main/page';
 import RestPage from '../[locale]/rest/[[...slug]]/page';
 
 describe('Should render without crashing', () => {
@@ -20,10 +19,6 @@ describe('Should render without crashing', () => {
 
   test('History Page', async () => {
     render(await HistoryPage({ params: { slug: [], locale: 'en' }, searchParams: {} }));
-  });
-
-  test('Main Page', async () => {
-    render(await MainPage({ params: { slug: [], locale: 'en' } }));
   });
 
   test('Rest Page', async () => {

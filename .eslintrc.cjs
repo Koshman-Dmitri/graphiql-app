@@ -39,5 +39,7 @@ module.exports = {
     'no-console': 'off',
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'react-compiler/react-compiler': 'error',
+    'react/jsx-props-no-spreading': 'off',
+    '@typescript-eslint/no-misused-promises': [2, { checksVoidReturn: { attributes: false } }],
   },
 };
