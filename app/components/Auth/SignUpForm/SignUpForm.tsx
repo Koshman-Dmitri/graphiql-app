@@ -15,6 +15,7 @@ import styles from '../authStyles.module.css';
 import authStyles from '../AuthInput/AuthInput.module.css';
 import useValidationSchema from '../schema';
 import ProtectedRoute from '../ProtectRoutes/ProtectedRoute';
+import AuthErrors from '../errors';
 
 function SignUpForm() {
   const [name, setName] = useState('');
@@ -69,7 +70,9 @@ function SignUpForm() {
         name="password"
         error={errors.password?.message || ''}
       />
-      {error && <p className={styles.errorMsg}>Error: {error?.code}</p>}
+      {error && (
+        <p className={styles.errorMsg}>{AuthErrors[error?.code] || AuthErrors.unexpectedError}</p>
+      )}
       <p>
         {t('have_account')}{' '}
         <Link href="/sign-in" className={styles.link}>

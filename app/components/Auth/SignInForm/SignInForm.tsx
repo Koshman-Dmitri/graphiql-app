@@ -12,6 +12,7 @@ import AuthInput from '../AuthInput/AuthInput';
 import styles from '../authStyles.module.css';
 import useValidationSchema from '../schema';
 import ProtectedRoute from '../ProtectRoutes/ProtectedRoute';
+import AuthErrors from '../errors';
 
 function SignInForm() {
   const { t } = useTranslation('sign');
@@ -51,7 +52,9 @@ function SignInForm() {
         name="password"
         error={errors.password?.message || ''}
       />
-      {error && <p className={styles.errorMsg}>Error: {error?.code}</p>}
+      {error && (
+        <p className={styles.errorMsg}>{AuthErrors[error?.code] || AuthErrors.unexpectedError}</p>
+      )}
       <p>
         {t('no_account')}{' '}
         <Link href="/sign-up" className={styles.link}>
