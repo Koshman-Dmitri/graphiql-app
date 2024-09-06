@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import NotFoundPage from '../[locale]/[...not-found]/page';
-import GraphQLPage from '../[locale]/GRAPHLq/[[...slug]]/page';
+import GraphQLPage from '../[locale]/GRAPHL/[[...slug]]/page';
 import HistoryPage from '../[locale]/history/page';
 import RestPage from '../[locale]/[rest]/[...slug]/page';
 
