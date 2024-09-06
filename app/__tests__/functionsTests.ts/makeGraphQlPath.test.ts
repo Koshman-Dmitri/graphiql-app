@@ -10,7 +10,7 @@ describe('makeGraphQlPath', () => {
     };
 
     expect(makeGraphQlPath(mockProps)).toBe(
-      '/graphql/GRAPHQL/dGVzdHVybA==/eyJxdWVyeSI6InRlc3RxdWVyeSIsInZhcmlhYmxlcyI6eyJ2YXIxIjoidmFyMXZhbHVlIiwidmFyMiI6InZhcjJ2YWx1ZSJ9fQ==?header=value'
+      '/GRAPHQL/dGVzdHVybA==/eyJxdWVyeSI6InRlc3RxdWVyeSIsInZhcmlhYmxlcyI6eyJ2YXIxIjoidmFyMXZhbHVlIiwidmFyMiI6InZhcjJ2YWx1ZSJ9fQ==?header=value'
     );
   });
 
@@ -23,7 +23,7 @@ describe('makeGraphQlPath', () => {
     };
 
     expect(makeGraphQlPath(mockProps)).toBe(
-      '/graphql/GRAPHQL/dGVzdHVybA==/eyJxdWVyeSI6InRlc3RxdWVyeSIsInZhcmlhYmxlcyI6e319?header=value'
+      '/GRAPHQL/dGVzdHVybA==/eyJxdWVyeSI6InRlc3RxdWVyeSIsInZhcmlhYmxlcyI6e319?header=value'
     );
   });
 
@@ -36,7 +36,7 @@ describe('makeGraphQlPath', () => {
     };
 
     expect(makeGraphQlPath(mockProps)).toBe(
-      '/graphql/GRAPHQL/dGVzdHVybA==/eyJxdWVyeSI6InRlc3RxdWVyeSIsInZhcmlhYmxlcyI6e319'
+      '/GRAPHQL/dGVzdHVybA==/eyJxdWVyeSI6InRlc3RxdWVyeSIsInZhcmlhYmxlcyI6e319'
     );
   });
 });

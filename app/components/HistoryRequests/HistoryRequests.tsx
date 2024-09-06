@@ -28,10 +28,10 @@ function HistoryRequests() {
         <p>{t('no_requests')}</p>
         <p>{t('try_options')}</p>
         <div className={styles.pageLinksWrapper}>
-          <Link href="/rest" className={`buttonLink ${styles.pageLink}`}>
+          <Link href="/GET" className={`buttonLink ${styles.pageLink}`}>
             {t('main:rest_client')}
           </Link>
-          <Link href="/graphql" className={`buttonLink ${styles.pageLink}`}>
+          <Link href="/GRAPHQL" className={`buttonLink ${styles.pageLink}`}>
             {t('main:graphiql_client')}
           </Link>
         </div>

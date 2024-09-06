@@ -47,7 +47,7 @@ function GraphiQLFormEditor({ children }: PropsWithChildren) {
     setVariables(initData.jsonVariables);
     setHeaders(initData.headers);
 
-    if (initData.sdlUrl.length && window.location.pathname !== '/graphql') {
+    if (initData.sdlUrl.length && window.location.pathname !== '/GRAPHQL') {
       fetch(initData.sdlUrl)
         .then((res) => res.text())
         .then((data) => {

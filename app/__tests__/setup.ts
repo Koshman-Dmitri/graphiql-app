@@ -30,7 +30,7 @@ vitest.mock('next/navigation', () => ({
   },
   usePathname() {
     return {
-      path: 'en/rest',
+      path: 'en/GET',
       split: vi.fn().mockImplementation(() => ['foo', 'bar']),
       replace: vi.fn(),
     };

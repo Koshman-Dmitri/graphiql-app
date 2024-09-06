@@ -9,10 +9,8 @@ import { redirect } from 'next/navigation';
 export default async function RestPage({ params, searchParams }: UrlParams) {
   if (!getAuthToken()) redirect('/sign-in');
 
-  const { data, status, errorMsg } = await makeRequest({ params, searchParams });
-
-  const { locale } = params;
-  const { t } = await initTranslations(locale, ['common', 'rest']);
+  const { data, status, errorMsg } = await makeRequest({ params, searchParams, type: 'rest' });
+  const { t } = await initTranslations(params.locale, ['common', 'rest']);
 
   return (
     <>

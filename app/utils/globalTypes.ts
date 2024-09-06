@@ -1,7 +1,11 @@
 import { RowElement } from '../components/RestFormEditor/types';
 
 export type UrlParams = {
-  params: { slug: string | string[]; locale: string };
+  params: {
+    slug: string | string[];
+    locale: string;
+    rest: string;
+  };
   searchParams: { [key: string]: string };
 };
 

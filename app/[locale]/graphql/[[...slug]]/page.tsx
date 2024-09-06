@@ -9,7 +9,7 @@ import { redirect } from 'next/navigation';
 export default async function GraphQLPage({ params, searchParams }: UrlParams) {
   if (!getAuthToken()) redirect('/sign-in');
 
-  const { data, status, errorMsg } = await makeRequest({ params, searchParams });
+  const { data, status, errorMsg } = await makeRequest({ params, searchParams, type: 'graphql' });
   const { t } = await initTranslations(params.locale, ['common', 'graphiql']);
 
   return (
