@@ -14,6 +14,7 @@ describe('ToggledTableEditor', () => {
       handleAddData: () => vi.fn(),
       handleChangeData: () => vi.fn(),
       handleRemoveData: () => vi.fn(),
+      handleFocusOut: () => vi.fn(),
     };
 
     render(
@@ -23,6 +24,7 @@ describe('ToggledTableEditor', () => {
         handleAddData={props.handleAddData}
         handleChangeData={props.handleChangeData}
         handleRemoveData={props.handleRemoveData}
+        handleFocusOut={props.handleFocusOut}
       />
     );
 
@@ -40,6 +42,7 @@ describe('ToggledTableEditor', () => {
       handleAddData: () => vi.fn(),
       handleChangeData: () => vi.fn(),
       handleRemoveData: () => vi.fn(),
+      handleFocusOut: () => vi.fn(),
     };
 
     render(
@@ -49,6 +52,7 @@ describe('ToggledTableEditor', () => {
         handleAddData={props.handleAddData}
         handleChangeData={props.handleChangeData}
         handleRemoveData={props.handleRemoveData}
+        handleFocusOut={props.handleFocusOut}
       />
     );
 

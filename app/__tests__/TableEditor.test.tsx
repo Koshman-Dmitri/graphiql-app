@@ -14,6 +14,7 @@ describe('TableEditor', () => {
       handleAddData: () => vi.fn(),
       handleChangeData: () => vi.fn(),
       handleRemoveData: () => vi.fn(),
+      handleFocusOut: () => vi.fn(),
     };
 
     render(
@@ -23,6 +24,7 @@ describe('TableEditor', () => {
         handleAddData={props.handleAddData}
         handleChangeData={props.handleChangeData}
         handleRemoveData={props.handleRemoveData}
+        handleFocusOut={props.handleFocusOut}
       />
     );
 
@@ -37,6 +39,7 @@ describe('TableEditor', () => {
       handleAddData: () => vi.fn(),
       handleChangeData: () => vi.fn(),
       handleRemoveData: () => vi.fn(),
+      handleFocusOut: () => vi.fn(),
     };
 
     render(
@@ -46,6 +49,7 @@ describe('TableEditor', () => {
         handleAddData={props.handleAddData}
         handleChangeData={props.handleChangeData}
         handleRemoveData={props.handleRemoveData}
+        handleFocusOut={props.handleFocusOut}
       />
     );
 

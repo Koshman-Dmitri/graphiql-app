@@ -10,18 +10,22 @@ describe('Should render without crashing', () => {
   });
 
   test('Not Found Page', async () => {
-    render(await NotFoundPage({ params: { slug: [], locale: 'en' } }));
+    render(await NotFoundPage({ params: { slug: [], locale: 'en', rest: 'GET' } }));
   });
 
   test('GraphQl Page', async () => {
-    render(await GraphQLPage({ params: { slug: [], locale: 'en' }, searchParams: {} }));
+    render(
+      await GraphQLPage({ params: { slug: [], locale: 'en', rest: 'GET' }, searchParams: {} })
+    );
   });
 
   test('History Page', async () => {
-    render(await HistoryPage({ params: { slug: [], locale: 'en' }, searchParams: {} }));
+    render(
+      await HistoryPage({ params: { slug: [], locale: 'en', rest: 'GET' }, searchParams: {} })
+    );
   });
 
   test('Rest Page', async () => {
-    render(await RestPage({ params: { slug: [], locale: 'en' }, searchParams: {} }));
+    render(await RestPage({ params: { slug: [], locale: 'en', rest: 'GET' }, searchParams: {} }));
   });
 });

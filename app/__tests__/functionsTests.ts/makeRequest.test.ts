@@ -1,18 +1,19 @@
-import makeRequest from '../../utils/makeRequest';
+import makeRequest, { RequestArgs } from '../../utils/makeRequest';
 
 describe('makeRequest', () => {
   test('Do success request', async () => {
     const mockProps = {
       params: {
         slug: [
-          'POST',
           'aHR0cHM6Ly9qc29ucGxhY2Vob2xkZXIudHlwaWNvZGUuY29tL3Bvc3RzLzE%3D',
           'eyJ0ZXN0IjoidmFsdWUifQ%3D%3D',
         ],
         locale: 'en',
+        rest: 'GET',
       },
       searchParams: { 'Content-Type': 'application/json' },
-    };
+      type: 'rest',
+    } satisfies RequestArgs;
 
     vi.spyOn(globalThis, 'fetch').mockImplementationOnce(() => {
       return Promise.resolve({
@@ -33,14 +34,15 @@ describe('makeRequest', () => {
     const mockProps = {
       params: {
         slug: [
-          'GRAPHQL',
           'aHR0cHM6Ly9qc29ucGxhY2Vob2xkZXIudHlwaWNvZGUuY29tL3Bvc3RzLzE%3D',
           'eyJ0ZXN0IjoidmFsdWUifQ%3D%3D',
         ],
         locale: 'en',
+        rest: 'POST',
       },
       searchParams: { 'Content-Type': 'application/json' },
-    };
+      type: 'rest',
+    } satisfies RequestArgs;
 
     vi.spyOn(globalThis, 'fetch').mockImplementationOnce(() => {
       return Promise.reject(new Error('Test Error', { cause: 'cause' }));
@@ -55,9 +57,10 @@ describe('makeRequest', () => {
 
   test('Return empty data if no url parameters', async () => {
     const mockProps = {
-      params: { slug: [], locale: '' },
+      params: { slug: [], locale: '', rest: '' },
       searchParams: {},
-    };
+      type: 'rest',
+    } satisfies RequestArgs;
 
     expect(await makeRequest(mockProps)).toStrictEqual({
       data: '',
@@ -69,11 +72,13 @@ describe('makeRequest', () => {
   test('Do success request with two slug', async () => {
     const mockProps = {
       params: {
-        slug: ['GRAPHQL', 'aHR0cHM6Ly9qc29ucGxhY2Vob2xkZXIudHlwaWNvZGUuY29tL3Bvc3RzLzE%3D'],
+        slug: ['GRAPHQL', ''],
         locale: 'en',
+        rest: '',
       },
       searchParams: null!,
-    };
+      type: 'graphql',
+    } satisfies RequestArgs;
 
     vi.spyOn(globalThis, 'fetch').mockImplementationOnce(() => {
       return Promise.resolve({
@@ -94,15 +99,16 @@ describe('makeRequest', () => {
     const mockProps = {
       params: {
         slug: [
-          'POST',
           'aHR0cHM6Ly9qc29ucGxhY2Vob2xkZXIudHlwaWNvZGUuY29tL3Bvc3RzLzE%3D',
           'eyJ0ZXN0IjoidmFsdWUifQ%3D%3D',
           'more',
         ],
         locale: 'en',
+        rest: 'POST',
       },
       searchParams: { 'Content-Type': 'application/json' },
-    };
+      type: 'rest',
+    } satisfies RequestArgs;
 
     vitest.mock('next/navigation', () => ({
       redirect: vi.fn(),
