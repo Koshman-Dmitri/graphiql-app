@@ -2,6 +2,7 @@ import { JSX, PropsWithChildren, useEffect, useState } from 'react';
 import { onIdTokenChanged } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
+import logOutAction from '@/app/services/firebase/logOutAction';
 import { auth } from '../../../services/firebase/config';
 import styles from './ProtectedRoute.module.css';
 
@@ -21,7 +22,7 @@ const ProtectedRoute = (
         } else if (!user && type === 'withoutAuth') {
           setIsAuth(true);
         } else {
-          router.replace('/');
+          logOutAction(window.location.pathname.split('/')[1]);
         }
       });
 
