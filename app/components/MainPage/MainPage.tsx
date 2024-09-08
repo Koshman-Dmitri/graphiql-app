@@ -42,10 +42,10 @@ export default function MainPage({ hasToken, name }: { hasToken: boolean; name: 
       <h1 className="pageTitle">{t('title_primary_auth', { name })}</h1>
       <MainPageInfo />
       <div className={styles.apiLinks}>
-        <Link href="/rest" className={`buttonLink ${styles.apiButton}`}>
+        <Link href="/GET" className={`buttonLink ${styles.apiButton}`}>
           {t('rest_btn')}
         </Link>
-        <Link href="/graphql" className={`buttonLink ${styles.apiButton}`}>
+        <Link href="/GRAPHQL" className={`buttonLink ${styles.apiButton}`}>
           {t('graphiql_btn')}
         </Link>
         <Link href="/history" className={`buttonLink ${styles.apiButton}`}>

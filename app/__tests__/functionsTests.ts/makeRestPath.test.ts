@@ -10,7 +10,7 @@ describe('makeRestPath', () => {
       body: 'body',
     };
 
-    expect(makeRestPath(mockProps)).toBe('/rest/GET/dGVzdFVybA==');
+    expect(makeRestPath(mockProps)).toBe('/GET/dGVzdFVybA==');
   });
 
   test('Create correct path for not GET method', () => {
@@ -22,7 +22,7 @@ describe('makeRestPath', () => {
       body: 'body',
     };
 
-    expect(makeRestPath(mockProps)).toBe('/rest/POST/dGVzdFVybA==/Ym9keQ==?header=value');
+    expect(makeRestPath(mockProps)).toBe('/POST/dGVzdFVybA==/Ym9keQ==?header=value');
   });
 
   test('Create correct path for not GET method without body and headers', () => {
@@ -34,6 +34,6 @@ describe('makeRestPath', () => {
       body: '',
     };
 
-    expect(makeRestPath(mockProps)).toBe('/rest/POST/dGVzdFVybA==');
+    expect(makeRestPath(mockProps)).toBe('/POST/dGVzdFVybA==');
   });
 });
