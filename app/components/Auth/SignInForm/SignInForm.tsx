@@ -11,10 +11,9 @@ import { IFormInput } from '../types';
 import AuthInput from '../AuthInput/AuthInput';
 import styles from '../authStyles.module.css';
 import useValidationSchema from '../schema';
-import ProtectedRoute from '../ProtectRoutes/ProtectedRoute';
 import useAuthErrors from '../errors';
 
-function SignInForm() {
+export default function SignInForm() {
   const { t } = useTranslation('sign');
   const schema = useValidationSchema();
   const authErrors = useAuthErrors();
@@ -68,5 +67,3 @@ function SignInForm() {
     </form>
   );
 }
-
-export default ProtectedRoute(SignInForm, 'withoutAuth');
