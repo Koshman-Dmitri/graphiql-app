@@ -1,4 +1,4 @@
-import GraphiQLFormEditor from '@/app/components/GraphiQLFormEditor/GraphiQLFormEditor';
+import GraphiQLFormEditor from '@/app/components/GraphiQLFormEditor/ProtectedGraphiQl';
 import ResponseSection from '@/app/components/ResponseSection/ResponseSection';
 import getAuthToken from '@/app/services/firebase/getAuthToken';
 import initTranslations from '@/app/services/internationalization/i18n';

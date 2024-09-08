@@ -10,7 +10,6 @@ import { addEmptyRow, changeRow, removeRow } from '@/app/utils/tableEditorHelper
 import { useTranslation } from 'react-i18next';
 import { RowElement } from './types';
 import styles from '../shared/editForm.module.css';
-import ProtectedRoute from '../Auth/ProtectRoutes/ProtectedRoute';
 import MethodEditor from '../MethodEditor/MethodEditor';
 import TableEditor from '../TableEditor/TableEditor';
 import ControlledInput from '../ControlledInput/ControlledInput';
@@ -18,7 +17,7 @@ import ToggledTableEditor from '../ToggledTableEditor/ToggledTableEditor';
 import BodyEditor from '../JsonEditor/JsonEditor';
 import Loader from '../Loader/Loader';
 
-function RestFormEditor({ children }: PropsWithChildren) {
+export default function RestFormEditor({ children }: PropsWithChildren) {
   const initData = useLocalStorage();
   const router = useRouter();
   const [loader, setLoader] = useState(false);
@@ -145,5 +144,3 @@ function RestFormEditor({ children }: PropsWithChildren) {
     </>
   );
 }
-
-export default ProtectedRoute(RestFormEditor, 'withAuth');
