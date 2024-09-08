@@ -20,6 +20,10 @@ describe('SignInForm', () => {
     await userEvent.type(password, 'qwerty1!');
     expect(password.value).toBe('qwerty1!');
 
+    const passwordVis = screen.getAllByRole<HTMLButtonElement>('button')[0];
+    await userEvent.click(passwordVis);
+    expect(passwordVis).toBeDefined();
+
     const submitBtn = screen.getByText('submit_btn');
     await userEvent.click(submitBtn);
     expect(submitBtn).toBeDefined();

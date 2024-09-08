@@ -43,6 +43,7 @@ vitest.mock('next/headers', () => ({
     return {
       get: vi.fn().mockImplementation(() => ({ value: 'cookie_name' })),
       set: vi.fn(),
+      delete: vi.fn(),
     };
   },
 }));
@@ -56,6 +57,7 @@ vitest.mock('firebase/app', () => ({
 vitest.mock('firebase/auth', () => ({
   getAuth: vi.fn(),
   onIdTokenChanged: () => vi.fn(),
+  signOut: vi.fn(),
   updateProfile: vi.fn(),
 }));
 
