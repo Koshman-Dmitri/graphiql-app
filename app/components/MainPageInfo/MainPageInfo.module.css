@@ -9,8 +9,8 @@
 }
 
 .sectionBox {
-  text-align: center;
   position: relative;
+  text-align: center;
   margin-bottom: 3.5rem;
   padding: 2rem 1.5rem;
   border-radius: var(--border-radius);
