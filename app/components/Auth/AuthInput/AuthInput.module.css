@@ -4,8 +4,8 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  padding-bottom: 36px;
-  font-weight: 500;
+  padding-bottom: 3.6rem;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -30,9 +30,8 @@
 }
 
 .errorMsg {
-  padding: 4px 0;
-  min-height: 24px;
-  font-size: 24px;
+  padding: 0.4rem 0;
+  height: 3.6rem;
   color: var(--color-text-error);
 }
 
