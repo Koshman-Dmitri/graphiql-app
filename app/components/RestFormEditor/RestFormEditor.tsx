@@ -76,6 +76,7 @@ export default function RestFormEditor({ children }: PropsWithChildren) {
     const path = makeRestPath({ method, url: endpointUrl, headers, variables, body });
     router.push(path);
     setLoader(true);
+    setTimeout(() => setLoader(false), 1000);
 
     const newQuery = {
       id: crypto.randomUUID(),

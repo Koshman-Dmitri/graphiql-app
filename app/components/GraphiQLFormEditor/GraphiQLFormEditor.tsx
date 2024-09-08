@@ -97,6 +97,7 @@ export default function GraphiQLFormEditor({ children }: PropsWithChildren) {
       const path = makeGraphQlPath({ url: endpointUrl, query, headers, variables });
       router.push(path);
       setLoader(true);
+      setTimeout(() => setLoader(false), 1000);
 
       const newQuery = {
         id: crypto.randomUUID(),
