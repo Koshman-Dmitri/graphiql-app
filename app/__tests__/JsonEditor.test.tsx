@@ -15,6 +15,7 @@ describe('JsonEditor', () => {
     cols: 10,
     placeholder: 'placeholder',
     handleChangeValue: () => vi.fn(),
+    handleFocusOut: () => vi.fn(),
   };
 
   test('Should be render', async () => {
@@ -27,6 +28,7 @@ describe('JsonEditor', () => {
         name={props.name}
         placeholder={props.placeholder}
         handleChangeValue={props.handleChangeValue}
+        handleFocusOut={props.handleFocusOut}
       />
     );
 
@@ -45,6 +47,7 @@ describe('JsonEditor', () => {
         name={props.name}
         placeholder={props.placeholder}
         handleChangeValue={props.handleChangeValue}
+        handleFocusOut={props.handleFocusOut}
       />
     );
 
@@ -61,6 +64,7 @@ describe('JsonEditor', () => {
       cols: 10,
       placeholder: 'placeholder',
       handleChangeValue: () => vi.fn(),
+      handleFocusOut: () => vi.fn(),
     };
 
     render(
@@ -72,6 +76,7 @@ describe('JsonEditor', () => {
         name={badProps.name}
         placeholder={badProps.placeholder}
         handleChangeValue={badProps.handleChangeValue}
+        handleFocusOut={props.handleFocusOut}
       />
     );
 
@@ -88,6 +93,7 @@ describe('JsonEditor', () => {
       cols: 10,
       placeholder: 'placeholder',
       handleChangeValue: () => vi.fn(),
+      handleFocusOut: () => vi.fn(),
     };
 
     render(
@@ -99,6 +105,7 @@ describe('JsonEditor', () => {
         name={badProps.name}
         placeholder={badProps.placeholder}
         handleChangeValue={badProps.handleChangeValue}
+        handleFocusOut={props.handleFocusOut}
       />
     );
 

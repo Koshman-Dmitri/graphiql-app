@@ -14,6 +14,7 @@ describe('QueryEditor', () => {
     cols: 10,
     placeholder: 'placeholder',
     handleChangeQuery: () => vi.fn(),
+    handleFocusOut: () => vi.fn(),
   };
 
   test('Should be render', async () => {
@@ -25,6 +26,7 @@ describe('QueryEditor', () => {
         name={props.name}
         placeholder={props.placeholder}
         handleChangeQuery={props.handleChangeQuery}
+        handleFocusOut={props.handleFocusOut}
       />
     );
 
@@ -42,6 +44,7 @@ describe('QueryEditor', () => {
         name={props.name}
         placeholder={props.placeholder}
         handleChangeQuery={props.handleChangeQuery}
+        handleFocusOut={props.handleFocusOut}
       />
     );
 
@@ -63,6 +66,7 @@ describe('QueryEditor', () => {
       cols: 10,
       placeholder: 'placeholder',
       handleChangeQuery: () => vi.fn(),
+      handleFocusOut: () => vi.fn(),
     };
 
     render(
@@ -73,6 +77,7 @@ describe('QueryEditor', () => {
         name={goodProps.name}
         placeholder={goodProps.placeholder}
         handleChangeQuery={goodProps.handleChangeQuery}
+        handleFocusOut={props.handleFocusOut}
       />
     );
 
@@ -88,6 +93,7 @@ describe('QueryEditor', () => {
       cols: 10,
       placeholder: 'placeholder',
       handleChangeQuery: () => vi.fn(),
+      handleFocusOut: () => vi.fn(),
     };
 
     render(
@@ -98,6 +104,7 @@ describe('QueryEditor', () => {
         name={goodProps.name}
         placeholder={goodProps.placeholder}
         handleChangeQuery={goodProps.handleChangeQuery}
+        handleFocusOut={props.handleFocusOut}
       />
     );
 

@@ -35,6 +35,10 @@ describe('RestFormEditor', () => {
 
     render(<RestFormEditor />);
 
+    const methodDelector = screen.getAllByRole('combobox')[0];
+    await userEvent.selectOptions(methodDelector, 'POST');
+    expect(methodDelector).toBeDefined();
+
     const sendBtn = screen.getByText('send');
     await userEvent.click(sendBtn);
     expect(sendBtn).toBeDefined();

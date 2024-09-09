@@ -12,7 +12,6 @@ import updateGraphUrl from '@/app/utils/updateGraphUrl';
 import { RowElement } from '../RestFormEditor/types';
 import selfStyles from './GraphiQLFormEditor.module.css';
 import styles from '../shared/editForm.module.css';
-import ProtectedRoute from '../Auth/ProtectRoutes/ProtectedRoute';
 import ControlledInput from '../ControlledInput/ControlledInput';
 import QueryEditor from '../QueryEditor/QueryEditor';
 import VariablesEditor from '../JsonEditor/JsonEditor';
@@ -20,7 +19,7 @@ import ToggledTableEditor from '../ToggledTableEditor/ToggledTableEditor';
 import GraphQlSchema from '../GraphQlSchema/GraphQlSchema';
 import Loader from '../Loader/Loader';
 
-function GraphiQLFormEditor({ children }: PropsWithChildren) {
+export default function GraphiQLFormEditor({ children }: PropsWithChildren) {
   const initData = useLocalStorage();
   const router = useRouter();
   const [loader, setLoader] = useState(false);
@@ -98,6 +97,7 @@ function GraphiQLFormEditor({ children }: PropsWithChildren) {
       const path = makeGraphQlPath({ url: endpointUrl, query, headers, variables });
       router.push(path);
       setLoader(true);
+      setTimeout(() => setLoader(false), 1000);
 
       const newQuery = {
         id: crypto.randomUUID(),
@@ -202,5 +202,3 @@ function GraphiQLFormEditor({ children }: PropsWithChildren) {
     </>
   );
 }
-
-export default ProtectedRoute(GraphiQLFormEditor, 'withAuth');

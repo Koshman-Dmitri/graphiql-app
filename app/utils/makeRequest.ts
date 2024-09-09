@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { UrlParams } from './globalTypes';
 
-type RequestArgs = UrlParams & {
+export type RequestArgs = UrlParams & {
   type: 'rest' | 'graphql';
 };
 

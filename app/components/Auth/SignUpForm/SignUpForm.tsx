@@ -14,10 +14,9 @@ import AuthInput from '../AuthInput/AuthInput';
 import styles from '../authStyles.module.css';
 import authStyles from '../AuthInput/AuthInput.module.css';
 import useValidationSchema from '../schema';
-import ProtectedRoute from '../ProtectRoutes/ProtectedRoute';
 import useAuthErrors from '../errors';
 
-function SignUpForm() {
+export default function SignUpForm() {
   const [name, setName] = useState('');
 
   const { t } = useTranslation('sign');
@@ -86,5 +85,3 @@ function SignUpForm() {
     </form>
   );
 }
-
-export default ProtectedRoute(SignUpForm, 'withoutAuth');
