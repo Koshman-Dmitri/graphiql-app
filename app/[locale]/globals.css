@@ -79,7 +79,6 @@ input {
 }
 
 textarea {
-  display: block;
   padding: 6px;
   font-size: inherit;
   border: 5px double var(--color-bg-dark);
