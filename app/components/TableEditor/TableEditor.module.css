@@ -42,3 +42,9 @@
   margin: 0 auto;
   border-radius: 30%;
 }
+
+@media (max-width: 570px) {
+  .tableEditor {
+    padding: 0 0 2rem;
+  }
+}

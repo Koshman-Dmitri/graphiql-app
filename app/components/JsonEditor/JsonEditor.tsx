@@ -50,7 +50,6 @@ export default function JsonEditor({
         <div className={styles.textareaWrapper}>
           <textarea
             ref={textareaRef}
-            className={styles.textarea}
             value={value}
             rows={rows}
             cols={cols}
@@ -64,7 +63,6 @@ export default function JsonEditor({
         <div className={styles.controlWrapper}>
           {title === t('body') && (
             <select
-              className={styles.select}
               onChange={() => {
                 setError(null);
                 setIsJSON(!isJSON);

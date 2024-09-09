@@ -25,3 +25,9 @@
   align-items: center;
   gap: 10px;
 }
+
+@media (max-width: 480px) {
+  .submitWrapper {
+    flex-direction: column;
+  }
+}

@@ -10,9 +10,8 @@ export default function Footer() {
             href="https://rs.school/courses/reactjs"
             target="_blank"
             rel="noreferrer"
-            className={styles.footerLink}
+            className={`${styles.footerLink} ${styles.rsLink}`}
           >
-            <span>RS School</span>
             <Image
               src="/images/rss-logo.svg"
               className={styles.footerLogo}
@@ -20,6 +19,7 @@ export default function Footer() {
               width={24}
               height={24}
             />
+            <span>RS School</span>
           </a>
           <div className={styles.footerLinks}>
             <a
@@ -28,7 +28,6 @@ export default function Footer() {
               rel="noreferrer"
               className={styles.footerLink}
             >
-              <span>koshman-dmitri</span>
               <Image
                 src="/images/github-logo.svg"
                 className={styles.footerLogo}
@@ -36,6 +35,7 @@ export default function Footer() {
                 width={24}
                 height={24}
               />
+              <span>koshman-dmitri</span>
             </a>
             <a
               href="https://github.com/digitalfantazy"
@@ -43,7 +43,6 @@ export default function Footer() {
               rel="noreferrer"
               className={styles.footerLink}
             >
-              <span>digitalfantazy</span>
               <Image
                 src="/images/github-logo.svg"
                 className={styles.footerLogo}
@@ -51,6 +50,7 @@ export default function Footer() {
                 width={24}
                 height={24}
               />
+              <span>digitalfantazy</span>
             </a>
             <a
               href="https://github.com/LiudmilaRodzina"
@@ -58,7 +58,6 @@ export default function Footer() {
               rel="noreferrer"
               className={styles.footerLink}
             >
-              <span>liudmilarodzina</span>
               <Image
                 src="/images/github-logo.svg"
                 className={styles.footerLogo}
@@ -66,6 +65,7 @@ export default function Footer() {
                 width={24}
                 height={24}
               />
+              <span>liudmilarodzina</span>
             </a>
           </div>
           <span className={styles.footerCopy}>&copy; 2024</span>

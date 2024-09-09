@@ -5,12 +5,14 @@ import { useEffect, useState } from 'react';
 import { onIdTokenChanged } from 'firebase/auth';
 import { auth } from '@/app/services/firebase/config';
 import { useTranslation } from 'react-i18next';
+import truncateText from '@/app/utils/textUtils';
 import MainPageInfo from '../MainPageInfo/MainPageInfo';
 import styles from './MainPage.module.css';
 
 export default function MainPage({ hasToken, name }: { hasToken: boolean; name: string }) {
   const [isAuth, setIsAuth] = useState(false);
   const { t } = useTranslation(['main', 'common']);
+  const truncatedName = truncateText(name, 15);
 
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, (user) => {
@@ -39,7 +41,7 @@ export default function MainPage({ hasToken, name }: { hasToken: boolean; name: 
 
   return (
     <div className={styles.mainContent}>
-      <h1 className="pageTitle">{t('title_primary_auth', { name })}</h1>
+      <h1 className="pageTitle">{t('title_primary_auth', { name: truncatedName })}</h1>
       <MainPageInfo />
       <div className={styles.apiLinks}>
         <Link href="/GET" className={`buttonLink ${styles.apiButton}`}>

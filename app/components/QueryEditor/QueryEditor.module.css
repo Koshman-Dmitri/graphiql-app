@@ -20,22 +20,16 @@
   gap: 2rem;
 }
 
-.textarea {
-  display: block;
-  padding: 6px;
-  font-size: inherit;
-  border: 5px double var(--color-bg-dark);
-  border-radius: 4px;
-  transition: var(--transition);
-}
-
-.textarea:focus {
-  border-color: var(--color-brand);
-}
-
 .errorMsg {
   margin: 10px 0;
   max-width: 400px;
   font-size: 2rem;
   color: var(--color-text-error);
+}
+
+@media (max-width: 570px) {
+  .wrapper {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 }
