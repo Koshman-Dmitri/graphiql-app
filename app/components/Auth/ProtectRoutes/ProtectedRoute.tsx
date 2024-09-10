@@ -21,6 +21,8 @@ const ProtectedRoute = (
           setIsAuth(true);
         } else if (!user && type === 'withoutAuth') {
           setIsAuth(true);
+        } else if (user && type === 'withoutAuth') {
+          router.replace(`/${window.location.pathname.split('/')[1]}/`);
         } else {
           logOutAction(window.location.pathname.split('/')[1]);
         }
