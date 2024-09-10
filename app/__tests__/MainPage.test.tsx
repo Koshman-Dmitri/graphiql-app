@@ -7,16 +7,16 @@ describe('MainPage', () => {
   });
 
   test('Should be rendered with token', () => {
-    const props = { hasToken: true, name: 'Name' };
-    render(<MainPage hasToken={props.hasToken} name={props.name} />);
+    const props = { hasToken: true };
+    render(<MainPage hasToken={props.hasToken} />);
 
     expect(screen.getByText('rest_btn')).toBeInTheDocument();
     expect(screen.queryByText('common:sign_in')).not.toBeInTheDocument();
   });
 
   test('Should be rendered without token', () => {
-    const props = { hasToken: false, name: 'Name' };
-    render(<MainPage hasToken={props.hasToken} name={props.name} />);
+    const props = { hasToken: false };
+    render(<MainPage hasToken={props.hasToken} />);
 
     expect(screen.queryByText('rest_btn')).not.toBeInTheDocument();
     expect(screen.getByText('common:sign_in')).toBeInTheDocument();
