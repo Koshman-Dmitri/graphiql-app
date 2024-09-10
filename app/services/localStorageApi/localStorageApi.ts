@@ -3,12 +3,22 @@ import { Query } from '@/app/utils/globalTypes';
 type LSKEY = {
   allHistoryQueries: Query[];
   restoreQuery: Query;
+  firebaseUserName: string;
 };
 
 type ValueOf<T> = T[keyof T];
 type LSValue = ValueOf<LSKEY>;
 
 const localStorageApi = {
+  getUserName: (): string => {
+    const userName = localStorage.getItem('firebaseUserName');
+    return userName ? (JSON.parse(userName) as string) : '';
+  },
+
+  deleteUserName: (): void => {
+    localStorage.removeItem('firebaseUserName');
+  },
+
   setData: (key: keyof LSKEY, data: LSValue): void => {
     localStorage.setItem(key.toString(), JSON.stringify(data));
   },

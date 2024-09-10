@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import NotFoundPage from '../[locale]/[...not-found]/page';
 import GraphQLPage from '../[locale]/GRAPHQL/[[...slug]]/page';
 import HistoryPage from '../[locale]/history/page';
@@ -9,15 +9,17 @@ import HomePage from '../[locale]/page';
 
 describe('Should render without crashing', () => {
   beforeEach(() => {
+    vi.spyOn(console, 'warn').mockImplementation(() => null);
     vi.spyOn(console, 'error').mockImplementation(() => null);
   });
 
-  test('Home Page', async () => {
-    render(await HomePage({ params: { slug: [], locale: 'en', rest: 'GET' } }));
+  test('Home Page', () => {
+    render(HomePage());
   });
 
-  test('Not Found Page', async () => {
-    render(await NotFoundPage({ params: { slug: [], locale: 'en', rest: 'GET' } }));
+  test('Not Found Page', () => {
+    render(<NotFoundPage />);
+    expect(screen.getByText('not_found')).toBeInTheDocument();
   });
 
   test('GraphQl Page', async () => {
