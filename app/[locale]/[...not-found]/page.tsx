@@ -1,10 +1,11 @@
+'use client';
+
 import Link from 'next/link';
-import initTranslations from '@/app/services/internationalization/i18n';
-import { RouteParams } from '@/app/utils/globalTypes';
+import { useTranslation } from 'react-i18next';
 import styles from './page.module.css';
 
-export default async function NotFoundPage({ params }: RouteParams) {
-  const { t } = await initTranslations(params?.locale, ['not-found']);
+export default function NotFoundPage() {
+  const { t } = useTranslation(['not-found']);
 
   return (
     <div className={styles.notFound}>
