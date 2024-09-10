@@ -9,11 +9,12 @@ import HomePage from '../[locale]/page';
 
 describe('Should render without crashing', () => {
   beforeEach(() => {
+    vi.spyOn(console, 'warn').mockImplementation(() => null);
     vi.spyOn(console, 'error').mockImplementation(() => null);
   });
 
-  test('Home Page', async () => {
-    render(await HomePage({ params: { slug: [], locale: 'en', rest: 'GET' } }));
+  test('Home Page', () => {
+    render(HomePage());
   });
 
   test('Not Found Page', async () => {
