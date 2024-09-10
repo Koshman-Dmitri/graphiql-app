@@ -9,6 +9,7 @@ import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/services/firebase/config';
 import setCookies from '@/app/services/firebase/setCookies';
 import { updateProfile } from 'firebase/auth';
+import localStorageApi from '@/app/services/localStorageApi/localStorageApi';
 import { IFormInput } from '../types';
 import AuthInput from '../AuthInput/AuthInput';
 import styles from '../authStyles.module.css';
@@ -37,7 +38,9 @@ export default function SignUpForm() {
 
     if (res) {
       const token = await res.user.getIdToken();
-      setCookies(token, window.location.pathname.split('/')[1], name);
+      setCookies(token, window.location.pathname.split('/')[1]);
+
+      localStorageApi.setData('firebaseUserName', name);
       await updateProfile(res.user, { displayName: name });
     }
   };

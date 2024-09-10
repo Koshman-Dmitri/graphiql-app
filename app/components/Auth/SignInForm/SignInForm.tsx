@@ -7,6 +7,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useTranslation } from 'react-i18next';
 import { auth } from '@/app/services/firebase/config';
 import setCookies from '@/app/services/firebase/setCookies';
+import localStorageApi from '@/app/services/localStorageApi/localStorageApi';
 import { IFormInput } from '../types';
 import AuthInput from '../AuthInput/AuthInput';
 import styles from '../authStyles.module.css';
@@ -31,7 +32,9 @@ export default function SignInForm() {
 
     if (res) {
       const token = await res.user.getIdToken();
-      setCookies(token, window.location.pathname.split('/')[1], res.user.displayName as string);
+      setCookies(token, window.location.pathname.split('/')[1]);
+
+      localStorageApi.setData('firebaseUserName', res.user.displayName as string);
     }
   };
 

@@ -22,10 +22,7 @@ const ProtectedRoute = (
         } else if (!user && type === 'withoutAuth') {
           setIsAuth(true);
         } else {
-          logOutAction(
-            window.location.pathname.split('/')[1],
-            type === 'withAuth' ? 'sign-in' : ''
-          );
+          logOutAction(window.location.pathname.split('/')[1]);
         }
       });
 

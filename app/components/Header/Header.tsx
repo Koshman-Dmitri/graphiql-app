@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { onIdTokenChanged, signOut } from 'firebase/auth';
 import { auth } from '@/app/services/firebase/config';
 import logOutAction from '@/app/services/firebase/logOutAction';
+import localStorageApi from '@/app/services/localStorageApi/localStorageApi';
 import styles from './Header.module.css';
 import LanguageSelect from '../LanguageSelect/LanguageSelect';
 
@@ -68,6 +69,7 @@ export default function Header({ hasToken }: { hasToken: boolean }) {
                 className="buttonLink"
                 onClick={async () => {
                   await signOut(auth);
+                  localStorageApi.deleteUserName();
                   logOutAction(window.location.pathname.split('/')[1]);
                 }}
               >
